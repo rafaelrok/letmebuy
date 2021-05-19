@@ -2,6 +2,7 @@ package com.devsuperior.dscatalog.controllers;
 
 import java.util.List;
 
+import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.services.CategoryService;
 
@@ -19,8 +20,8 @@ public class CategoryController {
     private CategoryService serviceCat;
     
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
-        List<Category> list = serviceCat.findAll();
+    public ResponseEntity<List<CategoryDTO>> findAll() {
+        List<CategoryDTO> list = serviceCat.findAll();
         return ResponseEntity.ok().body(list);
         
     }
