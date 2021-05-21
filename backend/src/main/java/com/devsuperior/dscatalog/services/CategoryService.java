@@ -24,13 +24,20 @@ public class CategoryService {
         List<Category> list = categoryRepo.findAll();
         return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
 
-
     }
 
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
         Optional<Category> obj = categoryRepo.findById(id);
         Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
+        return new CategoryDTO(entity);
+    }
+
+    @Transactional
+    public CategoryDTO save(CategoryDTO dto) {
+        Category entity = new Category();
+        entity.setName(dto.getName());
+        entity = categoryRepo.save(entity);
         return new CategoryDTO(entity);
     }
 }
