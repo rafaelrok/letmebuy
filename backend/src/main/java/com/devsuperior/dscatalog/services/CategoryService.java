@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repository.CategoryRepository;
-import com.devsuperior.dscatalog.services.handlers.EntityNotFoundException;
+import com.devsuperior.dscatalog.services.handlers.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
         Optional<Category> obj = categoryRepo.findById(id);
-        Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
+        Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
         return new CategoryDTO(entity);
     }
 
@@ -39,5 +41,19 @@ public class CategoryService {
         entity.setName(dto.getName());
         entity = categoryRepo.save(entity);
         return new CategoryDTO(entity);
+    }
+
+    public CategoryDTO update(Long id, CategoryDTO dto) {
+        try {
+            // getOne salva em memoria o objeto para não acessr 2 vezes a base
+            Category entity = categoryRepo.getOne(id); 
+            entity.setName(dto.getName());
+            entity = categoryRepo.save(entity);
+            return new CategoryDTO(entity);
+
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Categoria não encontrada " + id);
+        }
+        
     }
 }

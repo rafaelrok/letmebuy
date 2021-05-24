@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.devsuperior.dscatalog.services.handlers.EntityNotFoundException;
+import com.devsuperior.dscatalog.services.handlers.ResourceNotFoundException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionHandlerController {
     
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<StandrError> entityNotFound(EntityNotFoundException e, HttpServletRequest request) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<StandrError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request) {
         StandrError err = new StandrError();
         err.setTimestamp(Instant.now());
         err.setStatus(HttpStatus.NOT_FOUND.value());

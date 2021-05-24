@@ -25,7 +25,7 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    // #region Getters&Setters
+    //#region Getters&Setters
     public Long getId() {
         return id;
     }
