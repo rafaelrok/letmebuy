@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.devsuperior.dscatalog.services.handlers.DataBaseException;
 import com.devsuperior.dscatalog.services.handlers.ResourceNotFoundException;
 
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,25 @@ public class ExceptionHandlerController {
     
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandrError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
         StandrError err = new StandrError();
         err.setTimestamp(Instant.now());
-        err.setStatus(HttpStatus.NOT_FOUND.value());
+        err.setStatus(status.value());
         err.setError("Não Encontrado");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity<StandrError> dataBase(DataBaseException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandrError err = new StandrError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Database Exception");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
     }
 }

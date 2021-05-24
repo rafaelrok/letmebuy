@@ -16,7 +16,6 @@ public class StandrError implements Serializable {
         
     }
 
-
     public Instant getTimestamp() {
         return timestamp;
     }
