@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.controllers.exceptions;
+package com.rafaelvieira.dscatalog.controllers.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;

@@ -1,14 +1,8 @@
-package com.devsuperior.dscatalog.services;
+package com.rafaelvieira.dscatalog.services;
 
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
-
-import com.devsuperior.dscatalog.dto.CategoryDTO;
-import com.devsuperior.dscatalog.entities.Category;
-import com.devsuperior.dscatalog.repository.CategoryRepository;
-import com.devsuperior.dscatalog.services.handlers.DataBaseException;
-import com.devsuperior.dscatalog.services.handlers.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,6 +11,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.rafaelvieira.dscatalog.dto.CategoryDTO;
+import com.rafaelvieira.dscatalog.entities.Category;
+import com.rafaelvieira.dscatalog.repository.CategoryRepository;
+import com.rafaelvieira.dscatalog.services.handlers.DataBaseException;
+import com.rafaelvieira.dscatalog.services.handlers.ResourceNotFoundException;
 
 @Service
 public class CategoryService {

@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.services.handlers;
+package com.rafaelvieira.dscatalog.services.handlers;
 
 public class DataBaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;

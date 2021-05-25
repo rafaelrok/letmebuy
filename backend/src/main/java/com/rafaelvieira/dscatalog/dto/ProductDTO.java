@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.dto;
+package com.rafaelvieira.dscatalog.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.devsuperior.dscatalog.entities.Category;
-import com.devsuperior.dscatalog.entities.Product;
+import com.rafaelvieira.dscatalog.entities.Category;
+import com.rafaelvieira.dscatalog.entities.Product;
 
 public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
