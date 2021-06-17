@@ -39,7 +39,7 @@ public class Product implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "category_id"))
     Set<Category> categories = new HashSet<>();
 
-    public Product() {
+    public Product(long l, String string, String string2, double d, String string3, Instant instant, boolean b) {
     }
 
     public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
@@ -49,6 +49,10 @@ public class Product implements Serializable {
         this.price = price;
         this.imgUrl = imgUrl;
         this.date = date;
+    }
+
+    public Product() {
+
     }
 
 //#region Getter$Setters

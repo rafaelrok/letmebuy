@@ -8,18 +8,15 @@ import java.time.Instant;
 
 public class Factory {
 
-    public static Product createProduct(){
-
+    public static Product createProduct() {
         Product product = new Product(
                 1L,
                 "Phone",
                 "Good Phone",
-                90.5,
+                800.0,
                 "https://img.com/img.png",
-                Instant.parse("2020-07-13T20:50:07.12345Z"),
-                product.getCategories().add(new Category(2L, "Eletrônicos"))
-
-        );
+                Instant.parse("2020-10-20T03:00:00Z"));
+        product.getCategories().add(new Category(1L, "Electronics"));
         return product;
     }
 
