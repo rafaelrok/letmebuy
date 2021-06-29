@@ -55,17 +55,17 @@ public class ProductControllerTests {
 
         productDTO = Factory.createProductDTO();
         page = new PageImpl<>(List.of(productDTO));
-
+        //cenario de simulação localização paginada
         when(service.findAllPaged(any())).thenReturn(page);
-
+        //cenario de simulação localização por id
         when(service.findById(existingId)).thenReturn(productDTO);
         when(service.findById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
-
+        //cenario de simuilação insert
         when(service.save(any())).thenReturn(productDTO);
-
+        //cenariso de simulação update
         when(service.update(eq(existingId), any())).thenReturn(productDTO);
         when(service.update(eq(nonExistingId), any())).thenThrow(ResourceNotFoundException.class);
-
+        //Cenarios de simulação delete
         doNothing().when(service).delete(existingId);
         doThrow(ResourceNotFoundException.class).when(service).delete(nonExistingId);
         doThrow(DataBaseException.class).when(service).delete(dependentId);
@@ -123,7 +123,7 @@ public class ProductControllerTests {
         result.andExpect(jsonPath("$.id").exists());
         result.andExpect(jsonPath("$.name").exists());
         result.andExpect(jsonPath("$.description").exists());
-    }
+    } // pesquisar sobre o objectMapper
 
     @Test
     public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {

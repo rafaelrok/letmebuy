@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductServiceIT {
 
-
-
     @Autowired
     private ProductService service;
 
