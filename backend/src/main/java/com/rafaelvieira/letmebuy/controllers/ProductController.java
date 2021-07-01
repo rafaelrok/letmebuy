@@ -1,4 +1,4 @@
-package com.rafaelvieira.dscatalog.controllers;
+package com.rafaelvieira.letmebuy.controllers;
 
 import java.net.URI;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.rafaelvieira.dscatalog.dto.ProductDTO;
-import com.rafaelvieira.dscatalog.services.ProductService;
+import com.rafaelvieira.letmebuy.dto.ProductDTO;
+import com.rafaelvieira.letmebuy.services.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")

@@ -1,16 +1,12 @@
-package com.rafaelvieira.dscatalog.entities;
+package com.rafaelvieira.letmebuy.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "tb_category")
@@ -28,6 +24,9 @@ public class Category implements Serializable {
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updateAt;
+
+    @ManyToMany(mappedBy="categories")
+    private Set<Product> products = new HashSet<>();
     
     public Category() { }   
 
@@ -61,6 +60,8 @@ public class Category implements Serializable {
         return updateAt;
     }
 
+    public Set<Product> getProducts() { return products; }
+
     // adicona no save a hora atual no createdAt
     @PrePersist
     public void prePersist() {
@@ -72,6 +73,7 @@ public class Category implements Serializable {
     public void preUpdate() {
         updateAt = Instant.now();
     }
+
 
     
     //#endregion

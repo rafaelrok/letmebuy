@@ -1,7 +1,7 @@
 package com.rafaelvieira.dscatalog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rafaelvieira.dscatalog.dto.ProductDTO;
+import com.rafaelvieira.letmebuy.dto.ProductDTO;
 import com.rafaelvieira.dscatalog.tests.Factory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

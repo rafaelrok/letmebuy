@@ -1,4 +1,4 @@
-package com.rafaelvieira.dscatalog.entities;
+package com.rafaelvieira.letmebuy.entities;
 
 import java.io.Serializable;
 import java.time.Instant;

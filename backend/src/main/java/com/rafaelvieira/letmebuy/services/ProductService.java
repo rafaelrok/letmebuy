@@ -1,9 +1,12 @@
-package com.rafaelvieira.dscatalog.services;
+package com.rafaelvieira.letmebuy.services;
 
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.rafaelvieira.letmebuy.entities.Product;
+import com.rafaelvieira.letmebuy.repository.CategoryRepository;
+import com.rafaelvieira.letmebuy.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -12,14 +15,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.rafaelvieira.dscatalog.dto.CategoryDTO;
-import com.rafaelvieira.dscatalog.dto.ProductDTO;
-import com.rafaelvieira.dscatalog.entities.Category;
-import com.rafaelvieira.dscatalog.entities.Product;
-import com.rafaelvieira.dscatalog.repository.CategoryRepository;
-import com.rafaelvieira.dscatalog.repository.ProductRepository;
-import com.rafaelvieira.dscatalog.services.handlers.DataBaseException;
-import com.rafaelvieira.dscatalog.services.handlers.ResourceNotFoundException;
+import com.rafaelvieira.letmebuy.dto.CategoryDTO;
+import com.rafaelvieira.letmebuy.dto.ProductDTO;
+import com.rafaelvieira.letmebuy.entities.Category;
+import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
+import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 
 @Service
 public class ProductService {

@@ -1,4 +1,4 @@
-package com.rafaelvieira.dscatalog.controllers.exceptions;
+package com.rafaelvieira.letmebuy.controllers.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;

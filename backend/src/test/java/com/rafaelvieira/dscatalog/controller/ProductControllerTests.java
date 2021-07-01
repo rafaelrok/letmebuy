@@ -1,11 +1,11 @@
 package com.rafaelvieira.dscatalog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rafaelvieira.dscatalog.controllers.ProductController;
-import com.rafaelvieira.dscatalog.dto.ProductDTO;
-import com.rafaelvieira.dscatalog.services.ProductService;
-import com.rafaelvieira.dscatalog.services.handlers.DataBaseException;
-import com.rafaelvieira.dscatalog.services.handlers.ResourceNotFoundException;
+import com.rafaelvieira.letmebuy.controllers.ProductController;
+import com.rafaelvieira.letmebuy.dto.ProductDTO;
+import com.rafaelvieira.letmebuy.services.ProductService;
+import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
+import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 import com.rafaelvieira.dscatalog.tests.Factory;
 //Junit&Spring
 import org.junit.jupiter.api.BeforeEach;

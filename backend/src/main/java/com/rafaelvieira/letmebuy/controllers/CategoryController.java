@@ -1,7 +1,9 @@
-package com.rafaelvieira.dscatalog.controllers;
+package com.rafaelvieira.letmebuy.controllers;
 
 import java.net.URI;
 
+import com.rafaelvieira.letmebuy.dto.CategoryDTO;
+import com.rafaelvieira.letmebuy.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.rafaelvieira.dscatalog.dto.CategoryDTO;
-import com.rafaelvieira.dscatalog.services.CategoryService;
 
 @RestController
 @RequestMapping(value = "/categories")
@@ -41,7 +40,9 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
         dto = service.save(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
     

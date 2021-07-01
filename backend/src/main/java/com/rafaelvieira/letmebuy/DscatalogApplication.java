@@ -1,4 +1,4 @@
-package com.rafaelvieira.dscatalog;
+package com.rafaelvieira.letmebuy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

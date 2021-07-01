@@ -1,16 +1,15 @@
-package com.rafaelvieira.dscatalog.controllers.exceptions;
+package com.rafaelvieira.letmebuy.controllers.exceptions;
 
 import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
+import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import com.rafaelvieira.dscatalog.services.handlers.DataBaseException;
-import com.rafaelvieira.dscatalog.services.handlers.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ExceptionHandlerController {

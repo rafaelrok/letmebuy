@@ -1,8 +1,8 @@
-package com.rafaelvieira.dscatalog.dto;
+package com.rafaelvieira.letmebuy.dto;
 
 import java.io.Serializable;
 
-import com.rafaelvieira.dscatalog.entities.Category;
+import com.rafaelvieira.letmebuy.entities.Category;
 
 public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 1L;

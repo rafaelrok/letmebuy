@@ -1,8 +1,8 @@
 package com.rafaelvieira.dscatalog.tests;
 
-import com.rafaelvieira.dscatalog.dto.ProductDTO;
-import com.rafaelvieira.dscatalog.entities.Category;
-import com.rafaelvieira.dscatalog.entities.Product;
+import com.rafaelvieira.letmebuy.dto.ProductDTO;
+import com.rafaelvieira.letmebuy.entities.Category;
+import com.rafaelvieira.letmebuy.entities.Product;
 
 import java.time.Instant;
 

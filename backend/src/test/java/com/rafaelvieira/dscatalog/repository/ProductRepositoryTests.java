@@ -1,7 +1,8 @@
 package com.rafaelvieira.dscatalog.repository;
 
-import com.rafaelvieira.dscatalog.entities.Product;
+import com.rafaelvieira.letmebuy.entities.Product;
 import com.rafaelvieira.dscatalog.tests.Factory;
+import com.rafaelvieira.letmebuy.repository.ProductRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

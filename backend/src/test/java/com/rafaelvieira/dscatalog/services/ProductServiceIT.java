@@ -1,8 +1,9 @@
 package com.rafaelvieira.dscatalog.services;
 
-import com.rafaelvieira.dscatalog.dto.ProductDTO;
-import com.rafaelvieira.dscatalog.repository.ProductRepository;
-import com.rafaelvieira.dscatalog.services.handlers.ResourceNotFoundException;
+import com.rafaelvieira.letmebuy.dto.ProductDTO;
+import com.rafaelvieira.letmebuy.repository.ProductRepository;
+import com.rafaelvieira.letmebuy.services.ProductService;
+import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
