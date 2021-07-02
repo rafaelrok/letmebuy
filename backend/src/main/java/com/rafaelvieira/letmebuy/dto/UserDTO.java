@@ -2,6 +2,9 @@ package com.rafaelvieira.letmebuy.dto;
 
 import com.rafaelvieira.letmebuy.entities.User;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,11 +14,11 @@ public class UserDTO implements Serializable {
 
     private Long id;
 
-   // @NotBlank(message = "Campo obrigatório")
+    @NotBlank(message = "Campo obrigatório")
     private String firstName;
     private String lastName;
 
-   // @Email(message = "Favor entrar um email válido")
+    @Email(message = "Favor entrar um email válido")
     private String email;
 
     Set<RoleDTO> roles = new HashSet<>();

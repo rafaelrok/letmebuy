@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 import com.rafaelvieira.letmebuy.entities.Category;
 
+import javax.validation.constraints.NotBlank;
+
 public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @NotBlank(message = "Campo requirido")
     private String name;
 
     public CategoryDTO() {

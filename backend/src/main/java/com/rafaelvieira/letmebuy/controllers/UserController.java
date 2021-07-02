@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto) {
+    public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {
         UserDTO newDto = service.save(dto);
         URI uri = ServletUriComponentsBuilder
         		.fromCurrentRequest().path("/{id}")
