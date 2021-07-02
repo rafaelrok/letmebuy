@@ -3,7 +3,7 @@ package com.rafaelvieira.letmebuy.controllers.exceptions;
 import java.io.Serializable;
 import java.time.Instant;
 
-public class StandrError implements Serializable {
+public class StandardError implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Instant timestamp;
@@ -12,7 +12,7 @@ public class StandrError implements Serializable {
     private String message;
     private String path;
 
-    public StandrError() {
+    public StandardError() {
         
     }
 
