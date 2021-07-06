@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 
+
 @Component
 public class JwtTokenEnhancer implements TokenEnhancer {
 
