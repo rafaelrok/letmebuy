@@ -1,12 +1,14 @@
 package com.rafaelvieira.letmebuy.services;
 
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
+import com.rafaelvieira.letmebuy.dto.CategoryDTO;
+import com.rafaelvieira.letmebuy.dto.ProductDTO;
+import com.rafaelvieira.letmebuy.dto.UriDTO;
+import com.rafaelvieira.letmebuy.entities.Category;
 import com.rafaelvieira.letmebuy.entities.Product;
 import com.rafaelvieira.letmebuy.repository.CategoryRepository;
 import com.rafaelvieira.letmebuy.repository.ProductRepository;
+import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
+import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,12 +16,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.rafaelvieira.letmebuy.dto.CategoryDTO;
-import com.rafaelvieira.letmebuy.dto.ProductDTO;
-import com.rafaelvieira.letmebuy.entities.Category;
-import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
-import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
+import javax.persistence.EntityNotFoundException;
+import java.net.URL;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -29,6 +30,9 @@ public class ProductService {
 
     @Autowired
     private CategoryRepository categoryRepo;
+
+    @Autowired
+    private S3Service s3Service;
     
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPaged(Pageable pageable) {
@@ -93,5 +97,10 @@ public class ProductService {
             Category category = categoryRepo.getOne(catDTO.getId());
             entity.getCategories().add(category);
         }
+    }
+
+    public UriDTO uploadFile(MultipartFile file) {
+        URL url = s3Service.uploadFile(file);
+        return new UriDTO(url.toString());
     }
 }
