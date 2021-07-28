@@ -1,7 +1,5 @@
 package com.rafaelvieira.letmebuy.config;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -11,6 +9,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableResourceServer
@@ -24,7 +24,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 
-    private static final String[] OPERATOR_OR_ADMIN = { "/products/**", "/categories/**" };
+    private static final String[] OPERATOR_OR_ADMIN = { "/products/**", "/categories/**", "/emails/**" };
 
     private static final String[] ADMIN = { "/users/**" };
 

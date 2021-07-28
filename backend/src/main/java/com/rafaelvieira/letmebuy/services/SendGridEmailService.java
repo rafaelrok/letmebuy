@@ -17,10 +17,9 @@ import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 
-@Service
-public class EmailService {
+public class SendGridEmailService implements EmailService {
 
-    private static Logger LOG = LoggerFactory.getLogger(EmailService.class);
+    private static Logger LOG = LoggerFactory.getLogger(SendGridEmailService.class);
 
     @Autowired
     private SendGrid sendGrid;
