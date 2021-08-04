@@ -13,13 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,11 +37,21 @@ public class ProductService {
 
     @Autowired
     private S3Service s3Service;
-    
+
+    /*
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPaged(Pageable pageable) {
         Page<Product> list = productRepo.findAll(pageable);
         return list.map(x -> new ProductDTO(x));
+    }
+     */
+
+    @Transactional(readOnly = true)
+    public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
+        List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepo.getOne(categoryId));
+        Page<Product> page = productRepo.find(categories, name, pageable);
+        productRepo.findProductsWithCategories(page.getContent());
+        return page.map(x -> new ProductDTO(x, x.getCategories()));
     }
 
     @Transactional(readOnly = true)
