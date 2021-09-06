@@ -1,14 +1,16 @@
 package com.rafaelvieira.letmebuy.repository;
 
-import com.rafaelvieira.letmebuy.entities.Product;
-import com.rafaelvieira.letmebuy.tests.Factory;
-import org.junit.jupiter.api.*;
+import java.util.Optional;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.EmptyResultDataAccessException;
 
-import java.util.Optional;
-
+import com.rafaelvieira.letmebuy.entities.Product;
+import com.rafaelvieira.letmebuy.tests.Factory;
 
 @DataJpaTest
 public class ProductRepositoryTests {
