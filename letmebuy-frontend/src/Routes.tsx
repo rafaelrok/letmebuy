@@ -3,7 +3,7 @@ import Navbar from "components/Navbar";
 import Dashboard from "pages/Dashboard";
 
 import Home from "pages/Home";
-import Product from "pages/Product";
+import Catalog from "pages/Catalog";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const Routes = () => (
                 <Home />
             </Route>
             <Route path="/products">
-                <Product />
+                <Catalog />
             </Route>
             <Route path="/dashboard">
                 <Dashboard />
