@@ -1,3 +1,10 @@
 .btn-icon {
     height: 50px;
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.btn-icon:hover{
+    color:#1485ee;
+    color: #ffffff;
 }
