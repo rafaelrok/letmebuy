@@ -12,14 +12,16 @@ const Home = () => {
                         <div>
                             <h1>Venha conhecer nossos produtos de qualidade</h1>
                             <p>Ajudaremos você a encontrar os melhores produtos disponíveis no mercado.</p>
+                        </div>
+                        <div>
+                            <Link to="/products">
+                                <ButtonIcon />
+                            </Link>
+                        </div>                                     
                     </div>
-                    <Link to="/products">
-                        <ButtonIcon />
-                    </Link>                     
-                    </div>
-                    <div className="home-image-container">
-                        <MainImage />
-                    </div>
+                        <div className="home-image-container">
+                            <MainImage />
+                        </div>
                 </div>
             </div>
     );
