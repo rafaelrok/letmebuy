@@ -6,6 +6,7 @@ import Home from "pages/Home";
 import Catalog from "pages/Catalog";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ProductDetails from "pages/ProductDetails";
 
 
 const Routes = () => (
@@ -16,8 +17,11 @@ const Routes = () => (
             <Route path="/" exact>
                 <Home />
             </Route>
-            <Route path="/products">
+            <Route path="/products" exact>
                 <Catalog />
+            </Route>
+            <Route path="/products/:productId">
+                <ProductDetails />
             </Route>
             <Route path="/dashboard">
                 <Dashboard />
