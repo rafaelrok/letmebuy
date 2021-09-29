@@ -1,0 +1,35 @@
+ul {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-nav-container {
+    padding: 10px;
+    background-color: #FFFFFF;
+}
+
+.admin-nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #dbd8d8;
+    border-radius: 100px;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -0.015em;
+    color: #9E9E9E;
+}
+
+.admin-nav-item p {
+    margin-bottom: 0;
+}
+
+.admin-nav-item.active {
+    background: rgba(12, 12, 12, 0.3);
+    color:#FFFFFF;
+}
