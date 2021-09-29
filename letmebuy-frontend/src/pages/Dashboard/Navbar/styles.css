@@ -8,7 +8,7 @@ ul {
 
 .admin-nav-container {
     padding: 10px;
-    background-color: #FFFFFF;
+    background-color: #dbd8d8;
 }
 
 .admin-nav-item {
@@ -25,11 +25,39 @@ ul {
     color: #9E9E9E;
 }
 
+.admin-nav-item.active {
+    background: rgba(12, 12, 12, 0.3);
+    color: #FFFFFF;
+}
+
 .admin-nav-item p {
     margin-bottom: 0;
 }
 
-.admin-nav-item.active {
-    background: rgba(12, 12, 12, 0.3);
-    color:#FFFFFF;
+@media(min-width: 768px) {
+    .admin-nav-item {
+        min-width: 280px;
+    }
+}
+
+@media(min-width: 1200px) {
+    ul {
+        justify-content: unset;
+        flex-direction: column;
+    }
+
+    .admin-nav-container {
+        padding: 0;
+        width: 300px;
+        height: calc(100vh - 70px);
+    }
+
+    .admin-nav-item {
+        border-radius: 0;
+        font-size: 18px;
+        height: 80px;
+        border-bottom: 1px solid #c2c2c2;
+        justify-content: flex-start;
+        padding-left: 40px;
+    }
 }

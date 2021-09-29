@@ -5,7 +5,7 @@ import Dashboard from "pages/Dashboard";
 import Home from "pages/Home";
 import Catalog from "pages/Catalog";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ProductDetails from "pages/ProductDetails";
 
 
@@ -23,6 +23,7 @@ const Routes = () => (
             <Route path="/products/:productId">
                 <ProductDetails />
             </Route>
+            <Redirect from="/dashboard" to="/dashboard/products" exact />
             <Route path="/dashboard">
                 <Dashboard />
             </Route>
