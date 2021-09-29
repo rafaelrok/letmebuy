@@ -21,6 +21,7 @@
     height: 50px;
     border-radius: 0px 10px 10px 0px;
     background-color:#222222;
+    color: #fff
 }
 
 @media (min-width: 576px) {
