@@ -7,6 +7,7 @@ import Catalog from "pages/Catalog";
 
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ProductDetails from "pages/ProductDetails";
+import Auth from "pages/Dashboard/Auth";
 
 
 const Routes = () => (
@@ -22,6 +23,10 @@ const Routes = () => (
             </Route>
             <Route path="/products/:productId">
                 <ProductDetails />
+            </Route>
+            <Redirect from="/dashboard/auth" to="/dashboard/auth/login" exact />
+            <Route path="/dashboard/auth">
+                <Auth />
             </Route>
             <Redirect from="/dashboard" to="/dashboard/products" exact />
             <Route path="/dashboard">
