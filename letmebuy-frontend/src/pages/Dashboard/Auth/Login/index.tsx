@@ -13,7 +13,7 @@ const Login = () => {
 
     const { register, handleSubmit } = useForm<FormData>();
 
-    const onSubmit = (formData : FormData) => {
+    const onSubmit = (formData: FormData) => {
         console.log(formData);
     };
 
