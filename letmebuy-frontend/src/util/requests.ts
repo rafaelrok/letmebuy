@@ -1,8 +1,19 @@
 import axios from "axios";
 import qs from "qs";
 
+type LoginResponse = {
+    access_token: string;
+    token_type: string;
+    //refresh_token: string,;
+    expires_in: number;
+    scope: string;
+    userFirstName: string;
+    userId: number;
+}
+
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
 
+const tokenKey = 'authData';
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'letmebuy';
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'letmebuy123';
 
@@ -20,6 +31,7 @@ export const requestBackendLogin = (loginData: LoginData) => {
         Authorization: 'Basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET),
     };
 
+    //(qs.strindify) monta um QueryString de requisição apartir de um objeto.
     const data = qs.stringify({
         ...loginData,
         grant_type: 'password',
@@ -32,4 +44,14 @@ export const requestBackendLogin = (loginData: LoginData) => {
         data,
         headers,
     });
+}
+
+export const saveAuthData = (obj: LoginResponse) => {
+    localStorage.setItem(tokenKey, JSON.stringify(obj)); //(JSON.stringify) converte o obj em string.
+}
+
+export const getAuthData = () => {
+    //"{}" Pega o obj e converte em string com "JSON.parse" e o cast "as LoginResponse" garante o tipo de dado
+    const str = localStorage.getItem(tokenKey) ?? "{}";
+    return JSON.parse(str) as LoginResponse;
 }
