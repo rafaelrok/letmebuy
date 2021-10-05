@@ -5,41 +5,34 @@ import {
     getTokenData,
     isAuthenticated,
     removeAuthData,
-    TokenData,
-    LoginResponse
 } from 'util/requests';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import history from 'util/history';
+import { AuthContext } from 'AuthContext';
 
-
-type AuthData = {
-    authenticated: boolean;
-    tokenData?: TokenData,
-    LoginResponse?: LoginResponse
-}
 
 const Navbar = () => {
 
-    const [authData, setAuthData] = useState<AuthData>({ authenticated: false });
+    const { authContextData, setAuthContextData } = useContext(AuthContext);
 
     useEffect(() => {
         if (isAuthenticated()) {
-            setAuthData({
+            setAuthContextData({
                 authenticated: true,
                 tokenData: getTokenData()
             });
         }
         else {
-            setAuthData({
+            setAuthContextData({
                 authenticated: false
             });
         }
-    }, []);
+    }, [setAuthContextData]);
 
     const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
         removeAuthData();
-        setAuthData({
+        setAuthContextData({
             authenticated: false
         });
         history.replace('/');
@@ -68,9 +61,9 @@ const Navbar = () => {
                         </ul>
                         <p className="ms-auto navbar-text actions">
                             {
-                                authData.authenticated ? (
+                                authContextData.authenticated ? (
                                     <>
-                                        <span className="nav-username">{authData.tokenData?.user_name}</span>
+                                        <span className="nav-username">Bem vindo, {authContextData.tokenData?.user_name}</span>
                                         <NavLink
                                             to="/"
                                             onClick={handleLogoutClick}
@@ -80,20 +73,22 @@ const Navbar = () => {
                                         </NavLink>
                                     </>
                                 ) : (
-                                    <NavLink
-                                        className="login"
-                                        to="/dashboard/auth/login"
-                                        activeClassName="active">
-                                        Log In
-                                    </NavLink>
+                                    <>
+                                        <NavLink
+                                            className="login"
+                                            to="/dashboard/auth/login"
+                                            activeClassName="active">
+                                            Log In
+                                        </NavLink>
+                                        <NavLink
+                                            className="btn btn-light action-button"
+                                            role="button" to="/signup"
+                                            activeClassName="active">
+                                            Sign Up
+                                        </NavLink>
+                                    </>
                                 )
                             }
-                            <NavLink
-                                className="btn btn-light action-button"
-                                role="button" to="/signup"
-                                activeClassName="active">
-                                Sign Up
-                            </NavLink>
                         </p>
                     </div>
 
