@@ -1,4 +1,4 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 
 import './styles.css';
@@ -10,9 +10,17 @@ import { AuthContext } from 'AuthContext';
 type FormData = {
     username: string;
     password: string;
+};
+
+type LocationState = {
+    from: string;
 }
 
 const Login = () => {
+
+    const location = useLocation<LocationState>();
+
+    const { from } = location.state || { from: { pathname: '/dashboard' } };
 
     const { setAuthContextData } = useContext(AuthContext);
 
@@ -31,7 +39,7 @@ const Login = () => {
                     authenticated: true,
                     tokenData: getTokenData()
                 })
-                history.push('/dashboard');
+                history.replace(from);
             })
             .catch(err => {
                 setHasError(true);
