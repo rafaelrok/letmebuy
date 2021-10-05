@@ -9,6 +9,7 @@ import {
 import { useContext, useEffect } from 'react';
 import history from 'util/history';
 import { AuthContext } from 'AuthContext';
+import { hasAnyRoles } from '../../util/requests';
 
 
 const Navbar = () => {
@@ -56,7 +57,11 @@ const Navbar = () => {
                         <ul className="navbar-nav nav-right">
                             <li ><NavLink to="/" activeClassName="active">home </NavLink></li>
                             <li ><NavLink to="/products" activeClassName="active">produtos</NavLink></li>
-                            <li ><NavLink to="/dashboard" activeClassName="active">dashboard</NavLink></li>
+                            {hasAnyRoles(['ROLE_ADMIN']) &&
+                                (
+                                    <li ><NavLink to="/dashboard" activeClassName="active">dashboard</NavLink></li>
+                                )
+                            }
                             <li ><NavLink to="/contato" activeClassName="active">contato</NavLink></li>
                         </ul>
                         <p className="ms-auto navbar-text actions">
