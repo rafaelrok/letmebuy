@@ -1,7 +1,9 @@
-import { Route, Switch } from "react-router";
+import PrivateRoute from "components/PrivateRoute";
+import { Switch } from "react-router";
 import Navbar from "./Navbar";
-import './styles.css';
 import Users from "./User";
+
+import './styles.css';
 
 
 const Dashboard = () => {
@@ -11,15 +13,15 @@ const Dashboard = () => {
             <Navbar />
             <div className="admin-content">
                 <Switch>
-                    <Route path="/dashboard/products">
+                    <PrivateRoute path="/dashboard/products">
                         <h1>Product CRUD</h1>
-                    </Route>
-                    <Route path="/dashboard/categories">
+                    </PrivateRoute>
+                    <PrivateRoute path="/dashboard/categories">
                         <h1>Category CRUD</h1>
-                    </Route>
-                    <Route path="/dashboard/users">
+                    </PrivateRoute>
+                    <PrivateRoute path="/dashboard/users">
                         <Users />
-                    </Route>
+                    </PrivateRoute>
                 </Switch>
             </div>
 
