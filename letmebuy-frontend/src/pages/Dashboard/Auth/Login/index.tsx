@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 
 import './styles.css';
@@ -17,6 +17,8 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
+    const history = useHistory();
+
     const onSubmit = (formData: FormData) => {
         requestBackendLogin(formData)
             .then(response => {
@@ -25,6 +27,7 @@ const Login = () => {
                 console.log('TOKEN GERADO: ' + token);
                 setHasError(false);
                 console.log('SUCESSO', response);
+                history.push('/dashboard');
             })
             .catch(err => {
                 setHasError(true);
