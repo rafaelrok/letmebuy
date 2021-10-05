@@ -37,6 +37,13 @@
     }
 }
 
+@media (max-width:992px) {
+    .navbar-text span {
+        display: unset;
+        margin-right: 20px;
+    }
+}
+
 .navigation-clean-button .navbar-brand {
     font-weight: bold;
     color: inherit;
@@ -68,6 +75,19 @@
     margin-bottom: 0;
 }
 
+.navigation-clean-button .actions span {
+    display: none;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+@media(min-width: 992px){
+    .navigation-clean-button .actions span {
+        display: unset;
+        margin-right: 20px;
+    }
+}
+
 .navigation-clean-button .actions .login {
     margin-right: 7px;
     text-decoration: none;
@@ -75,7 +95,7 @@
 }
 
 .navigation-clean-button .actions .login:hover {
-    color: #575757;
+    color: #8f8f8f;
 }
 
 .navigation-clean-button .action-button,
@@ -117,3 +137,4 @@
 .btn {
     font-weight: 400;
 }
+

@@ -12,10 +12,10 @@ export type TokenData = {
     authorities: Role[];
 }
 
-type LoginResponse = {
+export type LoginResponse = {
     access_token: string;
     token_type: string;
-    //refresh_token: string,;
+    refresh_token: string;
     expires_in: number;
     scope: string;
     userFirstName: string;
@@ -104,7 +104,7 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-export const getTokenData = (): TokenData | undefined => {
+export const getTokenData = (): TokenData| undefined => {
     
     try {
         return jwtDecode(getAuthData().access_token) as TokenData;

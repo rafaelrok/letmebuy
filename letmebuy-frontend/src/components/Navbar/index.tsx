@@ -1,14 +1,21 @@
 import './styles.css';
 import 'bootstrap/js/src/collapse.js';
 import { Link, NavLink } from 'react-router-dom';
-import { getTokenData, isAuthenticated, removeAuthData, TokenData } from 'util/requests';
+import {
+    getTokenData,
+    isAuthenticated,
+    removeAuthData,
+    TokenData,
+    LoginResponse
+} from 'util/requests';
 import { useEffect, useState } from 'react';
 import history from 'util/history';
 
 
 type AuthData = {
     authenticated: boolean;
-    tokenData?: TokenData
+    tokenData?: TokenData,
+    LoginResponse?: LoginResponse
 }
 
 const Navbar = () => {
@@ -63,7 +70,7 @@ const Navbar = () => {
                             {
                                 authData.authenticated ? (
                                     <>
-                                        <span>{authData.tokenData?.user_name}</span>
+                                        <span className="nav-username">{authData.tokenData?.user_name}</span>
                                         <NavLink
                                             to="/"
                                             onClick={handleLogoutClick}
