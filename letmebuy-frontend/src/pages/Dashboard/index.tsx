@@ -1,6 +1,7 @@
 import { Route, Switch } from "react-router";
 import Navbar from "./Navbar";
 import './styles.css';
+import Users from "./User";
 
 
 const Dashboard = () => {
@@ -17,11 +18,11 @@ const Dashboard = () => {
                         <h1>Category CRUD</h1>
                     </Route>
                     <Route path="/dashboard/users">
-                        <h1>User CRUD</h1>
+                        <Users />
                     </Route>
                 </Switch>
             </div>
-            
+
         </div>
     );
 }

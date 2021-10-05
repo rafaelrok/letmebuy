@@ -5,8 +5,8 @@ import { Product } from "types/product";
 
 import { useEffect, useState } from 'react';
 import { SpringPage } from "types/vendor/spring";
-import { BASE_URL } from "util/requests";
-import axios, { AxiosRequestConfig } from "axios";
+import { requestBackend } from "util/requests";
+import { AxiosRequestConfig } from "axios";
 
 import './stykes.css';
 import CardLoader from "./CardLoader";
@@ -22,7 +22,6 @@ const Catalog = () => {
         const params: AxiosRequestConfig = {
             method: 'GET',
             url: "/products",
-            baseURL: BASE_URL,
             params: {
                 page: 0,
                 size: 12,
@@ -30,7 +29,7 @@ const Catalog = () => {
         };
 
         setIsLoading(true);
-        axios(params)
+        requestBackend(params)
             .then(response => {
                 setPage(response.data);
             })
@@ -48,12 +47,12 @@ const Catalog = () => {
 
                 {isLoading ? <CardLoader /> : (
                     page?.content.map(product => (
-                    <div className="col-sm-6 col-lg-4 col-xl-3" key={product.id}>
-                        <Link to="/products/1">
-                            <ProductCard product={product} />
-                        </Link>
-                    </div>
-                )))}
+                        <div className="col-sm-6 col-lg-4 col-xl-3" key={product.id}>
+                            <Link to="/products/1">
+                                <ProductCard product={product} />
+                            </Link>
+                        </div>
+                    )))}
 
             </div>
             <div className="row">

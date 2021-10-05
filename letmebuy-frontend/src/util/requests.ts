@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from "qs";
+import { AxiosRequestConfig } from 'axios';
 
 type LoginResponse = {
     access_token: string;
@@ -44,6 +45,19 @@ export const requestBackendLogin = (loginData: LoginData) => {
         data,
         headers,
     });
+}
+
+//(requestBackend) responsavel por efetuar a requisição de rotas
+export const requestBackend = (config: AxiosRequestConfig) => {
+
+    const headers = config.withCredentials
+        ? {
+            ...config.headers,
+            Authorization: "Bearer " + getAuthData().access_token
+        }
+            : config.headers;
+
+    return axios({ ...config, baseURL: BASE_URL, headers });
 }
 
 export const saveAuthData = (obj: LoginResponse) => {
