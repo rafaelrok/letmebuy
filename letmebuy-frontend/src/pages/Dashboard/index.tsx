@@ -13,13 +13,13 @@ const Dashboard = () => {
             <Navbar />
             <div className="admin-content">
                 <Switch>
-                    <PrivateRoute path="/dashboard/products">
+                    <PrivateRoute path="/dashboard/products" roles={["ROLE_OPERATOR"]}>
                         <h1>Product CRUD</h1>
                     </PrivateRoute>
-                    <PrivateRoute path="/dashboard/categories">
+                    <PrivateRoute path="/dashboard/categories" roles={["ROLE_OPERATOR"]}>
                         <h1>Category CRUD</h1>
                     </PrivateRoute>
-                    <PrivateRoute path="/dashboard/users">
+                    <PrivateRoute path="/dashboard/users" roles={["ROLE_OPERATOR"]}>
                         <Users />
                     </PrivateRoute>
                 </Switch>

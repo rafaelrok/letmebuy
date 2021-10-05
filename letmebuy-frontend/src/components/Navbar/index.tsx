@@ -1,15 +1,12 @@
 import './styles.css';
 import 'bootstrap/js/src/collapse.js';
 import { Link, NavLink } from 'react-router-dom';
-import {
-    getTokenData,
-    isAuthenticated,
-    removeAuthData,
-} from 'util/requests';
 import { useContext, useEffect } from 'react';
 import history from 'util/history';
 import { AuthContext } from 'AuthContext';
-import { hasAnyRoles } from '../../util/requests';
+import { getTokenData, hasAnyRoles, isAuthenticated } from 'util/auth';
+import { removeAuthData } from 'util/storage';
+
 
 
 const Navbar = () => {
@@ -70,11 +67,17 @@ const Navbar = () => {
                                     <>
                                         <span className="nav-username">Bem vindo, {authContextData.tokenData?.user_name}</span>
                                         <NavLink
+                                            to="/Perfil"
+                                            className="btn btn-light action-button"
+                                            activeClassName="active">
+                                            Perfil
+                                        </NavLink>
+                                        <NavLink
                                             to="/"
                                             onClick={handleLogoutClick}
-                                            className="login"
+                                            className="btn btn-light action-button"
                                             activeClassName="active">
-                                            Logout
+                                            Sair
                                         </NavLink>
                                     </>
                                 ) : (
@@ -87,7 +90,8 @@ const Navbar = () => {
                                         </NavLink>
                                         <NavLink
                                             className="btn btn-light action-button"
-                                            role="button" to="/signup"
+                                            role="button"
+                                            to="/signup"
                                             activeClassName="active">
                                             Sign Up
                                         </NavLink>
@@ -96,10 +100,6 @@ const Navbar = () => {
                             }
                         </p>
                     </div>
-
-                    <div>
-                    </div>
-
                 </div>
             </nav>
         </>
