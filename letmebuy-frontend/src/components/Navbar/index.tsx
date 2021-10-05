@@ -1,8 +1,43 @@
 import './styles.css';
 import 'bootstrap/js/src/collapse.js';
 import { Link, NavLink } from 'react-router-dom';
+import { getTokenData, isAuthenticated, removeAuthData, TokenData } from 'util/requests';
+import { useEffect, useState } from 'react';
+import history from 'util/history';
+
+
+type AuthData = {
+    authenticated: boolean;
+    tokenData?: TokenData
+}
 
 const Navbar = () => {
+
+    const [authData, setAuthData] = useState<AuthData>({ authenticated: false });
+
+    useEffect(() => {
+        if (isAuthenticated()) {
+            setAuthData({
+                authenticated: true,
+                tokenData: getTokenData()
+            });
+        }
+        else {
+            setAuthData({
+                authenticated: false
+            });
+        }
+    }, []);
+
+    const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        removeAuthData();
+        setAuthData({
+            authenticated: false
+        });
+        history.replace('/');
+    }
+
     return (
         <>
             <nav className="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button">
@@ -25,12 +60,27 @@ const Navbar = () => {
                             <li ><NavLink to="/contato" activeClassName="active">contato</NavLink></li>
                         </ul>
                         <p className="ms-auto navbar-text actions">
-                            <NavLink
-                                className="login"
-                                to="/login"
-                                activeClassName="active">
-                                Log In
-                            </NavLink>
+                            {
+                                authData.authenticated ? (
+                                    <>
+                                        <span>{authData.tokenData?.user_name}</span>
+                                        <NavLink
+                                            to="/"
+                                            onClick={handleLogoutClick}
+                                            className="login"
+                                            activeClassName="active">
+                                            Logout
+                                        </NavLink>
+                                    </>
+                                ) : (
+                                    <NavLink
+                                        className="login"
+                                        to="/dashboard/auth/login"
+                                        activeClassName="active">
+                                        Log In
+                                    </NavLink>
+                                )
+                            }
                             <NavLink
                                 className="btn btn-light action-button"
                                 role="button" to="/signup"
@@ -39,6 +89,10 @@ const Navbar = () => {
                             </NavLink>
                         </p>
                     </div>
+
+                    <div>
+                    </div>
+
                 </div>
             </nav>
         </>
