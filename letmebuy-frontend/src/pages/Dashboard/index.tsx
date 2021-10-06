@@ -1,9 +1,11 @@
 import PrivateRoute from "components/PrivateRoute";
 import { Switch } from "react-router";
 import Navbar from "./Navbar";
-import Users from "./User";
+import Users from "./Users";
 
 import './styles.css';
+import Products from "./Products";
+import Categories from "./Categories";
 
 
 const Dashboard = () => {
@@ -14,10 +16,10 @@ const Dashboard = () => {
             <div className="admin-content">
                 <Switch>
                     <PrivateRoute path="/dashboard/products" roles={["ROLE_OPERATOR"]}>
-                        <h1>Product CRUD</h1>
+                        <Products />
                     </PrivateRoute>
                     <PrivateRoute path="/dashboard/categories" roles={["ROLE_OPERATOR"]}>
-                        <h1>Category CRUD</h1>
+                        <Categories />
                     </PrivateRoute>
                     <PrivateRoute path="/dashboard/users" roles={["ROLE_OPERATOR"]}>
                         <Users />

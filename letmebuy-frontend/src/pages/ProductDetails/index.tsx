@@ -1,4 +1,3 @@
-import './styles.css';
 import ProductPrice from 'components/ProductPrice';
 import { ReactComponent as ArrowIcon } from '../../assets/images/arrow.svg';
 import { Link, useParams } from 'react-router-dom';
@@ -9,6 +8,7 @@ import { useEffect, useState } from 'react';
 import ProductInfoLoader from './ProductInfoLoader';
 import ProductDetailsLoader from './ProductDetailsLoader';
 
+import './styles.css';
 
 type UrlParams = {
     productId: string;
@@ -46,9 +46,7 @@ const ProductDetails = () => {
                         {isLoading ? (<ProductInfoLoader />) : (
                             <>
                                 <div className="img-container">
-                                    <img src={product?.imgUrl}
-                                        alt={product?.name}>
-                                    </img>
+                                    <img src={product?.imgUrl} alt={product?.name} />
                                 </div>
                                 <div className="name-price-container">
                                     <h1>{product?.name}</h1>
