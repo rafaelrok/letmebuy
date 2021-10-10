@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ProductCrudCard from "../../../../components/ProductCrudCard";
+import ProductCrudCard from "../ProductCrudCard";
 import './styles.css';
 
 const List = () => {
