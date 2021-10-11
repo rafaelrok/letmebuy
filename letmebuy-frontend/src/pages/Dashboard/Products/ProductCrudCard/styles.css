@@ -10,8 +10,9 @@
 }
 
 .product-crud-card-top-container img {
-    width: 158px;
+    width: 200px;
     height: 158px;
+    padding: 0 10px;
 }
 
 .product-crud-card-bottom-container {
