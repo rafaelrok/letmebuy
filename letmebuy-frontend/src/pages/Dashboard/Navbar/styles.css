@@ -49,7 +49,8 @@ ul {
     .admin-nav-container {
         padding: 0;
         width: 300px;
-        height: calc(100vh - 70px);
+        height: auto;
+        /*height: calc(100vh - 70px);*/
     }
 
     .admin-nav-item {
