@@ -9,7 +9,7 @@ import { getTokenData } from 'util/auth';
 
 import './styles.css';
 
-type FormData = {
+type CredentialsDTO = {
     username: string;
     password: string;
 };
@@ -28,11 +28,11 @@ const Login = () => {
 
     const [hasError, setHasError] = useState(false);
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors } } = useForm<CredentialsDTO>();
 
     const history = useHistory();
 
-    const onSubmit = (formData: FormData) => {
+    const onSubmit = (formData: CredentialsDTO) => {
         requestBackendLogin(formData)
             .then(response => { //Após autenticado com sucesso
                 saveAuthData(response.data);
@@ -59,7 +59,7 @@ const Login = () => {
                 </div>
             )}
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-4">
+                <div className="form-floating mb-4">
                     <input
                         {...register('username', {
                             required: 'Campo obrigatório',
@@ -68,23 +68,27 @@ const Login = () => {
                                 message: 'Email inválido'
                             }
                         })}
-                        type="text"
+                        type="email"
                         className={`form-control base-input ${errors.username ? 'is-invalid' : ''}`}
-                        placeholder="Email"
+                        id="floatingInput"
+                        placeholder="name@example.com"
                         name="username"
                     />
+                    <label htmlFor="floatingInput">Email</label>
                     <div className="invalid-feedback d-block">{errors.username?.message}</div>
                 </div>
-                <div className="mb-2">
+                <div className="form-floating mb-2">
                     <input
                         {...register('password', {
                             required: 'Campo obrigatório'
                         })}
                         type="password"
                         className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`}
+                        id="floatingPassword"
                         placeholder="Password"
                         name="password"
                     />
+                    <label htmlFor="floatingPassword">Senha</label>
                     <div className="invalid-feedback d-block">{errors.password?.message}</div>
                 </div>
                 <Link to="/admin/auth/recover" className="login-link-recover">
