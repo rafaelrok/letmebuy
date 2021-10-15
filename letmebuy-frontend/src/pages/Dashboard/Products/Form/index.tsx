@@ -1,32 +1,56 @@
 import './styles.css';
-import {useForm} from "react-hook-form";
-import {Product} from "../../../../types/product";
-import {requestBackend } from "../../../../util/requests";
-import {AxiosRequestConfig} from "axios";
-import {useHistory} from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Product } from "../../../../types/product";
+import { requestBackend } from "../../../../util/requests";
+import { AxiosRequestConfig } from "axios";
+import { useHistory, useParams } from "react-router-dom";
+import { useEffect } from "react";
+
+
+
+type UrlParams = {
+    productId: string;
+}
 
 const Form = () => {
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Product>();
+    const { productId } = useParams<UrlParams>();
+
+    const isEditing = productId !== 'create';
+
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm<Product>();
 
     const history = useHistory();
+
+    useEffect(() => {
+        if (isEditing) {
+            requestBackend({ url: `/products/${productId}` }).then((response) => {
+                const product = response.data as Product;
+
+                setValue('name', product.name);
+                setValue('description', product.description);
+                setValue('price', product.price);
+                setValue('imgUrl', product.imgUrl);
+                setValue('categories', product.categories);
+            });
+        }
+    }, [isEditing, productId, setValue]);
 
     //Function request basic from backend (POST) products
     const onSubmit = (formData: Product) => {
 
-        const data = { ...formData,
-            imgUrl: 'https://i.ibb.co/KXRj7dH/931303c53b5765fbc12a4a5c1e9004a0.png',
-            categories: [ {id: 1, name: ""} ],
+        const data = {
+            ...formData,
+            imgUrl: isEditing ? formData.imgUrl :
+                'https://i.ibb.co/KXRj7dH/931303c53b5765fbc12a4a5c1e9004a0.png',
+            categories: isEditing ? formData.categories :
+                [ {id: 1, name: ''} ],
         }
 
         const config: AxiosRequestConfig = {
-            method: 'POST',
-            url: "/products",
-            data: data,
+            method: isEditing ? 'PUT' : 'POST',
+            url: isEditing ? `/products/${productId}` : "/products",
+            data,
             withCredentials: true,
         };
 
