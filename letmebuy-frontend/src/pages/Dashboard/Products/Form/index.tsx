@@ -1,26 +1,43 @@
+import { AxiosRequestConfig } from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import CurrencyInput from 'react-currency-input-field';
+import { useForm, Controller } from 'react-hook-form';
+import { useHistory, useParams } from 'react-router-dom';
+import Select from 'react-select';
+import { Category } from 'types/category';
+import { Product } from 'types/product';
+import { requestBackend } from 'util/requests';
+import { toast } from 'react-toastify';
+
 import './styles.css';
-import { useForm } from "react-hook-form";
-import { Product } from "../../../../types/product";
-import { requestBackend } from "../../../../util/requests";
-import { AxiosRequestConfig } from "axios";
-import { useHistory, useParams } from "react-router-dom";
-import { useEffect } from "react";
-
-
 
 type UrlParams = {
     productId: string;
-}
+};
 
 const Form = () => {
-
     const { productId } = useParams<UrlParams>();
 
     const isEditing = productId !== 'create';
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm<Product>();
-
     const history = useHistory();
+
+    const [selectCategories, setSelectCategories] = useState<Category[]>([]);
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setValue,
+        control,
+    } = useForm<Product>();
+
+    useEffect(() => {
+        requestBackend({ url: '/categories' }).then((response) => {
+            setSelectCategories(response.data.content);
+        });
+    }, []);
 
     useEffect(() => {
         if (isEditing) {
@@ -28,45 +45,46 @@ const Form = () => {
                 const product = response.data as Product;
 
                 setValue('name', product.name);
-                setValue('description', product.description);
                 setValue('price', product.price);
+                setValue('description', product.description);
                 setValue('imgUrl', product.imgUrl);
                 setValue('categories', product.categories);
             });
         }
     }, [isEditing, productId, setValue]);
 
-    //Function request basic from backend (POST) products
     const onSubmit = (formData: Product) => {
-
         const data = {
             ...formData,
-            imgUrl: isEditing ? formData.imgUrl :
-                'https://i.ibb.co/KXRj7dH/931303c53b5765fbc12a4a5c1e9004a0.png',
-            categories: isEditing ? formData.categories :
-                [ {id: 1, name: ''} ],
-        }
+            price: String(formData.price).replace(',', '.'),
+        };
 
         const config: AxiosRequestConfig = {
             method: isEditing ? 'PUT' : 'POST',
-            url: isEditing ? `/products/${productId}` : "/products",
+            url: isEditing ? `/products/${productId}` : '/products',
             data,
             withCredentials: true,
         };
 
-        requestBackend(config).then(() => {
-            history.push("/dashboard/products")
-        });
+        requestBackend(config)
+            .then(() => {
+                toast.info('Produto cadastrado com sucesso');
+                history.push('/dashboard/products');
+            })
+            .catch(() => {
+                toast.error('Erro ao cadastrar produto');
+            });
     };
 
     const handleCancel = () => {
-        history.push("/dashboard/products")
-    }
+        history.push('/dashboard/products');
+    };
 
     return (
         <div className="product-crud-container">
             <div className="base-card product-crud-form-card">
-                <h1 className="product-crud-form-title">Dados do Produto</h1>
+                <h1 className="product-crud-form-title">DADOS DO PRODUTO</h1>
+
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="row product-crud-inputs-container">
                         <div className="col-lg-6 product-crud-inputs-left-container">
@@ -76,59 +94,119 @@ const Form = () => {
                                         required: 'Campo obrigatório',
                                     })}
                                     type="text"
-                                    className={`form-control base-input ${errors.name ? 'is-invalid' : ''}`}
+                                    className={`form-control base-input ${
+                                        errors.name ? 'is-invalid' : ''
+                                    }`}
                                     id="floatingInput"
-                                    placeholder="Nome do Produto"
+                                    placeholder="Nome do produto"
                                     name="name"
                                 />
                                 <label htmlFor="floatingInput">Produto</label>
-                                <div className="invalid-feedback d-block">{errors.name?.message}</div>
+                                <div className="invalid-feedback d-block">
+                                    {errors.name?.message}
+                                </div>
                             </div>
-                            <div className="form-floating mb-3 margin-bottom-30">
-                                <input type="" className="form-control base-input" id="floatingInput" placeholder="Categoria do Produto" />
-                                <label form="floatingInput">Categoria</label>
+
+                            <div className="margin-bottom-30 ">
+                                <Controller
+                                    name="categories"
+                                    rules={{ required: true }}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Select
+                                            {...field}
+                                            options={selectCategories}
+                                            classNamePrefix="product-crud-select"
+                                            isMulti
+                                            getOptionLabel={(category: Category) => category.name}
+                                            getOptionValue={(category: Category) =>
+                                                String(category.id)
+                                            }
+                                        />
+                                    )}
+                                />
+                                {errors.categories && (
+                                    <div className="invalid-feedback d-block">
+                                        Campo obrigatório
+                                    </div>
+                                )}
                             </div>
+
                             <div className="form-floating mb-3 margin-bottom-30">
-                                <input
-                                    {...register('price', {
-                                        required: 'Campo obrigatório',
-                                    })}
-                                    type="text"
-                                    className={`form-control base-input ${errors.price ? 'is-invalid' : ''}`}
-                                    id="floatingInput"
-                                    placeholder="Preço do Produto"
+                                <Controller
                                     name="price"
+                                    rules={{ required: 'Campo obrigatório' }}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <CurrencyInput
+                                            placeholder="Preço"
+                                            className={`form-control base-input ${
+                                                errors.name ? 'is-invalid' : ''
+                                            }`}
+                                            disableGroupSeparators={true}
+                                            value={field.value}
+                                            onValueChange={field.onChange}
+                                            id="floatingInput"
+                                        />
+                                    )}
                                 />
                                 <label htmlFor="floatingInput">Preço</label>
-                                <div className="invalid-feedback d-block">{errors.price?.message}</div>
+                                <div className="invalid-feedback d-block">
+                                    {errors.price?.message}
+                                </div>
+                            </div>
+
+                            <div className="form-floating mb-3 margin-bottom-30">
+                                <input
+                                    {...register('imgUrl', {
+                                        required: 'Campo obrigatório',
+                                        pattern: {
+                                            value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm,
+                                            message: 'Deve ser uma URL válida',
+                                        },
+                                    })}
+                                    type="text"
+                                    className={`form-control base-input ${
+                                        errors.name ? 'is-invalid' : ''
+                                    }`}
+                                    id="floatingInput"
+                                    placeholder="URL da imagem do produto"
+                                    name="imgUrl"
+                                />
+                                <label htmlFor="floatingInput">URL da imagem</label>
+                                <div className="invalid-feedback d-block">
+                                    {errors.imgUrl?.message}
+                                </div>
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <div className="form-floating">
+                            <div className="form-floating mb-3">
                                 <textarea
                                     rows={10}
                                     {...register('description', {
                                         required: 'Campo obrigatório',
                                     })}
-                                    className={`form-control base-input h-auto ${errors.description? 'is-invalid' : ''}`}
+                                    className={`form-control base-input h-auto ${
+                                        errors.name ? 'is-invalid' : ''
+                                    }`}
                                     id="floatingInput"
                                     placeholder="Descrição"
                                     name="description"
                                 />
-                                <label form="floatingTextarea">Descrição</label>
-                                <div className="invalid-feedback d-block">{errors.description?.message}</div>
+                                <label htmlFor="floatingInput">Descrição</label>
+                                <div className="invalid-feedback d-block">
+                                    {errors.description?.message}
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="product-crud-buttons-container">
                         <button
-                            className="btn-outline-danger product-crud-button"
-                            onClick={handleCancel}
-                        >
+                            className="btn btn-outline-danger product-crud-button-first"
+                            onClick={handleCancel}>
                             CANCELAR
                         </button>
-                        <button
-                            className="btn-primary product-crud-button text-white">
+                        <button className="btn btn-primary product-crud-button text-white">
                             SALVAR
                         </button>
                     </div>
@@ -136,6 +214,6 @@ const Form = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Form;

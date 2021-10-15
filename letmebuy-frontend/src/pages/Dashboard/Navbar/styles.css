@@ -8,7 +8,7 @@ ul {
 
 .admin-nav-container {
     padding: 10px;
-    background-color: #dbd8d8;
+    background-color: #ffffff;
 }
 
 .admin-nav-item {
@@ -16,17 +16,17 @@ ul {
     justify-content: center;
     align-items: center;
     height: 50px;
-    background-color: #dbd8d8;
+    background-color: #EEEEEE;
     border-radius: 100px;
     padding: 0 10px;
     font-size: 16px;
     font-weight: bold;
     letter-spacing: -0.015em;
-    color: #9E9E9E;
+    color: #B6B6B6;
 }
 
 .admin-nav-item.active {
-    background: rgba(12, 12, 12, 0.3);
+    background: rgba(40, 45, 50, 0.3);
     color: #FFFFFF;
 }
 
@@ -57,7 +57,7 @@ ul {
         border-radius: 0;
         font-size: 18px;
         height: 80px;
-        border-bottom: 1px solid #c2c2c2;
+        border-bottom: 1px solid #EEEEEE;
         justify-content: flex-start;
         padding-left: 40px;
     }

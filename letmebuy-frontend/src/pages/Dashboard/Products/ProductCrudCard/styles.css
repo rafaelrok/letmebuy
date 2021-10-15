@@ -55,6 +55,10 @@
     height: 40px;
 }
 
+.product-crud-card-button-first:hover {
+    background-color: #DF5753;
+}
+
 @media(min-width: 768px) {
     .product-crud-card {
         display: flex;

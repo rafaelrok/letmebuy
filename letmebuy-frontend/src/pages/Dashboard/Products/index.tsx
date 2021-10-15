@@ -11,7 +11,7 @@ const Products = () => {
                 <Route path="/dashboard/products" exact>
                     <List />
                 </Route>
-                <Route path="/dashboard/products/:productid">
+                <Route path="/dashboard/products/:productId">
                     <Form />
                 </Route>
             </Switch>
