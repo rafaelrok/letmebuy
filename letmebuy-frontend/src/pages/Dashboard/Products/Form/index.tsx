@@ -10,6 +10,8 @@ import { Product } from 'types/product';
 import { requestBackend } from 'util/requests';
 import { toast } from 'react-toastify';
 
+import Swal from 'sweetalert2';
+
 import './styles.css';
 
 type UrlParams = {
@@ -68,11 +70,34 @@ const Form = () => {
 
         requestBackend(config)
             .then(() => {
-                toast.info('Produto cadastrado com sucesso');
-                history.push('/dashboard/products');
+                if(isEditing){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Produto atualizado com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    history.push('/dashboard/products');
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Produto cadastrado com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    history.push('/dashboard/products');
+                }
             })
             .catch(() => {
-                toast.error('Erro ao cadastrar produto');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo deu errado!',
+                    confirmButtonColor: '#DF5753',
+                    footer: '<p>Verifiquei os dados</p>'
+                })
             });
     };
 

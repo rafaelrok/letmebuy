@@ -1,5 +1,7 @@
 import './styles.css';
 
+import Swal from 'sweetalert2';
+
 import ProductPrice from 'components/ProductPrice';
 import { Product } from 'types/product';
 import CategoryBadge from "../CategoryBadge";
@@ -17,10 +19,6 @@ const ProductCrudCard = ({ product, onDelete } : Props) => {
 
     const handleDelete = (productId: number) => {
 
-        if (!window.confirm("Tem certeza que deseja deletar?")){
-            return;
-        }
-
         const config: AxiosRequestConfig = {
             method: 'DELETE',
             url: `/products/${productId}`,
@@ -28,7 +26,24 @@ const ProductCrudCard = ({ product, onDelete } : Props) => {
         };
 
         requestBackend(config).then(() =>{
-            onDelete();
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você não poderá reverter isso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#407bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, exclua!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    onDelete();
+                    Swal.fire(
+                        'Excluído!',
+                        'Produto foi excluido.',
+                        'success'
+                    )
+                }
+            })
         });
     }
 
