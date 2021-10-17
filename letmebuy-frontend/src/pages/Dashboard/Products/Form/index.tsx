@@ -132,7 +132,7 @@ const Form = () => {
                                 </div>
                             </div>
 
-                            <div className="margin-bottom-30 ">
+                            <div className="form-floating margin-bottom-30 ">
                                 <Controller
                                     name="categories"
                                     rules={{ required: true }}
@@ -164,7 +164,6 @@ const Form = () => {
                                     control={control}
                                     render={({ field }) => (
                                         <CurrencyInput
-                                            placeholder="Preço"
                                             className={`form-control base-input ${
                                                 errors.name ? 'is-invalid' : ''
                                             }`}

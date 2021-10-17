@@ -1,4 +1,4 @@
-ul {
+.admin-nav-items-container {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
@@ -32,16 +32,21 @@ ul {
 
 .admin-nav-item p {
     margin-bottom: 0;
+    margin-left: 10px;
 }
 
 @media(min-width: 768px) {
     .admin-nav-item {
         min-width: 280px;
     }
+
+    .admin-nav-item p {
+        margin-left: 10px;
+    }
 }
 
 @media(min-width: 1200px) {
-    ul {
+    .admin-nav-items-container {
         justify-content: unset;
         flex-direction: column;
     }
@@ -60,5 +65,9 @@ ul {
         border-bottom: 1px solid #EEEEEE;
         justify-content: flex-start;
         padding-left: 40px;
+    }
+
+    .admin-nav-item p {
+        margin-left: 10px;
     }
 }

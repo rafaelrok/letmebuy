@@ -1,4 +1,8 @@
 import './styles.css';
+
+import { MdLogout } from "react-icons/md";
+import { ImProfile } from "react-icons/im";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import 'bootstrap/js/src/collapse.js';
 import { Link, NavLink } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
@@ -70,6 +74,7 @@ const Navbar = () => {
                                             to="/Perfil"
                                             className="btn btn-light action-button"
                                             activeClassName="active">
+                                            <ImProfile className="icon-button-content" />
                                             Perfil
                                         </NavLink>
                                         <NavLink
@@ -77,6 +82,7 @@ const Navbar = () => {
                                             onClick={handleLogoutClick}
                                             className="btn btn-light action-button"
                                             activeClassName="active">
+                                            <MdLogout className="icon-button-content" />
                                             Sair
                                         </NavLink>
                                     </>
@@ -93,6 +99,7 @@ const Navbar = () => {
                                             role="button"
                                             to="/signup"
                                             activeClassName="active">
+                                            <AiOutlineUserAdd className="icon-button-content" />
                                             Sign Up
                                         </NavLink>
                                     </>
