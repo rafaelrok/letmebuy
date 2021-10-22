@@ -22,3 +22,9 @@
     color: #263238
 }
 
+.card-bottom-categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+

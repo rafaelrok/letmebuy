@@ -2,11 +2,11 @@ import './styles.css';
 
 import ProductPrice from 'components/ProductPrice';
 import { Product } from 'types/product';
+//import CategoryBadge from "../../components/CategoryBadge";
 
 type Props = {
     product: Product;
 }
-
 
 const ProductCard = ({ product } : Props) => {
 

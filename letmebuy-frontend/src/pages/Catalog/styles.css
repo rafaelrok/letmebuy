@@ -12,6 +12,10 @@
     color: #263238;
 }
 
+.catalog-filter-container {
+    margin-bottom: 20px;
+}
+
 @media (min-width: 576px) {
     .catalog-container {
         font-size: 30px;

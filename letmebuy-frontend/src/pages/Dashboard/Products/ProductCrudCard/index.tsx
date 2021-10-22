@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 import ProductPrice from 'components/ProductPrice';
 import { Product } from 'types/product';
-import CategoryBadge from "../CategoryBadge";
+import CategoryBadge from "../../../../components/CategoryBadge";
 import { Link } from 'react-router-dom';
 import {AxiosRequestConfig} from "axios";
 import {requestBackend} from "../../../../util/requests";
