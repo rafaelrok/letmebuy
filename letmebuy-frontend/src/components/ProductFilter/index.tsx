@@ -51,14 +51,16 @@ const ProductFilter = ({ onSubmitFilter }: Props) => {
     return (
         <div className="base-card product-filter-container">
             <form onSubmit={handleSubmit(onSubmit)} className="product-filter-form">
-                <div className="product-filter-name-container">
+                <div className="form-floating product-filter-name-container">
                     <input
                         {...register('name')}
                         type="text"
                         className="form-control"
+                        id="floatingInput"
                         placeholder="Nome do produto"
                         name="name"
                     />
+                    <label htmlFor="floatingInput">Nome do Produto</label>
                     <button className="product-filter-search-icon">
                         <SearchIcon />
                     </button>

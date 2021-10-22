@@ -12,6 +12,7 @@
 
 .product-filter-name-container input {
     border: none;
+    font-size: 10px;
 }
 
 .product-filter-name-container input:focus {
@@ -19,6 +20,10 @@
 }
 
 .product-filter-name-container input::placeholder {
+    color: #9E9E9E;
+}
+
+.product-filter-name-container label {
     color: #9E9E9E;
 }
 
