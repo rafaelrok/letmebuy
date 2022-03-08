@@ -1,0 +1,34 @@
+.catalog-container {
+    font-size: 18px;
+}
+
+.catalog-title-container {
+    margin-bottom: 20px;
+}
+
+.catalog-title-container h1 {
+    font-size: 1em;
+    letter-spacing: -0.015em;
+    color: #263238;
+}
+
+.catalog-filter-container .product-filter-container {
+    margin-bottom: 20px;
+    margin-left: 0;
+}
+
+.catalog-filter-container .product-filter-container,
+.product-filter-name-container {
+    font-size: 14px;
+}
+
+.catalog-filter-container .product-filter-container,
+.product-filter-category-container {
+    font-size: 14px;
+}
+
+@media (min-width: 576px) {
+    .catalog-container {
+        font-size: 30px;
+    }
+}

@@ -1,7 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "backend"
+			"path": "letmebuy-backend"
+		},
+		{
+			"path": "letmebuy-frontend"
+		},
+		{
+			"path": "letmebuy-frontend-next"
+		},
+		{
+			"path": "letmebuy-mobile"
 		}
 	],
 	"settings": {
@@ -20,7 +29,10 @@
 			"titleBar.activeBackground": "#00bfff",
 			"titleBar.activeForeground": "#15202b",
 			"titleBar.inactiveBackground": "#00bfff99",
-			"titleBar.inactiveForeground": "#15202b99"
+			"titleBar.inactiveForeground": "#15202b99",
+			"sash.hoverBorder": "#33ccff",
+			"statusBarItem.remoteBackground": "#00bfff",
+			"statusBarItem.remoteForeground": "#15202b"
 		},
 		"peacock.color": "#00bfff"
 	}
