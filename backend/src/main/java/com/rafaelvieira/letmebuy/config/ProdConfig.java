@@ -1,7 +1,7 @@
 package com.rafaelvieira.letmebuy.config;
 
-import com.rafaelvieira.letmebuy.services.EmailService;
-import com.rafaelvieira.letmebuy.services.SendGridEmailService;
+import com.rafaelvieira.letmebuy.services.email.EmailService;
+import com.rafaelvieira.letmebuy.services.email.SendGridEmailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

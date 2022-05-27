@@ -1,4 +1,4 @@
-package com.rafaelvieira.letmebuy.services;
+package com.rafaelvieira.letmebuy.services.email;
 
 import com.rafaelvieira.letmebuy.dto.EmailDTO;
 import org.slf4j.Logger;

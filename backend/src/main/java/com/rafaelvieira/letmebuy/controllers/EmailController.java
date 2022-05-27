@@ -1,7 +1,7 @@
 package com.rafaelvieira.letmebuy.controllers;
 
 import com.rafaelvieira.letmebuy.dto.EmailDTO;
-import com.rafaelvieira.letmebuy.services.EmailService;
+import com.rafaelvieira.letmebuy.services.email.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,16 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "letmebuy-backend"
+			"path": "backend"
 		},
 		{
-			"path": "letmebuy-frontend"
+			"path": "frontend"
 		},
 		{
-			"path": "letmebuy-frontend-next"
+			"path": "frontend-next"
 		},
 		{
-			"path": "letmebuy-mobile"
+			"path": "mobile"
 		}
 	],
 	"settings": {
