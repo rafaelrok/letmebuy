@@ -6,9 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -21,15 +19,15 @@ public class User implements UserDetails, Serializable {
     private Long id;
     private String firstName;
     private String lastName;
-
     @Column(unique = true)// Não permite cadastrar o mesmo email
     private String email;
     private String password;
-
+    @OneToMany(mappedBy = "user")
+    private List<Feedback> feedbacks = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER) //Exigência do spring para autenticação e autorização
-    @JoinTable(name = "tb_user_role", 
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "tb_user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User(){}
@@ -121,7 +119,11 @@ public class User implements UserDetails, Serializable {
         this.roles = roles;
     }
 
-    public boolean hasHole(String roleName) {
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public boolean hasRole(String roleName) {
         for (Role role : roles) {
             if (role.getAuthority().equals(roleName)) {
                 return true;
@@ -130,31 +132,31 @@ public class User implements UserDetails, Serializable {
         return false;
     }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-    
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+
 
 }

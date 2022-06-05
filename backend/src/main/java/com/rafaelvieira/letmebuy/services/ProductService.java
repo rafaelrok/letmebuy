@@ -35,32 +35,23 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepo;
 
-
-
     @Autowired
     private S3Service s3Service;
 
-    /*
-    @Transactional(readOnly = true)
-    public Page<ProductDTO> findAllPaged(Pageable pageable) {
-        Page<Product> list = productRepo.findAll(pageable);
-        return list.map(x -> new ProductDTO(x));
-    }
-     */
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
         List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepo.getOne(categoryId));
         Page<Product> page = productRepo.find(categories, name, pageable);
         productRepo.findProductsWithCategories(page.getContent());
-        return page.map(x -> new ProductDTO(x, x.getCategories()));
+        return page.map(x -> new ProductDTO(x, x.getCategories(), x.getFeedbacks()));
     }
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         Optional<Product> obj = productRepo.findById(id);
         Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrada"));
-        return new ProductDTO(entity, entity.getCategories());
+        return new ProductDTO(entity, entity.getCategories(), entity.getFeedbacks());
     }
 
     @Transactional

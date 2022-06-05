@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.rafaelvieira.letmebuy.entities.Category;
+import com.rafaelvieira.letmebuy.entities.Feedback;
 import com.rafaelvieira.letmebuy.entities.Product;
 
 import javax.validation.constraints.NotBlank;
@@ -16,24 +17,21 @@ import javax.validation.constraints.Size;
 
 public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    private Long id;
 
+    private Long id;
     @Size(min = 2, max = 60, message = "Deve ter entre 5 e 60 caracteres")
     @NotBlank(message = "Campo requirido")
     private String name;
-
     @NotBlank(message = "Campo requirido")
     private String description;
-
     @Positive(message = "Preço deve ser positivo")
     private Double price;
     private String imgUrl;
-
     @PastOrPresent(message = "Data do produto futura")
     private Instant date;
-
     private List<CategoryDTO> categories = new ArrayList<>();
+
+    private List<FeedbackDTO> feedbacks = new ArrayList<>();
 
     public ProductDTO() { }
 
@@ -47,19 +45,26 @@ public class ProductDTO implements Serializable {
     }
 
     public ProductDTO(Product entity) {
-        this.id = entity.getId();
-        this.name = entity.getName();
-        this.description = entity.getDescription();
-        this.price = entity.getPrice();
-        this.imgUrl = entity.getImgUrl();
-        this.date = entity.getDate();
+        id = entity.getId();
+        name = entity.getName();
+        description = entity.getDescription();
+        price = entity.getPrice();
+        imgUrl = entity.getImgUrl();
+        date = entity.getDate();
+        entity.getFeedbacks().forEach(FeedbackDTO::new);
     }
 
     //Sobrecarga de dados, percorre e adiciona uma nova categoria a lista de List<categoryDTO>
-    public ProductDTO(Product entity, Set<Category> categories) {
+    public ProductDTO(Product entity, Set<Category> categories, List<Feedback> feedbacks) {
         this(entity);
         categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
+        feedbacks.forEach(x -> this.feedbacks.add(new FeedbackDTO(x)));
     }
+
+//    public ProductDTO(Product entity, List<Feedback> feedbacks) {
+//        this(entity);
+//        feedbacks.forEach(x -> this.feedbacks.add(new FeedbackDTO(x)));
+//    }
 
     //#region
     public Long getId() {
@@ -114,10 +119,10 @@ public class ProductDTO implements Serializable {
         return categories;
     }
 
-    public void setCategories(List<CategoryDTO> categories) {
-        this.categories = categories;
+    public List<FeedbackDTO> getFeedbacks() {
+        return feedbacks;
     }
     //#endregion
-    
-    
+
+
 }
