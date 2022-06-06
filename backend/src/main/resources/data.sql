@@ -2,6 +2,16 @@ INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Alex', 'Br
 INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Maria', 'Green', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Rafael', 'Vieira', 'rafaelrok25@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
+INSERT INTO tb_state (name) VALUES ('Minas Gerais');
+INSERT INTO tb_state (name) VALUES ('Rio de Janeiro');
+INSERT INTO tb_state (name) VALUES ('São Paulo');
+INSERT INTO tb_state (name) VALUES ('Bahia');
+
+INSERT INTO tb_city (name, state_id) VALUES ('Uberlândia', 1);
+INSERT INTO tb_city (name, state_id) VALUES ('Rio de Janeiro', 2);
+INSERT INTO tb_city (name, state_id) VALUES ('São Paulo', 3);
+INSERT INTO tb_city (name, state_id) VALUES ('Salvador', 4);
+
 INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
 
@@ -66,3 +76,9 @@ INSERT INTO tb_product_category (product_id, category_id) VALUES (22, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (23, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (24, 3);
 INSERT INTO tb_product_category (product_id, category_id) VALUES (25, 3);
+
+INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 1, 2);
+INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 2, 2);
+INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 3, 2);
+INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 4, 2);
+INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 5, 2);

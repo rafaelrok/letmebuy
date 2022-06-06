@@ -23,14 +23,6 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    /*
-    @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
-        //Parametros: Page, size , sort de forma resumida refatorando paginação
-        Page<ProductDTO> list = service.findAllPaged(pageable);
-        return ResponseEntity.ok().body(list);
-    }
-     */
 
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAll(
