@@ -93,11 +93,7 @@ public class UserService implements UserDetailsService {
     }
 
     private void copyDtoToEntity(UserDTO dto, User entity) {
-
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
-
         entity.getRoles().clear();
         for (RoleDTO roleDto : dto.getRoles()) {
             Role role = roleRepo.getOne(roleDto.getId());

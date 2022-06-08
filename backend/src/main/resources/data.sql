@@ -1,16 +1,22 @@
-INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Alex', 'Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Maria', 'Green', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Rafael', 'Vieira', 'rafaelrok25@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (email, password) VALUES ('alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (email, password) VALUES ('maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (email, password) VALUES ('rafaelrok25@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+
+INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALUES ('Alex', 'Lima', '12345678901', 1, 1);
+INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALUES ('Maria', 'silva', '12345678901', 1, 2);
+INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALUES ('Rafael', 'Vieira', '12345678901', 1, 3);
 
 INSERT INTO tb_state (name) VALUES ('Minas Gerais');
 INSERT INTO tb_state (name) VALUES ('Rio de Janeiro');
 INSERT INTO tb_state (name) VALUES ('São Paulo');
-INSERT INTO tb_state (name) VALUES ('Bahia');
 
 INSERT INTO tb_city (name, state_id) VALUES ('Uberlândia', 1);
 INSERT INTO tb_city (name, state_id) VALUES ('Rio de Janeiro', 2);
 INSERT INTO tb_city (name, state_id) VALUES ('São Paulo', 3);
-INSERT INTO tb_city (name, state_id) VALUES ('Salvador', 4);
+
+INSERT INTO tb_address (street, number, complement, neighborhood, zipcode, costumer_id, city_id) VALUES ('Rua Flores', '300', 'Apto 303', 'Jardim', '38220834', 1, 1);
+INSERT INTO tb_address (street, number, complement, neighborhood, zipcode, costumer_id, city_id) VALUES ('Avenida Matos', '105', 'Sala 800', 'Centro', '38777012', 2, 2);
+INSERT INTO tb_address (street, number, complement, neighborhood, zipcode, costumer_id, city_id) VALUES ('Avenida Floriano', '2106', 'apto 101', 'Centro', '281777012', 3, 3);
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');

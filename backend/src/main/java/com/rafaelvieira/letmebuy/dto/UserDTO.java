@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.rafaelvieira.letmebuy.entities.Costumer;
 import com.rafaelvieira.letmebuy.entities.Feedback;
 import com.rafaelvieira.letmebuy.entities.User;
 
@@ -16,36 +17,33 @@ public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	@NotBlank(message = "Campo obrigatório")
-	private String firstName;
-	private String lastName;
 	@Email(message = "Favor entrar um email válido")
 	private String email;
 	Set<RoleDTO> roles = new HashSet<>();
-	private List<FeedbackDTO> feedbacks = new ArrayList<>();
+
+//	private List<FeedbackDTO> feedbacks = new ArrayList<>();
+//
+//	private List<CostumerDTO> costumers = new ArrayList<>();
 
 	public UserDTO() {
 	}
 
-	public UserDTO(Long id, String firstName, String lastName, String email) {
+	public UserDTO(Long id, String email) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.email = email;
 	}
 
 	public UserDTO(User entity) {
 		id = entity.getId();
-		firstName = entity.getFirstName();
-		lastName = entity.getLastName();
 		email = entity.getEmail();
 		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 	}
 
-	public UserDTO(User entity, List<Feedback> list) {
-		this(entity);
-		list.forEach(x -> this.feedbacks.add(new FeedbackDTO(x)));
-	}
+//	public UserDTO(User entity, List<Feedback> feedbacks, List<Costumer> costumers) {
+//		this(entity);
+//		feedbacks.forEach(x -> this.feedbacks.add(new FeedbackDTO(x)));
+//		costumers.forEach(x -> this.costumers.add(new CostumerDTO(x)));
+//	}
 
 	public Long getId() {
 		return id;
@@ -53,22 +51,6 @@ public class UserDTO implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -83,8 +65,11 @@ public class UserDTO implements Serializable {
 		return roles;
 	}
 
-	public List<FeedbackDTO> getFeedbacks() {
-		return feedbacks;
-
-	}
+//	public List<FeedbackDTO> getFeedbacks() {
+//		return feedbacks;
+//
+//	}
+//	public List<CostumerDTO> getCostumers() {
+//		return costumers;
+//	}
 }

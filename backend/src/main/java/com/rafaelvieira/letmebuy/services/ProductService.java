@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -107,7 +108,7 @@ public class ProductService {
     }
 
     public UriDTO uploadFile(MultipartFile file) {
-        URL url = s3Service.uploadFile(file);
-        return new UriDTO(url.toString());
+        URI uri = s3Service.uploadFile(file);
+        return new UriDTO(uri.toString());
     }
 }

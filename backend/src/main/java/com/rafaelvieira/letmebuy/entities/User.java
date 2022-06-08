@@ -17,11 +17,11 @@ public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
     @Column(unique = true)// Não permite cadastrar o mesmo email
     private String email;
     private String password;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Costumer costumer;
     @OneToMany(mappedBy = "user")
     private List<Feedback> feedbacks = new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER) //Exigência do spring para autenticação e autorização
@@ -30,14 +30,15 @@ public class User implements UserDetails, Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(){}
+    public User(){
+        getRoles().add(new Role(1L, "ROLE_OPERATOR"));
+    }
 
-    public User(Long id, String firstName, String lastName, String email, String password) {
+    public User(Long id, String email, String password) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.password = password;
+        getRoles().add(new Role(1L, "ROLE_OPERATOR"));
     }
 
     public Long getId() {
@@ -46,22 +47,6 @@ public class User implements UserDetails, Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -112,7 +97,14 @@ public class User implements UserDetails, Serializable {
     }
 
     public Set<Role> getRoles() {
-        return roles;
+        return roles.stream().map(role -> new Role(role.getId(), role.getAuthority())).collect(Collectors.toSet());
+    }
+    public Costumer getCostumer() {
+        return costumer;
+    }
+
+    public void setCostumer(Costumer costumer) {
+        this.costumer = costumer;
     }
 
     public void setRoles(Set<Role> roles) {
@@ -122,6 +114,7 @@ public class User implements UserDetails, Serializable {
     public List<Feedback> getFeedbacks() {
         return feedbacks;
     }
+
 
     public boolean hasRole(String roleName) {
         for (Role role : roles) {

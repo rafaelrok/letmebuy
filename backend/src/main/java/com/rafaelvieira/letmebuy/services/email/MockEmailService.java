@@ -1,16 +1,17 @@
 package com.rafaelvieira.letmebuy.services.email;
 
-import com.rafaelvieira.letmebuy.dto.EmailDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.SimpleMailMessage;
 
+public class MockEmailService extends AbstractEmailService {
 
-public class MockEmailService implements EmailService {
+    private static final Logger LOG = LoggerFactory.getLogger(MockEmailService.class);
 
-    private static Logger LOG = LoggerFactory.getLogger(MockEmailService.class);
-
-    public void sendEmail(EmailDTO dto){
-            LOG.info("Sending email to: " + dto.getTo());
-            LOG.info("Email sent!");
+    @Override
+    public void sendEmail(SimpleMailMessage msg) {
+        LOG.info("Simulando envio de email...");
+        LOG.info(msg.toString());
+        LOG.info("Email enviado");
     }
 }

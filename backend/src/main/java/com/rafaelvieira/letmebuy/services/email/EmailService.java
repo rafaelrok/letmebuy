@@ -1,14 +1,11 @@
 package com.rafaelvieira.letmebuy.services.email;
 
-import com.rafaelvieira.letmebuy.dto.EmailDTO;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.stereotype.Service;
+import com.rafaelvieira.letmebuy.entities.User;
+import org.springframework.mail.SimpleMailMessage;
 
-@EnableJpaRepositories
-@Service
 public interface EmailService {
 
-    @Bean
-    void sendEmail(EmailDTO dto);
+    //void sendOrderConfirmationEmail(Order obj);
+    void sendEmail(SimpleMailMessage msg);
+    void sendNewPasswordEmail(User user, String newPass);
 }
