@@ -6,6 +6,10 @@ INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALU
 INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALUES ('Maria', 'silva', '12345678901', 1, 2);
 INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALUES ('Rafael', 'Vieira', '12345678901', 1, 3);
 
+INSERT INTO tb_phone (phones, costumer_id) VALUES ('21968973443', 1);
+INSERT INTO tb_phone (phones, costumer_id) VALUES ('21991830116', 2);
+INSERT INTO tb_phone (phones, costumer_id) VALUES ('21973874910', 3);
+
 INSERT INTO tb_state (name) VALUES ('Minas Gerais');
 INSERT INTO tb_state (name) VALUES ('Rio de Janeiro');
 INSERT INTO tb_state (name) VALUES ('São Paulo');

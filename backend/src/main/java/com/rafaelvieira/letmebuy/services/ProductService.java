@@ -66,7 +66,7 @@ public class ProductService {
     @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
-            // getOne salva em memoria o objeto para não acessr 2 vezes a base
+            // getOne salva em memoria o objeto para não acessar 2 vezes a base
             Product entity = productRepo.getOne(id);
             copyDtoToEntity(dto, entity);
             entity = productRepo.save(entity);

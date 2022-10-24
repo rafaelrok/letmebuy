@@ -1,7 +1,11 @@
 package com.rafaelvieira.letmebuy.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_city")
@@ -12,7 +16,6 @@ public class City implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "state_id")
     private State state;
@@ -50,6 +53,7 @@ public class City implements Serializable {
     public void setState(State state) {
         this.state = state;
     }
+
 
     @Override
     public int hashCode() {

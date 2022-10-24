@@ -20,8 +20,8 @@ public class Factory {
         return product;
     }
 
-    public static ProductDTO createProductDTO(){
+    public static ProductDTO createProductDTO() {
         Product product = createProduct();
-        return new ProductDTO(product, product.getCategories());
+        return new ProductDTO(product, product.getCategories(), null);
     }
 }

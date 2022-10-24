@@ -19,6 +19,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import com.rafaelvieira.letmebuy.components.JwtTokenEnhancer;
 
+/**
+ * @author rafae
+ */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {

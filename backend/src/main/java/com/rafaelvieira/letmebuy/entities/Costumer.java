@@ -1,6 +1,5 @@
 package com.rafaelvieira.letmebuy.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rafaelvieira.letmebuy.enums.TypeCostumer;
 
 import javax.persistence.*;
@@ -10,13 +9,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author rafae
+ */
 @Entity
 @Table(name = "tb_costumer")
 public class Costumer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String firstName;
     private String lastName;
@@ -25,21 +27,21 @@ public class Costumer implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy = "tb_costumer",cascade=CascadeType.ALL)
+    @OneToMany
     private List<Address> address = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name="phone")
+    @CollectionTable(name = "tb_phone")
     private Set<String> phones = new HashSet<>();
 
-//    @ElementCollection(fetch=FetchType.EAGER)
-//    @CollectionTable(name="PERFIS")
-//    private Set<Integer> profile = new HashSet<>();
+    // @ElementCollection(fetch=FetchType.EAGER)
+    // @CollectionTable(name="PERFIS")
+    // private Set<Integer> profile = new HashSet<>();
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy="cliente")
-//    private List<Order> oders = new ArrayList<>();
+    // @JsonIgnore
+    // @OneToMany(mappedBy="cliente")
+    // private List<Order> oders = new ArrayList<>();
 
-public Costumer() {
+    public Costumer() {
     }
 
     public Costumer(Integer id, String firstName, String lastName, String cpfOuCnpj, TypeCostumer type) {
@@ -47,7 +49,7 @@ public Costumer() {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.type = (type==null) ? null : type.getCode();
+        this.type = (type == null) ? null : type.getCode();
     }
 
     public Integer getId() {
@@ -124,18 +126,23 @@ public Costumer() {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Costumer other = (Costumer) obj;
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         return true;
     }
 }

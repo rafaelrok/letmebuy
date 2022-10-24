@@ -1,16 +1,11 @@
 package com.rafaelvieira.letmebuy.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
-import com.rafaelvieira.letmebuy.entities.Costumer;
-import com.rafaelvieira.letmebuy.entities.Feedback;
 import com.rafaelvieira.letmebuy.entities.User;
 
 public class UserDTO implements Serializable {

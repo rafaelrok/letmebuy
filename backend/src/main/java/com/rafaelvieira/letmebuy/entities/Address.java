@@ -1,10 +1,14 @@
 package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * @author rafae
+ */
 @Entity
 @Table(name = "tb_address")
 public class Address implements Serializable {
@@ -114,18 +118,20 @@ public class Address implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Address other = (Address) obj;
         if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+            return other.id == null;
+        } else {
+            return id.equals(other.id);
+        }
     }
 }

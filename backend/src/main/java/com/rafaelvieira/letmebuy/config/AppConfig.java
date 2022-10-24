@@ -1,6 +1,5 @@
 package com.rafaelvieira.letmebuy.config;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,13 +8,16 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 
+/**
+ * @author rafae
+ */
 @Configuration
 public class AppConfig {
 
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    //Criptografia do passaword com Bcrypt
+    //Criptografia do passaword com Bycrypt
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
 

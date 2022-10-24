@@ -12,7 +12,6 @@ import { getTokenData, hasAnyRoles, isAuthenticated } from 'util/auth';
 import { removeAuthData } from 'util/storage';
 
 
-
 const Navbar = () => {
 
     const { authContextData, setAuthContextData } = useContext(AuthContext);

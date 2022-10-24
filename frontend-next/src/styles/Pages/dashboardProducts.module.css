@@ -1,0 +1,33 @@
+.add {
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    width: 100%;
+    color: white;
+  }
+  
+  .add:hover {
+    color: white;
+  }
+  
+  .productListContainer {
+    width: 100%;
+    padding: 30px;
+    margin: 0 auto;
+    max-height: calc(100vh - 158px);
+    overflow-y: scroll;
+  }
+  
+  @media (min-width: 768px) {
+    .add {
+      max-width: 200px;
+      padding: 10px 40px;
+      margin: 0 0 25px 15px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .productListContainer {
+      max-height: calc(100vh - 70px);
+    }
+  }
+  

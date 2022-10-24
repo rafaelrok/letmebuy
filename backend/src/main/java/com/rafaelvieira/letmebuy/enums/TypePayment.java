@@ -1,5 +1,9 @@
 package com.rafaelvieira.letmebuy.enums;
 
+/**
+ * @author rafae
+ */
+
 public enum TypePayment {
 
     PENDENTE(1, "Pendente"),

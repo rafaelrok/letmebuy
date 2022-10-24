@@ -4,6 +4,9 @@ import com.rafaelvieira.letmebuy.entities.State;
 
 import java.io.Serializable;
 
+/**
+ * @author rafae
+ */
 public class StateDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

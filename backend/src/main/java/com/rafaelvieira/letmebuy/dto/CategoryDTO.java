@@ -6,6 +6,9 @@ import com.rafaelvieira.letmebuy.entities.Category;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * @author rafae
+ */
 public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

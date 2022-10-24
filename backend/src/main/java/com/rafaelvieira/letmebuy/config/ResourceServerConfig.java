@@ -19,6 +19,9 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
+/**
+ * @author rafae
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -33,6 +36,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] OPERATOR_OR_ADMIN = {
             "/products/**",
+            "/address/**",
+            "/getCep/**",
+            "https://viacep.com.br/ws/**",
             "/categories/**",
             "/feedbacks/**",
             "/states/**",
@@ -64,7 +70,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(ADMIN).hasRole("ADMIN")
                 .anyRequest().authenticated();
 
-        //Aplica configurações de cors, metodo 'corsConfigurationSource()'
+        //Aplica configurações de cors, methods 'corsConfigurationSource()'
         http.cors().configurationSource(corsConfigurationSource());
     }
 

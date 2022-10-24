@@ -1,0 +1,32 @@
+.productCardAdmin {
+    width: 100% !important;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  
+  .productCurrency {
+    font-size: 14px;
+  }
+  
+  .productPrice {
+    font-size: 24px;
+  }
+  
+  .productCardImageAdmin {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .productCardNameAdmin {
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: -0.015em;
+  }
+  
+  @media (min-width: 992px) {
+    .productCardImageAdmin {
+      margin: 10px;
+      border: 1px solid orangered;
+    }
+  }
+  

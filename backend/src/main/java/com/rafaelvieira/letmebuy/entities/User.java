@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author rafae
+ */
 @Entity
 @Table(name = "tb_user")
 public class User implements UserDetails, Serializable {
@@ -17,7 +20,7 @@ public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)// Não permite cadastrar o mesmo email
+    @Column(unique = true)// Não permite cadastrar o mesmo endereço eletrônico
     private String email;
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
@@ -149,7 +152,5 @@ public class User implements UserDetails, Serializable {
             return false;
         return true;
     }
-
-
 
 }

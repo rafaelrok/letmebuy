@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+/**
+ * @author rafae
+ */
 @Configuration
 @Profile("prod")
 public class ProdConfig {
