@@ -15,6 +15,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +40,15 @@ public class ProductService {
     @Autowired
     private S3Service s3Service;
 
+    @Transactional(readOnly=true)
+    public Page<Product> search(String nome, List<Long> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        List<Category> categories = categoryRepo.findAllById(ids);
+        return productRepo.findDistinctByNomeContainingAndCategoriasIn(nome, categories, pageRequest);
+    }
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
+    public Page<ProductDTO> findAllPagedWithFeedbacks(Long categoryId, String name, Pageable pageable) {
         List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepo.getOne(categoryId));
         Page<Product> page = productRepo.find(categories, name, pageable);
         productRepo.findProductsWithCategories(page.getContent());
@@ -51,7 +58,7 @@ public class ProductService {
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         Optional<Product> obj = productRepo.findById(id);
-        Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrada"));
+        Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
         return new ProductDTO(entity, entity.getCategories(), entity.getFeedbacks());
     }
 
@@ -89,7 +96,6 @@ public class ProductService {
         catch (DataIntegrityViolationException ex) {
             throw new DataBaseException("Integrity Violation");
         }
-
     }
     
     private void copyDtoToEntity(ProductDTO dto, Product entity) {

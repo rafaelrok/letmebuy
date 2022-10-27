@@ -1,10 +1,8 @@
 package com.rafaelvieira.letmebuy.utils;
 
-/**
- * @author rafae
- */
-public class DocumentValidity {
-    // Fonte: https://gist.github.com/adrianoluis/5043397d378ae506d87366abb0ab4e30
+// Fonte: https://gist.github.com/adrianoluis/5043397d378ae506d87366abb0ab4e30
+
+public class BR {
     // CPF
     private static final int[] weightSsn = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
@@ -28,7 +26,9 @@ public class DocumentValidity {
      * @return
      */
     public static boolean isValidCPF(final String ssn) {
-        if ((ssn == null) || (ssn.length() != 11) || ssn.matches(ssn.charAt(0) + "{11}")) return false;
+        if ((ssn == null) || (ssn.length() != 11) || ssn.matches(ssn.charAt(0) + "{11}")) {
+            return false;
+        }
 
         final Integer digit1 = calculate(ssn.substring(0, 9), weightSsn);
         final Integer digit2 = calculate(ssn.substring(0, 9) + digit1, weightSsn);
@@ -42,7 +42,9 @@ public class DocumentValidity {
      * @return
      */
     public static boolean isValidCNPJ(final String tin) {
-        if ((tin == null) || (tin.length() != 14) || tin.matches(tin.charAt(0) + "{14}")) return false;
+        if ((tin == null) || (tin.length() != 14) || tin.matches(tin.charAt(0) + "{14}")) {
+            return false;
+        }
 
         final Integer digit1 = calculate(tin.substring(0, 12), weightTin);
         final Integer digit2 = calculate(tin.substring(0, 12) + digit1, weightTin);

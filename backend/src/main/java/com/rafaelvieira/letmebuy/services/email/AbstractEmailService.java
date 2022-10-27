@@ -3,30 +3,37 @@ package com.rafaelvieira.letmebuy.services.email;
 import java.util.Date;
 
 import com.rafaelvieira.letmebuy.entities.Costumer;
+import com.rafaelvieira.letmebuy.entities.Order;
 import com.rafaelvieira.letmebuy.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
+
+
+
+/**
+ * @author rafae
+ */
 
 public abstract class AbstractEmailService implements EmailService {
 
     @Value("${default.sender}")
     private String sender;
 
-//    @Override
-//    public void sendOrderConfirmationEmail(Order obj) {
-//        SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
-//        sendEmail(sm);
-//    }
-//
-//    protected SimpleMailMessage prepareSimpleMailMessageFromPedido(Order obj) {
-//        SimpleMailMessage sm = new SimpleMailMessage();
-//        sm.setTo(obj.getCostumer().getEmail());
-//        sm.setFrom(sender);
-//        sm.setSubject("Pedido confirmado! Código: " + obj.getId());
-//        sm.setSentDate(new Date(System.currentTimeMillis()));
-//        sm.setText(obj.toString());
-//        return sm;
-//    }
+
+    public void sendOrderConfirmationEmail(Order obj) {
+        SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
+        sendEmail(sm);
+    }
+
+    protected SimpleMailMessage prepareSimpleMailMessageFromPedido(Order obj) {
+        SimpleMailMessage sm = new SimpleMailMessage();
+        sm.setTo(obj.getCostumer().getUser().getEmail());
+        sm.setFrom(sender);
+        sm.setSubject("Pedido confirmado! Código: " + obj.getId());
+        sm.setSentDate(new Date(System.currentTimeMillis()));
+        sm.setText(obj.toString());
+        return sm;
+    }
 
     @Override
     public void sendNewPasswordEmail(User user, String newPass) {
