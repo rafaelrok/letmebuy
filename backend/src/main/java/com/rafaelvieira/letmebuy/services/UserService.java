@@ -4,6 +4,7 @@ import com.rafaelvieira.letmebuy.dto.RoleDTO;
 import com.rafaelvieira.letmebuy.dto.UserDTO;
 import com.rafaelvieira.letmebuy.dto.UserInsertDTO;
 import com.rafaelvieira.letmebuy.dto.UserUpdateDTO;
+import com.rafaelvieira.letmebuy.entities.Costumer;
 import com.rafaelvieira.letmebuy.entities.Role;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.RoleRepository;
@@ -17,6 +18,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -101,15 +103,33 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = repository.findByEmail(username);
+//        if (user == null) {
+//            logger.error("User not found: " + username);
+//            throw new UsernameNotFoundException("Email not found");
+//        }
+//        logger.info("User found: " + username);
+//        return user;
+//    }
 
-        User user = repository.findByEmail(username);
-        if (user == null) {
-            logger.error("User not found: " + username);
-            throw new UsernameNotFoundException("Email not found");
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Costumer costumer = repository.findByEmail(email).getCostumer();
+        if (costumer == null) {
+            logger.error("Email not found: " + email);
+            throw new UsernameNotFoundException("Email not found" + email);
         }
-        logger.info("User found: " + username);
-        return user;
+        return new User(costumer.getId(), costumer.getUser().getEmail(), costumer.getUser().getPassword());
+    }
+
+    public static User authenticated() {
+        try {
+            return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 }

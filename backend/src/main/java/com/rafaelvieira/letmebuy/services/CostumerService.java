@@ -34,7 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class CostumerService {
     @Autowired
-    private CostumerRepository repo;
+    private CostumerRepository costumerRepository;
 
     @Autowired
     private AddressRepository addressRepository;
@@ -60,13 +60,13 @@ public class CostumerService {
     @Value("${img.profile.size}")
     private Integer size;
 
-    public Costumer find(Integer id) {
+    public Costumer find(Long id) {
         User user = authService.authenticated();
         if (user==null || !user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
             throw new UnauthorizedException("Acesso negado");
         }
 
-        Optional<Costumer> obj = repo.findById(id);
+        Optional<Costumer> obj = costumerRepository.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Costumer.class.getName()));
     }
@@ -74,7 +74,7 @@ public class CostumerService {
     @Transactional
     public Costumer insert(Costumer obj) {
         obj.setId(null);
-        obj = repo.save(obj);
+        obj = costumerRepository.save(obj);
         addressRepository.saveAll(obj.getAddress());
         return obj;
     }
@@ -82,13 +82,13 @@ public class CostumerService {
     public Costumer update(Costumer obj) {
         Costumer newObj = find(obj.getId());
         updateData(newObj, obj);
-        return repo.save(newObj);
+        return costumerRepository.save(newObj);
     }
 
-    public void delete(Integer id) {
+    public void delete(Long id) {
         find(id);
         try {
-            repo.deleteById(id);
+            costumerRepository.deleteById(id);
         }
         catch (DataIntegrityViolationException e) {
             throw new DataBaseException("Não é possível excluir porque há pedidos relacionados");
@@ -96,7 +96,7 @@ public class CostumerService {
     }
 
     public List<Costumer> findAll() {
-        return repo.findAll();
+        return costumerRepository.findAll();
     }
 
     public User findByEmail(String email) {
@@ -115,7 +115,7 @@ public class CostumerService {
 
     public Page<Costumer> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-        return repo.findAll(pageRequest);
+        return costumerRepository.findAll(pageRequest);
     }
 
     public Costumer fromDTO(CostumerDTO objDto) {

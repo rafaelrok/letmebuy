@@ -31,6 +31,9 @@ public class Payment implements Serializable {
     private Integer id;
     private Integer status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethod;
     @JsonIgnore
     @OneToOne
     @JoinColumn(name="order_id")

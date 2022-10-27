@@ -12,10 +12,13 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * @author rafae
+ */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
-    @Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cat WHERE obj.name LIKE %:nome% AND cat IN :categorias")
+    @Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cat WHERE obj.name LIKE %:nome% AND cat IN :categories")
     Page<Product> findDistinctByNomeContainingAndCategoriasIn(@Param("nome") String nome, @Param("categories") List<Category> categories, Pageable pageRequest);
 
     @Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cats WHERE "

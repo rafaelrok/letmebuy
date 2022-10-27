@@ -20,7 +20,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@JsonTypeName("paymentWithTicket")
+@JsonTypeName("paymentTicket")
 public class PaymentTicket extends Payment {
     private static final long serialVersionUID = 1L;
 

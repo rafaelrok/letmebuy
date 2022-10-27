@@ -18,6 +18,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+/**
+ * @author rafae
+ */
 @Service
 public class S3Service {
 

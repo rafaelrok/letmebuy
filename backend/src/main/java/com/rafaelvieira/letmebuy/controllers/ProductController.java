@@ -45,15 +45,15 @@ public class ProductController {
         return ResponseEntity.ok().body(listDto);
     }
 
-    @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(
-            @RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
-            @RequestParam(value = "name", defaultValue = "") String name,
-            Pageable pageable) {
-
-        Page<ProductDTO> list = service.findAllPagedWithFeedbacks(categoryId, name.trim(), pageable);
-        return ResponseEntity.ok().body(list);
-    }
+//    @GetMapping
+//    public ResponseEntity<Page<ProductDTO>> findAll(
+//            @RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+//            @RequestParam(value = "name", defaultValue = "") String name,
+//            Pageable pageable) {
+//
+//        Page<ProductDTO> list = service.findAllPagedWithFeedbacks(categoryId, name.trim(), pageable);
+//        return ResponseEntity.ok().body(list);
+//    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {

@@ -7,12 +7,23 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 
 import com.rafaelvieira.letmebuy.entities.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+/**
+ * @author rafae
+ */
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	@Email(message = "Favor entrar um email válido")
+	@Email(message = "Favor entrar com email válido")
 	private String email;
 	Set<RoleDTO> roles = new HashSet<>();
 
@@ -21,11 +32,6 @@ public class UserDTO implements Serializable {
 //	private List<CostumerDTO> costumers = new ArrayList<>();
 
 	public UserDTO() {
-	}
-
-	public UserDTO(Long id, String email) {
-		this.id = id;
-		this.email = email;
 	}
 
 	public UserDTO(User entity) {
@@ -39,26 +45,6 @@ public class UserDTO implements Serializable {
 //		feedbacks.forEach(x -> this.feedbacks.add(new FeedbackDTO(x)));
 //		costumers.forEach(x -> this.costumers.add(new CostumerDTO(x)));
 //	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Set<RoleDTO> getRoles() {
-		return roles;
-	}
 
 //	public List<FeedbackDTO> getFeedbacks() {
 //		return feedbacks;

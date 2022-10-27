@@ -31,10 +31,6 @@ public class OrderItem implements Serializable {
     private Integer quantity;
     private Double price;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
     public OrderItem(Order order, Product product, Double discount, Integer quantity, Double price) {
         super();
         orderItemPK.setOrder(order);

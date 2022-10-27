@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 
 /**
@@ -30,8 +31,9 @@ public class Order  implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
-    private Date instant;
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant instant;
 
     @OneToOne(cascade=CascadeType.ALL, mappedBy="order")
     private Payment payment;
@@ -47,12 +49,15 @@ public class Order  implements Serializable {
     @OneToMany(mappedBy="orderItemPK.order")
     private Set<OrderItem> itens = new HashSet<>();
 
-    public Order(Integer id, Date instant, Costumer costumer, Address addressDelivery) {
+    private Double amount;
+
+    public Order(Integer id, Instant instant, Costumer costumer, Address addressDelivery, Double amount) {
         super();
         this.id = id;
         this.instant = instant;
         this.costumer = costumer;
         this.addressDelivery = addressDelivery;
+        this.amount = getAmauntValue();
     }
 
     public double getAmauntValue() {

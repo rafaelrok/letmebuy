@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+/**
+ * @author rafae
+ */
 @RestController
 @RequestMapping(value="/costumers")
 public class CostumerController {
@@ -32,7 +35,7 @@ public class CostumerController {
     private CostumerService service;
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<Costumer> find(@PathVariable Integer id) {
+    public ResponseEntity<Costumer> find(@PathVariable Long id) {
         Costumer obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
@@ -53,7 +56,7 @@ public class CostumerController {
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Void> update(@Valid @RequestBody CostumerDTO objDto, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody CostumerDTO objDto, @PathVariable Long id) {
         Costumer obj = service.fromDTO(objDto);
         obj.setId(id);
         obj = service.update(obj);
@@ -62,7 +65,7 @@ public class CostumerController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

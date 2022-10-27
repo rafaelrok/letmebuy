@@ -8,6 +8,10 @@ import java.util.Set;
 import javax.persistence.*;
 
 
+/**
+ * @author rafae
+ */
+
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable {
@@ -17,15 +21,11 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    
-    //Padrão de armazenamento com UTC na base com a hora atual
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createdAt;
-
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
-
-    @ManyToMany(mappedBy="categories")
+    @ManyToMany(mappedBy="categories", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
     
     public Category() { }   

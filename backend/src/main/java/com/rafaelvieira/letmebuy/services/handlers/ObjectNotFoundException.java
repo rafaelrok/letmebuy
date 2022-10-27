@@ -3,15 +3,16 @@ package com.rafaelvieira.letmebuy.services.handlers;
 /**
  * @author rafae
  */
-public class FileException extends RuntimeException {
+
+public class ObjectNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public FileException(String msg) {
+    public ObjectNotFoundException(String msg) {
         super(msg);
     }
 
-    public FileException(String msg, Throwable cause) {
+    public ObjectNotFoundException(String msg, Throwable cause) {
         super(msg, cause);
     }
 

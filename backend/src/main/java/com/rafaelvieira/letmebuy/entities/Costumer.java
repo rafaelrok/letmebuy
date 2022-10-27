@@ -19,7 +19,7 @@ public class Costumer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String cpfOuCnpj;
@@ -44,7 +44,7 @@ public class Costumer implements Serializable {
     public Costumer() {
     }
 
-    public Costumer(Integer id, String firstName, String lastName, String cpfOuCnpj, TypeCostumer type) {
+    public Costumer(Long id, String firstName, String lastName, String cpfOuCnpj, TypeCostumer type) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,11 +52,11 @@ public class Costumer implements Serializable {
         this.type = (type == null) ? null : type.getCode();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

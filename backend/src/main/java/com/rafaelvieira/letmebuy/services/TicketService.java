@@ -3,6 +3,7 @@ package com.rafaelvieira.letmebuy.services;
 import com.rafaelvieira.letmebuy.entities.PaymentTicket;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,10 +13,10 @@ import java.util.Date;
 
 @Service
 public class TicketService {
-    public void fillPaymentWithTicket(PaymentTicket pagto, Date instantOrder) {
+    public static void fillPaymentWithTicket(PaymentTicket ticket, Instant instantOrder) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(instantOrder);
+        cal.setTime(Date.from(instantOrder));
         cal.add(Calendar.DAY_OF_MONTH, 7);
-        pagto.setDueDate(cal.getTime());
+        ticket.setDueDate(cal.getTime());
     }
 }

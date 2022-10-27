@@ -8,6 +8,7 @@ import com.rafaelvieira.letmebuy.entities.Product;
 import com.rafaelvieira.letmebuy.repository.CategoryRepository;
 import com.rafaelvieira.letmebuy.repository.ProductRepository;
 import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
+import com.rafaelvieira.letmebuy.services.handlers.ObjectNotFoundException;
 import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -55,6 +56,14 @@ public class ProductService {
         return page.map(x -> new ProductDTO(x, x.getCategories(), x.getFeedbacks()));
     }
 
+    @Transactional(readOnly = true)
+    public Product find(Long id) {
+        Optional<Product> obj = productRepo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Produto não encontrado! Id: " + id + ", Tipo: " + Product.class.getName()));
+    }
+
+    //Retorno de um DTO
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         Optional<Product> obj = productRepo.findById(id);

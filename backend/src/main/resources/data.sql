@@ -6,6 +6,10 @@ INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALU
 INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALUES ('Maria', 'silva', '12345678901', 1, 2);
 INSERT INTO tb_costumer (first_name, last_name, cpf_ou_cnpj, type, user_id) VALUES ('Rafael', 'Vieira', '12345678901', 1, 3);
 
+--UPDATE tb_user SET cotumer_id = 1 WHERE id = 1;
+--UPDATE tb_user SET cotumer_id = 2 WHERE id = 2;
+--UPDATE tb_user SET cotumer_id = 3 WHERE id = 3;
+
 INSERT INTO tb_phone (phones, costumer_id) VALUES ('21968973443', 1);
 INSERT INTO tb_phone (phones, costumer_id) VALUES ('21991830116', 2);
 INSERT INTO tb_phone (phones, costumer_id) VALUES ('21973874910', 3);
@@ -92,3 +96,11 @@ INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom '
 INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 3, 2);
 INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 4, 2);
 INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 5, 2);
+
+INSERT INTO tb_order (instant, costumer_id,  address_delivery_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 1, 1);
+INSERT INTO tb_order (instant, costumer_id,  address_delivery_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 2, 2);
+INSERT INTO tb_order (instant, costumer_id,  address_delivery_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 3, 3);
+
+INSERT INTO tb_order_item (discount, quantity, price, order_id, product_id) VALUES (0.00, 1, 2000.00, 1, 1);
+INSERT INTO tb_order_item (discount, quantity, price, order_id, product_id) VALUES (0.00, 2, 80.00, 2, 2);
+INSERT INTO tb_order_item (discount, quantity, price, order_id, product_id) VALUES (0.00, 1, 800.00, 3, 3);

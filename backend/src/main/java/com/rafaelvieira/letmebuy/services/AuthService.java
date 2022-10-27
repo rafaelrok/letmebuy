@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
+/**
+ * @author rafae
+ */
 @Service
 public class AuthService {
 

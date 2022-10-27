@@ -8,6 +8,9 @@ import com.rafaelvieira.letmebuy.repository.FeedbackRepository;
 import com.rafaelvieira.letmebuy.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+/**
+ * @author rafae
+ */
 @Service
 public class FeedbackService {
     @Autowired

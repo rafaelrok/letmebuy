@@ -6,8 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rafaelvieira.letmebuy.entities.Costumer;
 
+/**
+ * @author rafae
+ */
 @Repository
-public interface CostumerRepository extends JpaRepository<Costumer, Integer>{
+public interface CostumerRepository extends JpaRepository<Costumer, Long>{
 
 //    @Transactional(readOnly=true)
 //    Costumer findByName(String firstName);

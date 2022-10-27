@@ -7,10 +7,13 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 
+/**
+ * @author rafae
+ */
 public class CostumerDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Long id;
 
     @NotEmpty(message="Preenchimento obrigatório")
     @Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
@@ -32,11 +35,11 @@ public class CostumerDTO implements Serializable {
         user = new UserDTO(entity.getUser());
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
