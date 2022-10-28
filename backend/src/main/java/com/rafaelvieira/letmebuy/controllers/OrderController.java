@@ -1,15 +1,18 @@
 package com.rafaelvieira.letmebuy.controllers;
 
+import com.rafaelvieira.letmebuy.dto.*;
 import com.rafaelvieira.letmebuy.entities.Order;
 import com.rafaelvieira.letmebuy.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 /**
  * @author rafae
@@ -44,5 +47,52 @@ public class OrderController {
             @RequestParam(value="direction", defaultValue="DESC") String direction) {
         Page<Order> list = service.findPage(page, linesPerPage, orderBy, direction);
         return ResponseEntity.ok().body(list);
+    }
+
+
+    @GetMapping
+    public ResponseEntity<Page<OrderDTO>> sales(
+            @RequestParam(value = "minDate", defaultValue = "") String minDate,
+            @RequestParam(value = "maxDate", defaultValue = "") String maxDate,
+            @RequestParam(value = "gender", defaultValue = "") String status,
+            Pageable pageable) {
+        Page<OrderDTO> page = service.orders(minDate, maxDate, status, pageable);
+        return ResponseEntity.ok(page);
+    }
+
+    @GetMapping(value = "/by-store")
+    public ResponseEntity<List<OrderByCostumerDTO>> salesByStore(
+            @RequestParam(value = "minDate", defaultValue = "") String minDate,
+            @RequestParam(value = "maxDate", defaultValue = "") String maxDate,
+            @RequestParam(value = "gender", defaultValue = "") String status) {
+        List<OrderByCostumerDTO> list = service.orderByCostumer(minDate, maxDate, status);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/by-payment-method")
+    public ResponseEntity<List<OrderByPaymentMethodDTO>> salesByPaymentMethod(
+            @RequestParam(value = "minDate", defaultValue = "") String minDate,
+            @RequestParam(value = "maxDate", defaultValue = "") String maxDate,
+            @RequestParam(value = "gender", defaultValue = "") String status) {
+        List<OrderByPaymentMethodDTO> list = service.orderByPaymentMethod(minDate, maxDate, status);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/by-date")
+    public ResponseEntity<List<OrderByDateDTO>> salesByDate(
+            @RequestParam(value = "minDate", defaultValue = "") String minDate,
+            @RequestParam(value = "maxDate", defaultValue = "") String maxDate,
+            @RequestParam(value = "gender", defaultValue = "") String status) {
+        List<OrderByDateDTO> list = service.orderByDate(minDate, maxDate, status);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(value = "/summary")
+    public ResponseEntity<OrderSummaryDTO> salesSummary(
+            @RequestParam(value = "minDate", defaultValue = "") String minDate,
+            @RequestParam(value = "maxDate", defaultValue = "") String maxDate,
+            @RequestParam(value = "gender", defaultValue = "") String status) {
+        OrderSummaryDTO obj = service.orderSummary(minDate, maxDate, status);
+        return ResponseEntity.ok(obj);
     }
 }

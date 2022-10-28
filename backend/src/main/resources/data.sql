@@ -97,9 +97,15 @@ INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom '
 INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 4, 2);
 INSERT INTO tb_feedback (text, product_id, user_id) VALUES ('Produto muito bom ', 5, 2);
 
-INSERT INTO tb_order (instant, costumer_id,  address_delivery_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 1, 1);
-INSERT INTO tb_order (instant, costumer_id,  address_delivery_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 2, 2);
-INSERT INTO tb_order (instant, costumer_id,  address_delivery_id) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 3, 3);
+INSERT INTO tb_payment_method (description) VALUES ('Cartão de crédito');
+INSERT INTO tb_payment_method (description) VALUES ('Cartão de Débito');
+INSERT INTO tb_payment_method (description) VALUES ('Boleto');
+INSERT INTO tb_payment_method (description) VALUES ('Pix');
+INSERT INTO tb_payment_method (description) VALUES ('Dinheiro');
+
+INSERT INTO tb_order (instant, costumer_id,  address_delivery_id, amount) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 1, 1, 2000.00);
+INSERT INTO tb_order (instant, costumer_id,  address_delivery_id, amount) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 2, 2, 160.00);
+INSERT INTO tb_order (instant, costumer_id,  address_delivery_id, amount) VALUES (TIMESTAMP WITH TIME ZONE '2022-10-27T10:00:00Z', 3, 3, 800.00);
 
 INSERT INTO tb_order_item (discount, quantity, price, order_id, product_id) VALUES (0.00, 1, 2000.00, 1, 1);
 INSERT INTO tb_order_item (discount, quantity, price, order_id, product_id) VALUES (0.00, 2, 80.00, 2, 2);

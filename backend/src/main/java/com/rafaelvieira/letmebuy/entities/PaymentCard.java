@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author rafae
@@ -19,6 +20,7 @@ import javax.persistence.Entity;
 @Setter
 @Entity
 @JsonTypeName("paymentWithCard")
+@Table(name = "tb_payment_card")
 public class PaymentCard extends Payment {
     private static final long serialVersionUID = 1L;
 
