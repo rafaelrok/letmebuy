@@ -2,6 +2,9 @@ package com.rafaelvieira.letmebuy.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+/**
+ * @author rafae
+ */
 @Entity
 @Table(name = "tb_feedback")
 public class Feedback implements Serializable {

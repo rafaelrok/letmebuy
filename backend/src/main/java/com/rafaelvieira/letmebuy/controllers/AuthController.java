@@ -1,7 +1,9 @@
 package com.rafaelvieira.letmebuy.controllers;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import com.rafaelvieira.letmebuy.dto.EmailDTO;
+import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author rafae
+ */
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthController {

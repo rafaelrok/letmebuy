@@ -1,5 +1,7 @@
 package com.rafaelvieira.letmebuy.entities;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -9,7 +11,16 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+/**
+ * @author rafae
+ */
+
+@Getter
+@Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_product")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -19,6 +30,7 @@ public class Product implements Serializable {
     private String name;
     @Column(columnDefinition = "TEXT")
     private String description;
+    @Column(columnDefinition = "DECIMAL(10,2)")
     private Double price;
     private String imgUrl;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -34,6 +46,10 @@ public class Product implements Serializable {
     public Product(long l, String string, String string2, double d, String string3, Instant instant, boolean b) {
     }
 
+    public void prePersist() {
+        date = Instant.now();
+    }
+
     public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
         this.id = id;
         this.name = name;
@@ -42,69 +58,6 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
         this.date = date;
     }
-
-    public Product() {}
-
-//#region Getter$Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public Instant getDate() {
-        return date;
-    }
-
-    public void setDate(Instant date) {
-        this.date = date;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
-
-    }
-
-//#endregion
 
     @Override
     public int hashCode() {
@@ -132,4 +85,17 @@ public class Product implements Serializable {
             return id.equals(other.id);
         }
     }
+
+    public static Product of(Product product) {
+        return Product.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .imgUrl(product.getImgUrl())
+                .date(product.getDate())
+                .categories(product.getCategories())
+                .build();
+    }
+
 }

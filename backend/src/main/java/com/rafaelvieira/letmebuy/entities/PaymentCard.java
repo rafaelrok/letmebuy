@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,15 +21,19 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@JsonTypeName("paymentWithCard")
+@JsonTypeName("paymentCard")
 @Table(name = "tb_payment_card")
 public class PaymentCard extends Payment {
     private static final long serialVersionUID = 1L;
 
     private Integer numberOfInstallments;
 
-    public PaymentCard(Integer id, TypePayment status, Order order, Integer numberOfInstallments) {
-        super(id, status, order);
+    @ManyToOne
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    private Order order;
+
+    public PaymentCard(TypePayment status, Order order, Integer numberOfInstallments) {
+        super(numberOfInstallments, status, order);
         this.numberOfInstallments = numberOfInstallments;
     }
 }

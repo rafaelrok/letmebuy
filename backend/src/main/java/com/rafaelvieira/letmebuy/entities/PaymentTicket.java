@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -30,6 +32,10 @@ public class PaymentTicket extends Payment {
     private Date dueDate;
     @JsonFormat(pattern="dd/MM/yyyy")
     private Date paymentDate;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+    private Order order;
 
     public PaymentTicket(Integer id, TypePayment status, Order order, Date dueDate, Date paymentDate) {
         super(id, status, order);

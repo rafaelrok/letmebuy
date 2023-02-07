@@ -18,7 +18,6 @@ public class AddressDTO implements Serializable {
     private String complement;
     private String neighborhood;
     private String zipcode;
-    private Costumer costumer;
     private City city;
 
     public AddressDTO() {
@@ -40,7 +39,6 @@ public class AddressDTO implements Serializable {
         this.complement = entity.getComplement();
         this.neighborhood = entity.getNeighborhood();
         this.zipcode = entity.getZipcode();
-        this.costumer = entity.getCostumer();
         this.city = entity.getCity();
     }
 

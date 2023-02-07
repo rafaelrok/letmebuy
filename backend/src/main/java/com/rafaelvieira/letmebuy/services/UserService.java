@@ -11,6 +11,7 @@ import com.rafaelvieira.letmebuy.repository.RoleRepository;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
 import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
+import com.rafaelvieira.letmebuy.services.handlers.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,17 @@ public class UserService implements UserDetailsService {
     public Page<UserDTO> findAllPaged(Pageable pageable) {
         Page<User> list = repository.findAll(pageable);
         return list.map(x -> new UserDTO(x));
+    }
+
+    public User find(Long id) {
+        User user = authService.authenticated();
+        if (user==null || !user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
+            throw new UnauthorizedException("Acesso negado");
+        }
+
+        Optional<User> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ResourceNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + User.class.getName()));
     }
 
     @Transactional(readOnly = true)
@@ -116,12 +128,12 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Costumer costumer = repository.findByEmail(email).getCostumer();
-        if (costumer == null) {
+        User user = repository.findByEmail(email);
+        if (user == null) {
             logger.error("Email not found: " + email);
             throw new UsernameNotFoundException("Email not found" + email);
         }
-        return new User(costumer.getId(), costumer.getUser().getEmail(), costumer.getUser().getPassword());
+        return new User(user.getId(), user.getEmail(), user.getPassword());
     }
 
     public static User authenticated() {

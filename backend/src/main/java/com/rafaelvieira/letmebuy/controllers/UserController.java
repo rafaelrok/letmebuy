@@ -23,6 +23,10 @@ import com.rafaelvieira.letmebuy.services.UserService;
 
 import javax.validation.Valid;
 
+/**
+ * @author rafae
+ */
+
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {

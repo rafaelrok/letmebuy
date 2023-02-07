@@ -11,7 +11,6 @@ import com.rafaelvieira.letmebuy.entities.Address;
 import com.rafaelvieira.letmebuy.entities.City;
 import com.rafaelvieira.letmebuy.entities.Costumer;
 import com.rafaelvieira.letmebuy.entities.User;
-import com.rafaelvieira.letmebuy.entities.Role;
 import com.rafaelvieira.letmebuy.enums.TypeCostumer;
 import com.rafaelvieira.letmebuy.repository.AddressRepository;
 import com.rafaelvieira.letmebuy.repository.CostumerRepository;
@@ -42,7 +41,7 @@ public class CostumerService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
+    @Autowired(required = false)
     private BCryptPasswordEncoder pe;
 
     @Autowired
@@ -152,7 +151,6 @@ public class CostumerService {
                 objDto.getZipcode(),
                 costumer, city);
         costumer.getAddress().add(address);
-        costumer.setUser(user);
         costumer.getPhones().add(objDto.getPhone1());
         if (objDto.getPhone2()!=null) {
             costumer.getPhones().add(objDto.getPhone2());

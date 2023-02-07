@@ -6,10 +6,10 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
-
 /**
  * @author rafae
  */
+
 public class CostumerDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -23,8 +23,6 @@ public class CostumerDTO implements Serializable {
     @Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
     private String lastName;
 
-    private UserDTO user;
-
     public CostumerDTO() {
     }
 
@@ -32,7 +30,6 @@ public class CostumerDTO implements Serializable {
         id = entity.getId();
         firstName = entity.getFirstName();
         lastName = entity.getLastName();
-        user = new UserDTO(entity.getUser());
     }
 
     public Long getId() {
@@ -59,11 +56,4 @@ public class CostumerDTO implements Serializable {
         this.lastName = lastName;
     }
 
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
-    }
 }

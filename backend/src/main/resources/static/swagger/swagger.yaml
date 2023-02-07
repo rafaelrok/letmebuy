@@ -1,0 +1,246 @@
+openapi: 3.0.0
+info:
+   version: "1.0.0"
+   title: "lembebuy"
+servers:
+   - url: "http://localhost:8080"
+   - url: "https://perfume-websore-api.herokuapp.com"
+
+tags:
+  - name: "UserController"
+
+paths:
+  /api/v1/admin/user/{id}:
+    get:
+      tags:
+        - "AdminController"
+      summary: "Get user by id"
+      operationId: "getUser"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: "Not Found"
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: "User not found."
+      security:
+        - token: [ ]
+
+  /api/v1/admin/user/all:
+    get:
+      tags:
+        - "AdminController"
+      summary: "Get users from database"
+      operationId: "getAllUsers"
+      parameters: [ ]
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BaseUserResponse"
+      security:
+        - token: [ ]
+
+  /api/v1/admin/graphql/user:
+    post:
+      tags:
+        - "AdminController"
+      summary: "Get user by GraphQL query"
+      operationId: "getUserByQuery"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                query:
+                  type: "string"
+                  example: "{ user(id: 2) { id email firstName lastName city address phoneNumber postIndex } }"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: "integer"
+                    format: int64
+                  email:
+                    type: "string"
+                  firstName:
+                    type: "string"
+                  lastName:
+                    type: "string"
+                  city:
+                    type: "string"
+                  address:
+                    type: "string"
+                  phoneNumber:
+                    type: "string"
+                  postIndex:
+                    type: "string"
+                example:
+                  id: 2
+                  email: "test123@test.com"
+                  firstName: "John"
+                  lastName: "Doe"
+                  city: "New York"
+                  address: "Wall Street 1"
+                  phoneNumber: "1234567890"
+                  postIndex: "1234567890"
+      security:
+        - token: [ ]
+
+  /api/v1/admin/graphql/user/all:
+    post:
+      tags:
+        - "AdminController"
+      summary: "Get all users by GraphQL query"
+      operationId: "getAllUsersByQuery"
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                query:
+                  type: "string"
+                  example: "{ users { id email firstName lastName city address phoneNumber postIndex } }"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: "integer"
+                      format: int64
+                    email:
+                      type: "string"
+                    firstName:
+                      type: "string"
+                    lastName:
+                      type: "string"
+                    city:
+                      type: "string"
+                    address:
+                      type: "string"
+                    phoneNumber:
+                      type: "string"
+                    postIndex:
+                      type: "string"
+                  example:
+                    id: 2
+                    email: "test123@test.com"
+                    firstName: "John"
+                    lastName: "Doe"
+                    city: "New York"
+                    address: "Wall Street 1"
+                    phoneNumber: "1234567890"
+                    postIndex: "1234567890"
+      security:
+        - token: [ ]
+
+components:
+  securitySchemes:
+    token:
+      type: apiKey
+      name: Authorization
+      in: header
+
+  schemas:
+    BaseUserResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 2
+        email:
+          type: "string"
+          example: "test123@test.com"
+        firstName:
+          type: "string"
+          example: "John"
+        roles:
+          type: "array"
+          items:
+            type: "string"
+            example: "USER"
+        provider:
+          type: "string"
+          example: "LOCAL"
+
+    User:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+          example: 2
+        email:
+          type: "string"
+          example: "test123@test.com"
+        firstName:
+          type: "string"
+          example: "John"
+        lastName:
+          type: "string"
+          example: "Doe"
+        city:
+          type: "string"
+          example: "New York"
+        address:
+          type: "string"
+          example: "Wall Street 1"
+        phoneNumber:
+          type: "string"
+          example: "123456"
+        postIndex:
+          type: "string"
+          example: "123456"
+        provider:
+          type: "string"
+          example: "LOCAL"
+        roles:
+          type: "array"
+          items:
+            type: "string"
+            example: "USER"
+
+    AuthenticationResponse:
+      type: "object"
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: "string"

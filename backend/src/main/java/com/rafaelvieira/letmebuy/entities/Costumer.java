@@ -1,6 +1,7 @@
 package com.rafaelvieira.letmebuy.entities;
 
 import com.rafaelvieira.letmebuy.enums.TypeCostumer;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +13,13 @@ import java.util.Set;
 /**
  * @author rafae
  */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "tb_costumer")
 public class Costumer implements Serializable {
@@ -24,25 +32,12 @@ public class Costumer implements Serializable {
     private String lastName;
     private String cpfOuCnpj;
     private Integer type;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
-    @OneToMany
+    @ManyToMany
+    @ToString.Exclude
     private List<Address> address = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tb_phone")
     private Set<String> phones = new HashSet<>();
-
-    // @ElementCollection(fetch=FetchType.EAGER)
-    // @CollectionTable(name="PERFIS")
-    // private Set<Integer> profile = new HashSet<>();
-
-    // @JsonIgnore
-    // @OneToMany(mappedBy="cliente")
-    // private List<Order> oders = new ArrayList<>();
-
-    public Costumer() {
-    }
 
     public Costumer(Long id, String firstName, String lastName, String cpfOuCnpj, TypeCostumer type) {
         this.id = id;
@@ -50,70 +45,6 @@ public class Costumer implements Serializable {
         this.lastName = lastName;
         this.cpfOuCnpj = cpfOuCnpj;
         this.type = (type == null) ? null : type.getCode();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getCpfOuCnpj() {
-        return cpfOuCnpj;
-    }
-
-    public void setCpfOuCnpj(String cpfOuCnpj) {
-        this.cpfOuCnpj = cpfOuCnpj;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(List<Address> address) {
-        this.address = address;
-    }
-
-    public Set<String> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(Set<String> phones) {
-        this.phones = phones;
     }
 
     @Override
@@ -137,12 +68,20 @@ public class Costumer implements Serializable {
         }
         Costumer other = (Costumer) obj;
         if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
-        } else if (!id.equals(other.id)) {
-            return false;
+            return other.id == null;
+        } else {
+            return id.equals(other.id);
         }
-        return true;
+    }
+
+    public static Costumer of(Costumer costumer) {
+        return Costumer.builder()
+                .id(costumer.getId())
+                .firstName(costumer.getFirstName())
+                .lastName(costumer.getLastName())
+                .cpfOuCnpj(costumer.getCpfOuCnpj())
+                .type(TypeCostumer.toEnum(costumer.getType()))
+                .address(costumer.getAddress())
+                .build();
     }
 }

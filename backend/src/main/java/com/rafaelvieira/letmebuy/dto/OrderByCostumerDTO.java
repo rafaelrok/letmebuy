@@ -1,6 +1,7 @@
 package com.rafaelvieira.letmebuy.dto;
 
 import com.rafaelvieira.letmebuy.entities.Costumer;
+import com.rafaelvieira.letmebuy.entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +21,8 @@ public class OrderByCostumerDTO implements Serializable {
     private String costumerName;
     private Double sum;
 
-    public OrderByCostumerDTO(Costumer costumer, Double sum) {
-        this.costumerName =costumer.getFirstName();
+    public OrderByCostumerDTO(User user, Double sum) {
+        this.costumerName = user.getCostumer().getFirstName();
         this.sum = sum;
     }
 }

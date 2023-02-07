@@ -1,12 +1,15 @@
 package com.rafaelvieira.letmebuy.services;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.rafaelvieira.letmebuy.dto.*;
 import com.rafaelvieira.letmebuy.entities.*;
+import com.rafaelvieira.letmebuy.enums.OrderStatus;
 import com.rafaelvieira.letmebuy.enums.TypePayment;
 import com.rafaelvieira.letmebuy.repository.OrderItemRepository;
 import com.rafaelvieira.letmebuy.repository.OrderRepository;
@@ -48,6 +51,9 @@ public class OrderService {
     private CostumerService costumerService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired(required = false)
     private EmailService emailService;
 
     public Order find(Integer id) {
@@ -58,13 +64,14 @@ public class OrderService {
 
     public Order insert(Order obj) {
         obj.setId(null);
-        obj.setInstant(new Date().toInstant());
-        obj.setCostumer(costumerService.find(obj.getCostumer().getId()));
-        obj.getPayment().setStatus(TypePayment.PENDENTE);
+        obj.setDate(new Date().equals(null) ? LocalDate.now() : obj.getDate());
+        obj.setUser(userService.find(obj.getUser().getId()));
+        obj.getPayment().setTypePayment(TypePayment.PENDENTE);
+        obj.setStatus(OrderStatus.PENDENTE);
         obj.getPayment().setOrder(obj);
         if (obj.getPayment() instanceof PaymentTicket) {
             PaymentTicket ticket = (PaymentTicket) obj.getPayment();
-            TicketService.fillPaymentWithTicket(ticket, obj.getInstant());
+            TicketService.fillPaymentWithTicket(ticket, Instant.from(obj.getDate() == null ? LocalDate.now() : obj.getDate()));
         }
         obj = orderRepository.save(obj);
         paymentRepository.save(obj.getPayment());
@@ -85,48 +92,48 @@ public class OrderService {
             throw new UnauthorizedException("Acesso negado");
         }
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-        Costumer costumer =  costumerService.find(user.getId());
-        return orderRepository.findByCostumer(costumer, pageRequest);
+        User user1 =  userService.find(user.getId());
+        return orderRepository.findByUser(user1, pageRequest);
     }
 
     @Transactional(readOnly = true)
     public Page<OrderDTO> orders(String minDate, String maxDate, String status, Pageable pageable) {
-        Instant min = "".equals(minDate) ? null : Instant.parse(minDate);
-        Instant max = "".equals(maxDate) ? null : Instant.parse(maxDate);
+        LocalDate min = "".equals(minDate) ? null : LocalDate.parse(minDate);
+        LocalDate max = "".equals(maxDate) ? null : LocalDate.parse(maxDate);
         TypePayment typePayment = "".equals(status) ? null : TypePayment.valueOf(status);
         Page<Order> page = orderRepository.searchPage(min, max, typePayment, pageable);
         orderRepository.orderWithOtherEntities(page.getContent());
-        return page.map(OrderDTO::new);
+        return page.map(x -> new OrderDTO(x));
     }
 
     @Transactional(readOnly = true)
     public List<OrderByCostumerDTO> orderByCostumer(String minDate, String maxDate, String status) {
-        Instant min = "".equals(minDate) ? null : Instant.parse(minDate);
-        Instant max = "".equals(maxDate) ? null : Instant.parse(maxDate);
+        LocalDate min = "".equals(minDate) ? null : LocalDate.parse(minDate);
+        LocalDate max = "".equals(maxDate) ? null : LocalDate.parse(maxDate);
         TypePayment typePayment = "".equals(status) ? null : TypePayment.valueOf(status);
         return orderRepository.orderByCostumer(min, max, typePayment);
     }
 
     @Transactional(readOnly = true)
     public List<OrderByPaymentMethodDTO> orderByPaymentMethod(String minDate, String maxDate, String status) {
-        Instant min = "".equals(minDate) ? null : Instant.parse(minDate);
-        Instant max = "".equals(maxDate) ? null : Instant.parse(maxDate);
+        LocalDate min = "".equals(minDate) ? null : LocalDate.parse(minDate);
+        LocalDate max = "".equals(maxDate) ? null : LocalDate.parse(maxDate);
         TypePayment typePayment = "".equals(status) ? null : TypePayment.valueOf(status);
         return orderRepository.orderByPaymentMethod(min, max, typePayment);
     }
 
     @Transactional(readOnly = true)
     public List<OrderByDateDTO> orderByDate(String minDate, String maxDate, String status) {
-        Instant min = "".equals(minDate) ? null : Instant.parse(minDate);
-        Instant max = "".equals(maxDate) ? null : Instant.parse(maxDate);
+        LocalDate min = "".equals(minDate) ? null : LocalDate.parse(minDate);
+        LocalDate max = "".equals(maxDate) ? null : LocalDate.parse(maxDate);
         TypePayment typePayment = "".equals(status) ? null : TypePayment.valueOf(status);
         return orderRepository.orderByDate(min, max, typePayment);
     }
 
     @Transactional(readOnly = true)
     public OrderSummaryDTO orderSummary(String minDate, String maxDate, String status) {
-        Instant min = "".equals(minDate) ? null : Instant.parse(minDate);
-        Instant max = "".equals(maxDate) ? null : Instant.parse(maxDate);
+        LocalDate min = "".equals(minDate) ? null : LocalDate.parse(minDate);
+        LocalDate max = "".equals(maxDate) ? null : LocalDate.parse(maxDate);
         TypePayment typePayment = "".equals(status) ? null : TypePayment.valueOf(status);
         return orderRepository.orderSummary(min, max, typePayment);
     }

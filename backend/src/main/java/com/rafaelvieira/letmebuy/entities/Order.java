@@ -1,9 +1,9 @@
 package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
+import com.rafaelvieira.letmebuy.enums.OrderStatus;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
@@ -11,15 +11,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author rafae
  */
 
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -31,16 +33,16 @@ public class Order  implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant instant;
+    private LocalDate date;
 
     @OneToOne(cascade=CascadeType.ALL, mappedBy="order")
     private Payment payment;
 
+    private OrderStatus status;
+
     @ManyToOne
-    @JoinColumn(name="costumer_id")
-    private Costumer costumer;
+    @JoinColumn(name="user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="address_delivery_id")
@@ -51,12 +53,14 @@ public class Order  implements Serializable {
 
     private Double amount;
 
-    public Order(Integer id, Instant instant, Costumer costumer, Address addressDelivery, Double amount) {
+    public Order(Integer id, LocalDate date, User user, Address addressDelivery, Payment payment, OrderStatus status, Double amount) {
         super();
         this.id = id;
-        this.instant = instant;
-        this.costumer = costumer;
+        this.date = date;
+        this.user = user;
         this.addressDelivery = addressDelivery;
+        this.payment = payment;
+        this.status = status;
         this.amount = getAmauntValue();
     }
 
@@ -71,16 +75,18 @@ public class Order  implements Serializable {
     @Override
     public String toString() {
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder builder = new StringBuilder();
         builder.append("Pedido número: ");
         builder.append(getId());
         builder.append(", Instante: ");
-        builder.append(sdf.format(getInstant()));
+        builder.append(getDate());
         builder.append(", Cliente: ");
-        builder.append(getCostumer().getFirstName());
+        builder.append(getUser().getCostumer().getFirstName());
         builder.append(", Situação do pagamento: ");
-        builder.append(getPayment().getStatus().getDescription());
+        builder.append(getPayment().getTypePayment());
+        builder.append(", Situação do pedido: ");
+        builder.append(getStatus());
         builder.append("\nDetalhes:\n");
         for (OrderItem ip : getItens()) {
             builder.append(ip.toString());

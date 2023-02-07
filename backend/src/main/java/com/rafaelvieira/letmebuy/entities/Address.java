@@ -5,6 +5,8 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author rafae
@@ -22,10 +24,10 @@ public class Address implements Serializable {
     private String complement;
     private String neighborhood;
     private String zipcode;
+
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="costumer_id")
-    private Costumer costumer;
+    @ManyToMany(mappedBy="address", fetch = FetchType.LAZY)
+    private Set<Costumer> costumer = new HashSet<>();
     @ManyToOne
     @JoinColumn(name="city_id")
     private City city;
@@ -40,7 +42,6 @@ public class Address implements Serializable {
         this.complement = complement;
         this.neighborhood = neighborhood;
         this.zipcode = zipcode;
-        this.costumer = costumer;
         this.setCity(city);
     }
 
@@ -92,14 +93,9 @@ public class Address implements Serializable {
         this.zipcode = zipcode;
     }
 
-    public Costumer getCostumer() {
+    public Set<Costumer> getCostumer() {
         return costumer;
     }
-
-    public void setCostumer(Costumer costumer) {
-        this.costumer = costumer;
-    }
-
     public City getCity() {
         return city;
     }

@@ -1,7 +1,8 @@
 package com.rafaelvieira.letmebuy.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
+@SpringBootApplication(exclude= {UserDetailsServiceAutoConfiguration.class})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -32,10 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/actuator/**");
-        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-                "/configuration/**", "/swagger-ui.html", "/webjars/**");
-
+        web.ignoring().antMatchers("/actuator/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
+                            "/configuration/**", "/swagger-ui.html", "/webjars/**", "/products/**");
     }
 
     @Override

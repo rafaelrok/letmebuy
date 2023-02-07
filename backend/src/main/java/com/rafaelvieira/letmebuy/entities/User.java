@@ -20,14 +20,14 @@ public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)// Não permite cadastrar o mesmo endereço eletrônico
+    @Column(unique = true)
     private String email;
     private String password;
     @OneToOne(cascade = CascadeType.ALL)
     private Costumer costumer;
     @OneToMany(mappedBy = "user")
     private List<Feedback> feedbacks = new ArrayList<>();
-    @ManyToMany(fetch = FetchType.EAGER) //Exigência do spring para autenticação e autorização
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

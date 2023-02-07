@@ -1,5 +1,9 @@
 package com.rafaelvieira.letmebuy.enums;
 
+/**
+ * @author rafae
+ */
+
 public enum TypeCostumer {
 
     PESSOAFISICA(1, "Pessoa Física"),
@@ -23,7 +27,7 @@ public enum TypeCostumer {
     }
 
     //Statico para se iniciada mesmo que não tenha instanciado
-    public static TypeCostumer toEnum(Integer code) {
+    public static Integer toEnum(Integer code) {
 
         if (code == null) {
             return null;

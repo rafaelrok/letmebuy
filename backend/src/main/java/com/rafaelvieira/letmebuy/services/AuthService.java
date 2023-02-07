@@ -1,6 +1,5 @@
 package com.rafaelvieira.letmebuy.services;
 
-
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 import com.rafaelvieira.letmebuy.services.email.EmailService;
@@ -22,15 +21,12 @@ public class AuthService {
 
 	@Autowired
 	private UserRepository userRepository;
-
 	@Autowired
-	private BCryptPasswordEncoder pe;
-
+	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	private EmailService emailService;
+	private final Random rand = new Random();
 
-	private Random rand = new Random();
-	
 	@Transactional(readOnly = true)
 	public User authenticated() {
 		try {
@@ -49,16 +45,14 @@ public class AuthService {
 		}
 	}
 
+	@Transactional
 	public void sendNewPassword(String email) {
-
 		User user = userRepository.findByEmail(email);
 		if (user == null) {
 			throw new ForbiddenException("Email não encontrado");
 		}
-
 		String newPass = newPassword();
-		user.setPassword(pe.encode(newPass));
-
+		user.setPassword(passwordEncoder.encode(newPass));
 		userRepository.save(user);
 		emailService.sendNewPasswordEmail(user, newPass);
 	}
@@ -73,13 +67,13 @@ public class AuthService {
 
 	private char randomChar() {
 		int opt = rand.nextInt(3);
-		if (opt == 0) { // gera um digito
+		if (opt == 0) {
 			return (char) (rand.nextInt(10) + 48);
 		}
-		else if (opt == 1) { // gera letra maiuscula
+		else if (opt == 1) {
 			return (char) (rand.nextInt(26) + 65);
 		}
-		else { // gera letra minuscula
+		else {
 			return (char) (rand.nextInt(26) + 97);
 		}
 	}

@@ -30,30 +30,30 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @RequestMapping(method=RequestMethod.GET)
-    public ResponseEntity<Page<ProductDTO>> findPage(
-            @RequestParam(value="nome", defaultValue="") String nome,
-            @RequestParam(value="categories", defaultValue="") String categories,
-            @RequestParam(value="page", defaultValue="0") Integer page,
-            @RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
-            @RequestParam(value="orderBy", defaultValue="nome") String orderBy,
-            @RequestParam(value="direction", defaultValue="ASC") String direction) {
-        String nomeDecoded = URL.decodeParam(nome);
-        List<Long> ids = URL.decodeIntList(categories);
-        Page<Product> list = service.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
-        Page<ProductDTO> listDto = list.map(ProductDTO::new);
-        return ResponseEntity.ok().body(listDto);
-    }
-
-//    @GetMapping
-//    public ResponseEntity<Page<ProductDTO>> findAll(
-//            @RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
-//            @RequestParam(value = "name", defaultValue = "") String name,
-//            Pageable pageable) {
-//
-//        Page<ProductDTO> list = service.findAllPagedWithFeedbacks(categoryId, name.trim(), pageable);
-//        return ResponseEntity.ok().body(list);
+//    @RequestMapping(method=RequestMethod.GET)
+//    public ResponseEntity<Page<ProductDTO>> findPage(
+//            @RequestParam(value="nome", defaultValue="") String nome,
+//            @RequestParam(value="categories", defaultValue="0") String categories,
+//            @RequestParam(value="page", defaultValue="0") Integer page,
+//            @RequestParam(value="linesPerPage", defaultValue="12") Integer linesPerPage,
+//            @RequestParam(value="orderBy", defaultValue="name") String orderBy,
+//            @RequestParam(value="direction", defaultValue="ASC") String direction) {
+//        String nomeDecoded = URL.decodeParam(nome);
+//        List<Long> ids = URL.decodeIntList(categories);
+//        Page<Product> list = service.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
+//        Page<ProductDTO> listDto = list.map(ProductDTO::new);
+//        return ResponseEntity.ok().body(listDto);
 //    }
+
+    @GetMapping
+    public ResponseEntity<Page<ProductDTO>> findAll(
+            @RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+            @RequestParam(value = "name", defaultValue = "") String name,
+            Pageable pageable) {
+
+        Page<ProductDTO> list = service.findAllPagedWithFeedbacks(categoryId, name.trim(), pageable);
+        return ResponseEntity.ok().body(list);
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {

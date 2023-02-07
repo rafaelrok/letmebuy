@@ -1,5 +1,7 @@
 package com.rafaelvieira.letmebuy.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -23,6 +25,8 @@ public class Category implements Serializable {
     private String name;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createdAt;
+
+    @JsonIgnore
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
     @ManyToMany(mappedBy="categories", fetch = FetchType.LAZY)

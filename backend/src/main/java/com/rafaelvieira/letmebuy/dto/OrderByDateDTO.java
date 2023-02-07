@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * @author rafae
@@ -17,11 +18,11 @@ import java.time.Instant;
 public class OrderByDateDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Instant instant;
+    private LocalDate date;
     private Double sum;
 
-    public OrderByDateDTO(Instant instant, Double sum) {
-        this.instant = instant;
+    public OrderByDateDTO(LocalDate date, Double sum) {
+        this.date = date;
         this.sum = sum;
     }
 }

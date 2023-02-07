@@ -2,11 +2,12 @@ package com.rafaelvieira.letmebuy.config;
 
 import java.util.Arrays;
 
+import com.rafaelvieira.letmebuy.components.JwtTokenEnhancer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -16,8 +17,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-
-import com.rafaelvieira.letmebuy.components.JwtTokenEnhancer;
 
 /**
  * @author rafae
@@ -50,9 +49,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private JwtTokenEnhancer tokenEnhancer;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
@@ -64,9 +60,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient(clientId)
                 .secret(passwordEncoder.encode(clientSecret))
                 .scopes("read", "write")
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(jwtDuration)
-                .refreshTokenValiditySeconds(jwtDuration);
+                .authorizedGrantTypes("password")
+                .accessTokenValiditySeconds(jwtDuration);
     }
 
     @Override
@@ -78,7 +73,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore)
                 .accessTokenConverter(accessTokenConverter)
-                .tokenEnhancer(chain)
-                .userDetailsService(userDetailsService);
+                .tokenEnhancer(chain);
     }
 }

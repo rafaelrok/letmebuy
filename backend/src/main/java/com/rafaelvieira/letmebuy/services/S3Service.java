@@ -26,7 +26,7 @@ public class S3Service {
 
     private static Logger LOG = LoggerFactory.getLogger(S3Service.class);
 
-    @Autowired
+    @Autowired(required = false)
     private AmazonS3 s3client;
 
     @Value("${s3.bucket}")

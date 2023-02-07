@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 
-
+/**
+ * @author rafae
+ */
 @Component
 public class JwtTokenEnhancer implements TokenEnhancer {
 
@@ -26,7 +28,7 @@ public class JwtTokenEnhancer implements TokenEnhancer {
         User user = userRepository.findByEmail(authentication.getName());
 
         Map<String, Object> map = new HashMap<>();
-        map.put("userEmail", user.getEmail());
+        map.put("userFirstName", user.getCostumer().getFirstName());
         map.put("userId", user.getId());
 
         DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) accessToken;

@@ -30,7 +30,7 @@ public class Payment implements Serializable {
 
     @Id
     private Integer id;
-    private Integer status;
+    private TypePayment typePayment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_method_id")
@@ -41,19 +41,11 @@ public class Payment implements Serializable {
     @MapsId
     private Order order;
 
-    public Payment(Integer id, TypePayment status, Order order) {
+    public Payment(Integer id, TypePayment typePayment, Order order) {
         super();
         this.id = id;
-        this.status = (status == null) ? null : status.getCode();
+        this.typePayment = typePayment;
         this.order = order;
-    }
-
-    public TypePayment getStatus() {
-        return TypePayment.toEnum(status);
-    }
-
-    public void setStatus(TypePayment status) {
-        this.status = status.getCode();
     }
 
     @Override
