@@ -1,11 +1,17 @@
 package com.rafaelvieira.letmebuy.entities;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 /**
  * @author rafae
  */
+@Getter
+@Setter
 @Entity
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_feedback")
 public class Feedback implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -22,43 +28,13 @@ public class Feedback implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String text;
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    public Feedback() {
-    }
-    public Feedback(Long id, String text, User user, Product product) {
-        this.id = id;
-        this.text = text;
-        this.user = user;
-        this.product = product;
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getText() {
-        return text;
-    }
-    public void setText(String text) {
-        this.text = text;
-    }
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
-    public Product getProduct() {
-        return product;
-    }
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -69,18 +45,23 @@ public class Feedback implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Feedback other = (Feedback) obj;
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         return true;
     }
 }

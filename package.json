@@ -1,0 +1,8 @@
+{
+  "name": "latemebuy",
+  "version": "1.0.0",
+  "scripts": {
+      "precommit": "mvn clean install"
+    }
+  }
+

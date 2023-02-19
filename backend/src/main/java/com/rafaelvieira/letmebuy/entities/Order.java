@@ -1,7 +1,7 @@
 package com.rafaelvieira.letmebuy.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rafaelvieira.letmebuy.enums.OrderStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -21,10 +21,12 @@ import java.util.Set;
  * @author rafae
  */
 
-@RequiredArgsConstructor
+
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name="tb_order")
 public class Order  implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -32,28 +34,21 @@ public class Order  implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-
     private LocalDate date;
-
     @OneToOne(cascade=CascadeType.ALL, mappedBy="order")
     private Payment payment;
-
     private OrderStatus status;
-
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
-
     @ManyToOne
     @JoinColumn(name="address_delivery_id")
     private Address addressDelivery;
-
     @OneToMany(mappedBy="orderItemPK.order")
     private Set<OrderItem> itens = new HashSet<>();
-
     private Double amount;
 
-    public Order(Integer id, LocalDate date, User user, Address addressDelivery, Payment payment, OrderStatus status, Double amount) {
+    public Order(Integer id, LocalDate date, User user, Address addressDelivery, Payment payment, OrderStatus status) {
         super();
         this.id = id;
         this.date = date;

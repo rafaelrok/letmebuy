@@ -9,7 +9,7 @@ public enum TypeCostumer {
     PESSOAFISICA(1, "Pessoa Física"),
     PESSOAJURIDICA(2, "Pessoa Jurídica");
 
-    private int code;
+    private Integer code;
     private String description;
 
     //tipo enum o construtor é privado
@@ -18,7 +18,7 @@ public enum TypeCostumer {
         this.description = description;
     }
     //Somente getters
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
@@ -28,17 +28,14 @@ public enum TypeCostumer {
 
     //Statico para se iniciada mesmo que não tenha instanciado
     public static Integer toEnum(Integer code) {
-
         if (code == null) {
             return null;
         }
-
         for (TypeCostumer x : TypeCostumer.values()) {
             if (code.equals(x.getCode())) {
-                return x;
+                return x.getCode();
             }
         }
-
         throw new IllegalArgumentException("Id inválido: " + code);
     }
 }

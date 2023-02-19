@@ -3,13 +3,11 @@ package com.rafaelvieira.letmebuy.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.rafaelvieira.letmebuy.enums.TypePayment;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,11 +15,11 @@ import java.util.Objects;
  * @author rafae
  */
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Inheritance(strategy=InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 @Table(name = "tb_payment")
@@ -30,6 +28,7 @@ public class Payment implements Serializable {
 
     @Id
     private Integer id;
+    @NotBlank(message = "O campo 'Tipo de Pagamento' é obrigatório")
     private TypePayment typePayment;
 
     @ManyToOne(fetch = FetchType.LAZY)

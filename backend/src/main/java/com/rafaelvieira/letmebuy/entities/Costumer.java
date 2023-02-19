@@ -16,9 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @RequiredArgsConstructor
 @Entity
 @Table(name = "tb_costumer")
@@ -32,8 +30,7 @@ public class Costumer implements Serializable {
     private String lastName;
     private String cpfOuCnpj;
     private Integer type;
-    @ManyToMany
-    @ToString.Exclude
+    @OneToMany(mappedBy = "costumer", cascade = CascadeType.ALL)
     private List<Address> address = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tb_phone")
@@ -45,6 +42,9 @@ public class Costumer implements Serializable {
         this.lastName = lastName;
         this.cpfOuCnpj = cpfOuCnpj;
         this.type = (type == null) ? null : type.getCode();
+    }
+
+    public Costumer(Long id, String firstName, String lastName, String cpfOuCnpj, Integer toEnum) {
     }
 
     @Override

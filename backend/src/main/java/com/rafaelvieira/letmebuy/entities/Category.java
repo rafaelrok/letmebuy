@@ -1,6 +1,10 @@
 package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -8,13 +12,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 
 /**
  * @author rafae
  */
 
+@Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "tb_category")
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -22,65 +32,21 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Campo obrigatório")
     private String name;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createdAt;
-
     @JsonIgnore
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
     @ManyToMany(mappedBy="categories", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
-    
-    public Category() { }   
+
 
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
     }
-
-    //#region Getters&Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public Instant getUpdateAt() {
-        return updatedAt;
-    }
-
-    public Set<Product> getProducts() { return products; }
-
-    // adiciona no save a hora atual no createdAt
-    @PrePersist
-    public void prePersist() {
-        createdAt = Instant.now();
-    }
-    
-    // atualiza o updateAt com a hora atual com metodo update
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt = Instant.now();
-    }
-
-    //#endregion
-
-    //#region Equals & HashCode
 
     @Override
     public int hashCode() {
@@ -92,18 +58,23 @@ public class Category implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Category other = (Category) obj;
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         return true;
     }
     //#endregion

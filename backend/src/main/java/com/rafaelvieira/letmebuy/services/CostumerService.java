@@ -19,6 +19,7 @@ import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
 import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 import com.rafaelvieira.letmebuy.services.handlers.UnauthorizedException;
 
+import com.rafaelvieira.letmebuy.utils.BR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,6 +31,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * @author rafae
+ */
 @Service
 public class CostumerService {
     @Autowired
@@ -122,8 +126,8 @@ public class CostumerService {
                 objDto.getId(),
                 objDto.getFirstName(),
                 objDto.getLastName(),
-                null,
-                null);
+                (String) null,
+                (TypeCostumer) null);
     }
 
     public Costumer fromDTO(CostumerNewDTO objDto) {
@@ -149,7 +153,8 @@ public class CostumerService {
                 objDto.getComplement(),
                 objDto.getNeighborhood(),
                 objDto.getZipcode(),
-                costumer, city);
+                costumer,
+                city);
         costumer.getAddress().add(address);
         costumer.getPhones().add(objDto.getPhone1());
         if (objDto.getPhone2()!=null) {
