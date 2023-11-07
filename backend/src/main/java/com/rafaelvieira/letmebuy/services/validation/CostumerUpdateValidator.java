@@ -1,14 +1,10 @@
 package com.rafaelvieira.letmebuy.services.validation;
 
 import com.rafaelvieira.letmebuy.controllers.exceptions.FieldMessage;
-import com.rafaelvieira.letmebuy.dto.CostumerDTO;
 import com.rafaelvieira.letmebuy.dto.UserDTO;
-import com.rafaelvieira.letmebuy.entities.Costumer;
 import com.rafaelvieira.letmebuy.entities.User;
-import com.rafaelvieira.letmebuy.repository.CostumerRepository;
 
 import com.rafaelvieira.letmebuy.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +18,13 @@ import java.util.Map;
 public class CostumerUpdateValidator implements ConstraintValidator<CostumerUpdate, UserDTO> {
 
 
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
+    private final UserRepository repo;
 
-    @Autowired
-    private UserRepository repo;
+    public CostumerUpdateValidator(HttpServletRequest request, UserRepository repo) {
+        this.request = request;
+        this.repo = repo;
+    }
 
     @Override
     public void initialize(CostumerUpdate ann) {

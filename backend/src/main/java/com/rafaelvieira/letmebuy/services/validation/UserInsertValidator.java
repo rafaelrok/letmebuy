@@ -11,16 +11,18 @@ import com.rafaelvieira.letmebuy.dto.UserInsertDTO;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 
 public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserInsertDTO> {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
+
+    public UserInsertValidator(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void initialize(UserInsertValid ann) {
+        // TODO document why this method is empty
     }
 
     @Override

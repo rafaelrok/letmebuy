@@ -13,12 +13,13 @@ import com.rafaelvieira.letmebuy.enums.TypeCostumer;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 import com.rafaelvieira.letmebuy.utils.DocumentValidity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class CostumerInsertValidator implements ConstraintValidator<CostumerInsert, CostumerNewDTO> {
 
-    @Autowired
-    private UserRepository repo;
+    private final UserRepository repo;
+
+    public CostumerInsertValidator(UserRepository repo) {
+        this.repo = repo;
+    }
 
     @Override
     public void initialize(CostumerInsert ann) {

@@ -14,4 +14,5 @@ public interface EmailService {
     void sendOrderConfirmationEmail(Order obj);
     void sendEmail(SimpleMailMessage msg);
     void sendNewPasswordEmail(User user, String newPass);
+    void sendRecoverPassword(String to, String subject, String body);
 }

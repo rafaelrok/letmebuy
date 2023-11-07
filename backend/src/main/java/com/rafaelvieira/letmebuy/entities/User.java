@@ -1,11 +1,15 @@
 package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,14 +17,22 @@ import java.util.stream.Collectors;
 /**
  * @author rafae
  */
+
+@Getter
+@Setter
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_user")
 public class User implements UserDetails, Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String firstName;
+    private String lastName;
 
     @Column(unique = true)
     private String email;
@@ -42,37 +54,19 @@ public class User implements UserDetails, Serializable {
         getRoles().add(new Role(1L, "ROLE_OPERATOR"));
     }
 
-    public User(Long id, String email, String password) {
+    public User(Long id, String firstName, String lastName, String email, String password) {
+        super();
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
-        getRoles().add(new Role(1L, "ROLE_OPERATOR"));
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toList());
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -108,10 +102,6 @@ public class User implements UserDetails, Serializable {
         return roles.stream().map(role -> new Role(role.getId(), role.getAuthority())).collect(Collectors.toSet());
     }
 
-    public Costumer getCostumer() {
-        return costumer;
-    }
-
     public void setCostumer(Costumer costumer) {
         this.costumer = costumer;
     }
@@ -120,8 +110,8 @@ public class User implements UserDetails, Serializable {
         this.roles = roles;
     }
 
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
     public boolean hasRole(String roleName) {
@@ -135,10 +125,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+        return Objects.hash(id);
     }
 
     @Override

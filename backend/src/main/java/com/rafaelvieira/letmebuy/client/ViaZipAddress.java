@@ -1,5 +1,6 @@
 package com.rafaelvieira.letmebuy.client;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class ViaZipAddress implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6046704732666502085L;
 
     @GetMapping(value="/getCep/{zipcode}")
@@ -28,7 +30,7 @@ public class ViaZipAddress implements Serializable {
 
         String uri = "https://viacep.com.br/ws/{zipcode}/json/";
 
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("zipcode", zipcode);
 
         AddressDTO dto = restTemplate.getForObject(uri, AddressDTO.class, params);

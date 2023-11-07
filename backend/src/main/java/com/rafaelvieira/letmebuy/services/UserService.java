@@ -6,6 +6,7 @@ import com.rafaelvieira.letmebuy.dto.UserInsertDTO;
 import com.rafaelvieira.letmebuy.dto.UserUpdateDTO;
 import com.rafaelvieira.letmebuy.entities.Role;
 import com.rafaelvieira.letmebuy.entities.User;
+import com.rafaelvieira.letmebuy.projections.UserDetailsProjection;
 import com.rafaelvieira.letmebuy.repository.RoleRepository;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
@@ -13,7 +14,6 @@ import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 import com.rafaelvieira.letmebuy.services.handlers.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -24,32 +24,35 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityNotFoundException;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
 
-    private static Logger logger = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final UserRepository repository;
+    private final RoleRepository roleRepo;
+    private final AuthService authService;
 
-    @Autowired
-    private UserRepository repository;
-
-    @Autowired
-    private RoleRepository roleRepo;
-
-    @Autowired
-    private AuthService authService;
+    public UserService(BCryptPasswordEncoder passwordEncoder, UserRepository repository, RoleRepository roleRepo, AuthService authService) {
+        this.passwordEncoder = passwordEncoder;
+        this.repository = repository;
+        this.roleRepo = roleRepo;
+        this.authService = authService;
+    }
 
     @Transactional(readOnly = true)
     public Page<UserDTO> findAllPaged(Pageable pageable) {
         Page<User> list = repository.findAll(pageable);
-        return list.map(x -> new UserDTO(x));
+        return list.map(UserDTO::new);
     }
 
     public User find(Long id) {
@@ -72,10 +75,17 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDTO save(UserInsertDTO dto) {
+    public UserDTO insert(UserInsertDTO dto) {
         User entity = new User();
+
         copyDtoToEntity(dto, entity);
+
         entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+        entity.getRoles().clear();
+        Role role = roleRepo.findByAuthority("ROLE_OPERATOR");
+        entity.getRoles().add(role);
+
         entity = repository.save(entity);
         return new UserDTO(entity);
     }
@@ -83,15 +93,17 @@ public class UserService implements UserDetailsService {
     @Transactional
     public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
-            User entity = repository.getOne(id);
+            User entity = repository.getReferenceById(id);
             copyDtoToEntity(dto, entity);
             entity = repository.save(entity);
             return new UserDTO(entity);
-        } catch (EntityNotFoundException e) {
+        }
+        catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + id);
         }
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
         try {
             repository.deleteById(id);
@@ -103,7 +115,11 @@ public class UserService implements UserDetailsService {
     }
 
     private void copyDtoToEntity(UserDTO dto, User entity) {
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
+        entity.getRoles().clear();
+
         entity.getRoles().clear();
         for (RoleDTO roleDto : dto.getRoles()) {
             Role role = roleRepo.getOne(roleDto.getId());
@@ -112,13 +128,21 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.findByEmail(email);
-        if (user == null) {
-            logger.error("Email not found: " + email);
-            throw new UsernameNotFoundException("Email not found" + email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
+        if (result.isEmpty()) {
+            throw new UsernameNotFoundException("Email not found");
         }
-        return new User(user.getId(), user.getEmail(), user.getPassword());
+
+        User user = new User();
+        user.setEmail(result.get(0).getUsername());
+        user.setPassword(result.get(0).getPassword());
+        for (UserDetailsProjection projection : result) {
+            user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
+        }
+
+        return user;
     }
 
     public static User authenticated() {

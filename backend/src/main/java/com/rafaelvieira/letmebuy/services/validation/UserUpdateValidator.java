@@ -5,7 +5,6 @@ import com.rafaelvieira.letmebuy.dto.UserUpdateDTO;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.UserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +17,17 @@ import java.util.Map;
 
 public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid, UserUpdateDTO> {
 
-    @Autowired
-    private HttpServletRequest request; //Guarda as informações da requisição
+    private final HttpServletRequest request; //Guarda as informações da requisição
+    private final UserRepository repository;
 
-    @Autowired
-    private UserRepository repository;
+    public UserUpdateValidator(HttpServletRequest request, UserRepository repository) {
+        this.request = request;
+        this.repository = repository;
+    }
 
     @Override
     public void initialize(UserUpdateValid ann) {
+        // TODO document why this method is empty
     }
 
     @Override
