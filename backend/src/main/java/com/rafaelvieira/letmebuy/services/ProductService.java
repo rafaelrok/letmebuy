@@ -17,14 +17,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.net.URI;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +39,9 @@ public class ProductService {
     @Autowired
     private S3Service s3Service;
 
-    @Transactional(readOnly=true)
-    public Page<Product> search(String nome, List<Long> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
+    @Transactional(readOnly = true)
+    public Page<Product> search(String nome, List<Long> ids, Integer page, Integer linesPerPage, String orderBy,
+            String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         List<Category> categories = categoryRepo.findAllById(ids);
         return productRepo.findDistinctByNomeContainingAndCategoriasIn(nome, categories, pageRequest);
@@ -63,7 +62,7 @@ public class ProductService {
                 "Produto não encontrado! Id: " + id + ", Tipo: " + Product.class.getName()));
     }
 
-    //Retorno de um DTO
+    // Retorno de um DTO
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         Optional<Product> obj = productRepo.findById(id);
@@ -101,12 +100,13 @@ public class ProductService {
         catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Produto não encontrada " + id);
         }
-        // Tratamento de integridade do banco verifica se exite produto vinculado a essa produto
+        // Tratamento de integridade do banco verifica se exite produto vinculado a essa
+        // produto
         catch (DataIntegrityViolationException ex) {
             throw new DataBaseException("Integrity Violation");
         }
     }
-    
+
     private void copyDtoToEntity(ProductDTO dto, Product entity) {
 
         entity.setName(dto.getName());

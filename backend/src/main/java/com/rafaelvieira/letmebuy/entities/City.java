@@ -2,7 +2,7 @@ package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,6 @@ public class City implements Serializable {
     public void setState(State state) {
         this.state = state;
     }
-
 
     @Override
     public int hashCode() {

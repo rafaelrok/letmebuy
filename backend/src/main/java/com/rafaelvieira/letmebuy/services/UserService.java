@@ -4,7 +4,6 @@ import com.rafaelvieira.letmebuy.dto.RoleDTO;
 import com.rafaelvieira.letmebuy.dto.UserDTO;
 import com.rafaelvieira.letmebuy.dto.UserInsertDTO;
 import com.rafaelvieira.letmebuy.dto.UserUpdateDTO;
-import com.rafaelvieira.letmebuy.entities.Costumer;
 import com.rafaelvieira.letmebuy.entities.Role;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.RoleRepository;
@@ -27,7 +26,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -55,7 +54,7 @@ public class UserService implements UserDetailsService {
 
     public User find(Long id) {
         User user = authService.authenticated();
-        if (user==null || !user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
+        if (user == null || !user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
             throw new UnauthorizedException("Acesso negado");
         }
 
@@ -88,8 +87,7 @@ public class UserService implements UserDetailsService {
             copyDtoToEntity(dto, entity);
             entity = repository.save(entity);
             return new UserDTO(entity);
-        }
-        catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + id);
         }
     }
@@ -97,11 +95,9 @@ public class UserService implements UserDetailsService {
     public void delete(Long id) {
         try {
             repository.deleteById(id);
-        }
-        catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Id not found " + id);
-        }
-        catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             throw new DataBaseException("Integrity violation");
         }
     }
@@ -114,17 +110,6 @@ public class UserService implements UserDetailsService {
             entity.getRoles().add(role);
         }
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user = repository.findByEmail(username);
-//        if (user == null) {
-//            logger.error("User not found: " + username);
-//            throw new UsernameNotFoundException("Email not found");
-//        }
-//        logger.info("User found: " + username);
-//        return user;
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -139,8 +124,7 @@ public class UserService implements UserDetailsService {
     public static User authenticated() {
         try {
             return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return null;
         }
     }

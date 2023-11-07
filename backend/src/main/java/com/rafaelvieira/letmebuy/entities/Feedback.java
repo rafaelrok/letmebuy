@@ -2,8 +2,9 @@ package com.rafaelvieira.letmebuy.entities;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
+
 /**
  * @author rafae
  */
@@ -15,15 +16,16 @@ import java.io.Serializable;
 @Table(name = "tb_feedback")
 public class Feedback implements Serializable {
     private static final long serialVersionUID = 1L;
-//    @Id
-//    @GenericGenerator(name = "UUIDGenerator", strategy = "org.hibernate.id.UUIDGenerator")
-//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "UUIDGenerator")
-//    @Column(name = "id", updatable = false, nullable = false)
-//    @ColumnDefault("random_uuid()")
-//    @Type(type = "uuid-char")
+    // @Id
+    // @GenericGenerator(name = "UUIDGenerator", strategy =
+    // "org.hibernate.id.UUIDGenerator")
+    // @GeneratedValue(strategy = GenerationType.AUTO, generator = "UUIDGenerator")
+    // @Column(name = "id", updatable = false, nullable = false)
+    // @ColumnDefault("random_uuid()")
+    // @Type(type = "uuid-char")
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String text;
@@ -33,7 +35,6 @@ public class Feedback implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
 
     @Override
     public int hashCode() {

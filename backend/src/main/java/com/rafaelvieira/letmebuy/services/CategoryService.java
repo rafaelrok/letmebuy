@@ -4,7 +4,7 @@ package com.rafaelvieira.letmebuy.services;
 
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 import com.rafaelvieira.letmebuy.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepo;
-    
+
     @Transactional(readOnly = true)
     public Page<CategoryDTO> findAllPaged(Pageable pageable) {
         Page<Category> list = categoryRepo.findAll(pageable);
@@ -71,10 +71,11 @@ public class CategoryService {
         catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Categoria não encontrada " + id);
         }
-        // Tratamento de integridade do banco verifica se exite produto vinculado a essa categoria
+        // Tratamento de integridade do banco verifica se exite produto vinculado a essa
+        // categoria
         catch (DataIntegrityViolationException ex) {
             throw new DataBaseException("Integrity Violation");
         }
-        
+
     }
 }

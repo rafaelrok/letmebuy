@@ -1,9 +1,7 @@
 package com.rafaelvieira.letmebuy.utils;
 
-import org.hibernate.annotations.Type;
-
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import java.util.UUID;
 
 /**
@@ -12,7 +10,8 @@ import java.util.UUID;
 
 @MappedSuperclass
 public class EntityWithUUID {
-    @Id @Type(type = "pg-uuid")
+    @Id
+    // @Type(value = "uuid-char")
     private UUID id;
 
     public EntityWithUUID() {

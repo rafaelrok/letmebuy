@@ -2,8 +2,6 @@ package com.rafaelvieira.letmebuy.dto;
 
 import com.rafaelvieira.letmebuy.entities.Address;
 import com.rafaelvieira.letmebuy.entities.City;
-import com.rafaelvieira.letmebuy.entities.Costumer;
-
 import java.io.Serializable;
 
 /**
@@ -23,7 +21,8 @@ public class AddressDTO implements Serializable {
     public AddressDTO() {
     }
 
-    public AddressDTO(Integer id, String street, String number, String complement, String neighborhood, String zipcode) {
+    public AddressDTO(Integer id, String street, String number, String complement, String neighborhood,
+            String zipcode) {
         this.id = id;
         this.street = street;
         this.number = number;

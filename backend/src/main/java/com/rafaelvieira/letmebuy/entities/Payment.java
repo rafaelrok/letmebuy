@@ -6,7 +6,7 @@ import com.rafaelvieira.letmebuy.enums.TypePayment;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,7 +20,7 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 @Table(name = "tb_payment")
 public class Payment implements Serializable {
@@ -36,7 +36,7 @@ public class Payment implements Serializable {
     private PaymentMethod paymentMethod;
     @JsonIgnore
     @OneToOne
-    @JoinColumn(name="order_id")
+    @JoinColumn(name = "order_id")
     @MapsId
     private Order order;
 

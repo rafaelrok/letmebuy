@@ -56,7 +56,13 @@ public class OrderService {
     @Autowired(required = false)
     private EmailService emailService;
 
+    @Autowired
+    private AuthService authService;
+
+
     public Order find(Integer id) {
+        User user = authService.authenticated();
+        authService.validateSelfOrAdmin(user.getId());
         Optional<Order> obj = orderRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Pedido não encontrado! Id: " + id + ", Tipo: " + Order.class.getName()));
@@ -64,7 +70,7 @@ public class OrderService {
 
     public Order insert(Order obj) {
         obj.setId(null);
-        obj.setDate(new Date().equals(null) ? LocalDate.now() : obj.getDate());
+        obj.setDate(obj.getDate());
         obj.setUser(userService.find(obj.getUser().getId()));
         obj.getPayment().setTypePayment(TypePayment.PENDENTE);
         obj.setStatus(OrderStatus.PENDENTE);
@@ -87,10 +93,8 @@ public class OrderService {
     }
 
     public Page<Order> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-        User user = UserService.authenticated();
-        if (user == null) {
-            throw new UnauthorizedException("Acesso negado");
-        }
+        User user = authService.authenticated();
+        authService.validateSelfOrAdmin(user.getId());
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         User user1 =  userService.find(user.getId());
         return orderRepository.findByUser(user1, pageRequest);
@@ -103,7 +107,7 @@ public class OrderService {
         TypePayment typePayment = "".equals(status) ? null : TypePayment.valueOf(status);
         Page<Order> page = orderRepository.searchPage(min, max, typePayment, pageable);
         orderRepository.orderWithOtherEntities(page.getContent());
-        return page.map(x -> new OrderDTO(x));
+        return page.map(OrderDTO::new);
     }
 
     @Transactional(readOnly = true)

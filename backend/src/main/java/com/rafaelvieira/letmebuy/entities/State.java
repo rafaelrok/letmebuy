@@ -2,7 +2,7 @@ package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +21,10 @@ public class State implements Serializable {
     @OneToMany(mappedBy = "state")
     private List<City> cities = new ArrayList<>();
 
-
     public State() {
     }
 
-public State(Integer id, String name) {
+    public State(Integer id, String name) {
         super();
         this.id = id;
         this.name = name;

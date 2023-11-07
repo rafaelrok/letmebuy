@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -35,12 +35,10 @@ public class User implements UserDetails, Serializable {
     private List<Feedback> feedbacks = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(){
+    public User() {
         getRoles().add(new Role(1L, "ROLE_OPERATOR"));
     }
 
@@ -109,6 +107,7 @@ public class User implements UserDetails, Serializable {
     public Set<Role> getRoles() {
         return roles.stream().map(role -> new Role(role.getId(), role.getAuthority())).collect(Collectors.toSet());
     }
+
     public Costumer getCostumer() {
         return costumer;
     }
@@ -124,7 +123,6 @@ public class User implements UserDetails, Serializable {
     public List<Feedback> getFeedbacks() {
         return feedbacks;
     }
-
 
     public boolean hasRole(String roleName) {
         for (Role role : roles) {

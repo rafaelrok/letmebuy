@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -21,30 +21,29 @@ import java.util.Set;
  * @author rafae
  */
 
-
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name="tb_order")
-public class Order  implements Serializable {
+@Table(name = "tb_order")
+public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDate date;
-    @OneToOne(cascade=CascadeType.ALL, mappedBy="order")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Payment payment;
     private OrderStatus status;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
-    @JoinColumn(name="address_delivery_id")
+    @JoinColumn(name = "address_delivery_id")
     private Address addressDelivery;
-    @OneToMany(mappedBy="orderItemPK.order")
+    @OneToMany(mappedBy = "orderItemPK.order")
     private Set<OrderItem> itens = new HashSet<>();
     private Double amount;
 

@@ -11,10 +11,8 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * @author rafae
@@ -39,9 +37,8 @@ public class Category implements Serializable {
     @JsonIgnore
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
-    @ManyToMany(mappedBy="categories", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
-
 
     public Category(Long id, String name) {
         this.id = id;
@@ -77,7 +74,6 @@ public class Category implements Serializable {
         }
         return true;
     }
-    //#endregion
-    
-    
+    // #endregion
+
 }

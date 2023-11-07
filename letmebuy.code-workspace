@@ -36,6 +36,11 @@
       "titleBar.inactiveForeground": "#15202b99"
     },
     "peacock.color": "#00bfff",
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "jest.disabledWorkspaceFolders": [
+      "backend",
+      "frontend-next",
+      "mobile"
+    ]
   }
 }

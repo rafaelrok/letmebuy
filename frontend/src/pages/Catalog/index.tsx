@@ -20,7 +20,6 @@ type ControlComponentsData = {
 const Catalog = () => {
     const [page, setPage] = useState<SpringPage<Product>>();
     const [isLoading, setIsLoading] = useState(false);
-
     const [controlComponentsData, setControlComponentsData] =
         useState<ControlComponentsData>({
             activePage: 0,

@@ -18,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
-@SpringBootApplication(exclude= {UserDetailsServiceAutoConfiguration.class})
+@SpringBootApplication(exclude = { UserDetailsServiceAutoConfiguration.class })
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/actuator/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-                            "/configuration/**", "/swagger-ui.html", "/webjars/**", "/products/**");
+                "/configuration/**", "/swagger-ui.html", "/webjars/**", "/products/**");
     }
 
     @Override
@@ -45,4 +45,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
-

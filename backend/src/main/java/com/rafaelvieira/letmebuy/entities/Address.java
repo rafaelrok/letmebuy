@@ -1,9 +1,10 @@
 package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -30,12 +31,11 @@ public class Address implements Serializable {
     private String zipcode;
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="costumer_id")
-    private Costumer costumer ;
+    @JoinColumn(name = "costumer_id")
+    private Costumer costumer;
     @ManyToOne
-    @JoinColumn(name="city_id")
+    @JoinColumn(name = "city_id")
     private City city;
-
 
     @Override
     public int hashCode() {

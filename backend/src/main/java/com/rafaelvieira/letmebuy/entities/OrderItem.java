@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name="tb_order_item")
+@Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 

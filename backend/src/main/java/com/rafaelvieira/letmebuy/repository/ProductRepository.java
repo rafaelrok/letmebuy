@@ -9,17 +9,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author rafae
  */
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long>{
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cat WHERE obj.name LIKE %:nome% AND cat IN :categories")
-    Page<Product> findDistinctByNomeContainingAndCategoriasIn(@Param("nome") String nome, @Param("categories") List<Category> categories, Pageable pageRequest);
+    Page<Product> findDistinctByNomeContainingAndCategoriasIn(@Param("nome") String nome,
+            @Param("categories") List<Category> categories, Pageable pageRequest);
 
     @Query("SELECT DISTINCT obj FROM Product obj INNER JOIN obj.categories cats WHERE "
             + "(COALESCE(:categories) IS NULL OR cats IN :categories) AND "
@@ -29,4 +29,3 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
     @Query("SELECT obj FROM Product obj JOIN FETCH obj.categories WHERE obj IN :products")
     List<Product> findProductsWithCategories(List<Product> products);
 }
-
