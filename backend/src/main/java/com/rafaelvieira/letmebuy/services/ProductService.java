@@ -5,24 +5,22 @@ import com.rafaelvieira.letmebuy.dto.ProductDTO;
 import com.rafaelvieira.letmebuy.dto.UriDTO;
 import com.rafaelvieira.letmebuy.entities.Category;
 import com.rafaelvieira.letmebuy.entities.Product;
+import com.rafaelvieira.letmebuy.projections.ProductProjection;
 import com.rafaelvieira.letmebuy.repository.CategoryRepository;
 import com.rafaelvieira.letmebuy.repository.ProductRepository;
 import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
 import com.rafaelvieira.letmebuy.services.handlers.ObjectNotFoundException;
 import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.EntityNotFoundException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -30,14 +28,38 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepo;
+    private final ProductRepository productRepo;
+    private final CategoryRepository categoryRepo;
+    private final S3Service s3Service;
 
-    @Autowired
-    private CategoryRepository categoryRepo;
+    public ProductService(ProductRepository productRepo, CategoryRepository categoryRepo, S3Service s3Service) {
+        this.productRepo = productRepo;
+        this.categoryRepo = categoryRepo;
+        this.s3Service = s3Service;
+    }
 
-    @Autowired
-    private S3Service s3Service;
+    @Transactional(readOnly = true)
+    public Page<ProductDTO> findAllPaged(Pageable pageable) {
+        Page<Product> list = productRepo.findAll(pageable);
+        return list.map(ProductDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ProductDTO> findAllPaged(String categoryId, String name, Pageable pageable) {
+
+        List<Long> categoryIds = new ArrayList<>();
+        if (!"0".equals(categoryId)) {
+            categoryIds = Arrays.asList(categoryId.split(",")).stream().map(Long::parseLong).toList();
+        }
+
+        Page<ProductProjection> page = productRepo.searchProducts(categoryIds, name.trim(), pageable);
+        List<Long> productIds = page.map(ProductProjection::getId).toList();
+
+        List<Product> entities = productRepo.searchProductsWithCategories(productIds);
+        List<ProductDTO> dtos = entities.stream().map(p -> new ProductDTO(p, p.getCategories())).toList();
+
+        return new PageImpl<>(dtos, page.getPageable(), page.getTotalElements());
+    }
 
     @Transactional(readOnly = true)
     public Page<Product> search(String nome, List<Long> ids, Integer page, Integer linesPerPage, String orderBy,
@@ -49,7 +71,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAllPagedWithFeedbacks(Long categoryId, String name, Pageable pageable) {
-        List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepo.getOne(categoryId));
+        List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepo.getReferenceById(categoryId));
         Page<Product> page = productRepo.find(categories, name, pageable);
         productRepo.findProductsWithCategories(page.getContent());
         return page.map(x -> new ProductDTO(x, x.getCategories(), x.getFeedbacks()));
@@ -81,8 +103,7 @@ public class ProductService {
     @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
-            // getOne salva em memoria o objeto para não acessar 2 vezes a base
-            Product entity = productRepo.getOne(id);
+            Product entity = productRepo.getReferenceById(id);
             copyDtoToEntity(dto, entity);
             entity = productRepo.save(entity);
             return new ProductDTO(entity);
@@ -117,7 +138,7 @@ public class ProductService {
 
         entity.getCategories().clear();
         for (CategoryDTO catDTO : dto.getCategories()) {
-            Category category = categoryRepo.getOne(catDTO.getId());
+            Category category = categoryRepo.getReferenceById(catDTO.getId());
             entity.getCategories().add(category);
         }
     }

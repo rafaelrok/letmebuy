@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-public class ProductServiceIT {
+class ProductServiceIT {
 
     @Autowired
     private ProductService service;
@@ -36,7 +36,7 @@ public class ProductServiceIT {
     }
 
     @Test
-    public void deleteShouldDeleteResourceWhenIdExists() {
+    void deleteShouldDeleteResourceWhenIdExists() {
 
         service.delete(existingId);
 
@@ -44,7 +44,7 @@ public class ProductServiceIT {
     }
 
     @Test
-    public void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
+    void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             service.delete(nonExistingId);
@@ -52,7 +52,7 @@ public class ProductServiceIT {
     }
 
     @Test
-    public void findAllPagedShouldReturnPageWhenPage0Size10() {
+    void findAllPagedShouldReturnPageWhenPage0Size10() {
 
         PageRequest pageRequest = PageRequest.of(0, 10);
 
@@ -65,7 +65,7 @@ public class ProductServiceIT {
     }
 
     @Test
-    public void findAllPagedShouldReturnEmptyPageWhenPageDoesNotExist() {
+    void findAllPagedShouldReturnEmptyPageWhenPageDoesNotExist() {
 
         PageRequest pageRequest = PageRequest.of(50, 10);
 
@@ -75,7 +75,7 @@ public class ProductServiceIT {
     }
 
     @Test
-    public void findAllPagedShouldReturnSortedPageWhenSortByName() {
+    void findAllPagedShouldReturnSortedPageWhenSortByName() {
 
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("name"));
 

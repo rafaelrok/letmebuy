@@ -13,7 +13,7 @@ import com.rafaelvieira.letmebuy.entities.Product;
 import com.rafaelvieira.letmebuy.tests.Factory;
 
 @DataJpaTest
-public class ProductRepositoryTests {
+class ProductRepositoryTests {
 
     @Autowired
     private ProductRepository repository;
@@ -30,7 +30,7 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void saveShouldPersistWithAutoincrementWhenIdIsNull() {
+    void saveShouldPersistWithAutoincrementWhenIdIsNull() {
 
         Product product = Factory.createProduct();
         product.setId(null);
@@ -45,7 +45,7 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void deleteShouldDeleteObjectWhenIdExists() {
+    void deleteShouldDeleteObjectWhenIdExists() {
 
         repository.deleteById(existingId);
 
@@ -55,7 +55,7 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void deleteShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist() {
+    void deleteShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist() {
 
         Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
             repository.deleteById(nonExistingId);
@@ -63,14 +63,14 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void findByIdShouldReturnNonEmptyOptionalWhenIdExists(){
+    void findByIdShouldReturnNonEmptyOptionalWhenIdExists(){
 
         Optional<Product> result = repository.findById(existingId);
         Assertions.assertTrue(result.isPresent());
     }
 
     @Test
-    public void findByIdShouldReturnNonEmptyOptionalWhenIdDoesNotExists(){
+    void findByIdShouldReturnNonEmptyOptionalWhenIdDoesNotExists(){
 
         Optional<Product> result = repository.findById(nonExistingId);
         Assertions.assertTrue(result.isEmpty());

@@ -5,67 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80ec125e-fd48-40cf-8aab-a118af747ecd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5bfc4abf33dd488f79042826c126ab35350f65e3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/c/5c60239afd4210f84b1d4875cc1889efcc217ba7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/7/87fca528ceb3d70508b96c0e4f8adef6cab6c0a8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8edf09a21a8d4b795b11831ff66beec9f8203ce8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/b/5bfc4abf33dd488f79042826c126ab35350f65e3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/c/5c60239afd4210f84b1d4875cc1889efcc217ba7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/7/87fca528ceb3d70508b96c0e4f8adef6cab6c0a8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/e/8edf09a21a8d4b795b11831ff66beec9f8203ce8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/components/CustomPasswordAuthenticationConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/components/CustomPasswordAuthenticationProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/components/CustomPasswordAuthenticationToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/components/CustomUserAuthorities.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/NewPasswordDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/projections/ProductProjection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/projections/UserDetailsProjection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/PasswordRecoverRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/9/f9590cd73598b6f2427c8b1327d922c50d1dc504" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/9/f9590cd73598b6f2427c8b1327d922c50d1dc504" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/META-INF/additional-spring-configuration-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/letmebuy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/letmebuy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf6087fbddf2512c46a441e843479f3a2c72007c" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf6087fbddf2512c46a441e843479f3a2c72007c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/client/ViaZipAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/client/ViaZipAddress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/components/JwtTokenEnhancer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/AuthorizationServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/AuthorizationServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/ResourceServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/WebSecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/EmailDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/EmailDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserInsertDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserInsertDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserUpdateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/controllers/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/ProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Category.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/email/AbstractEmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/email/AbstractEmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/email/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/email/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/email/SmtpEmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/email/SmtpEmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/DataBaseException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/DataBaseException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/EmailException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/EmailException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/FileException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/FileException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/ForbiddenException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/ForbiddenException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/ObjectNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/ObjectNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/ResourceNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/UnauthorizedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/handlers/UnauthorizedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/CostumerInsertValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/CostumerInsertValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/CostumerUpdateValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/CostumerUpdateValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/UserInsertValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/UserInsertValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/UserUpdateValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/UserUpdateValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-dev.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-prod.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/controller/ProductControllerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/controller/ProductControllerIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/controller/ProductControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/controller/ProductControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/repository/ProductRepositoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/repository/ProductRepositoryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/services/ProductServiceIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/services/ProductServiceIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/services/ProductServicesTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/services/ProductServicesTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/tests/TokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/rafaelvieira/letmebuy/tests/TokenUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +103,7 @@
       <workItem from="1699306043147" duration="1203000" />
       <workItem from="1699310244406" duration="848000" />
       <workItem from="1699353089248" duration="1347000" />
-      <workItem from="1699354454359" duration="7348000" />
+      <workItem from="1699354454359" duration="10040000" />
     </task>
     <servers />
   </component>

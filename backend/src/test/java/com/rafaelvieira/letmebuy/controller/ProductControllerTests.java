@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ProductControllerTests {
+class ProductControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -87,7 +87,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    public void deleteShouldReturnNoContentWhenIdExists() throws Exception {
+    void deleteShouldReturnNoContentWhenIdExists() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 
@@ -100,7 +100,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    public void deleteShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+    void deleteShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 
@@ -113,7 +113,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    public void insertShouldReturnProductDTOCreated() throws Exception {
+    void insertShouldReturnProductDTOCreated() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 
@@ -133,7 +133,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
+    void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 
@@ -153,7 +153,7 @@ public class ProductControllerTests {
     } // pesquisar sobre o objectMapper
 
     @Test
-    public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+    void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 
@@ -170,7 +170,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    public void findAllShouldReturnPage() throws Exception {
+    void findAllShouldReturnPage() throws Exception {
 
         ResultActions result =
                 mockMvc.perform(get("/products")
@@ -180,7 +180,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    public void findByIdShouldReturnProductWhenIdExists() throws Exception {
+    void findByIdShouldReturnProductWhenIdExists() throws Exception {
 
         ResultActions result =
                 mockMvc.perform(get("/products/{id}", existingId)
@@ -193,7 +193,7 @@ public class ProductControllerTests {
     }
 
     @Test
-    public void findByIdShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+    void findByIdShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 
         ResultActions result =
                 mockMvc.perform(get("/products/{id}", nonExistingId)

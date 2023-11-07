@@ -28,7 +28,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(SpringExtension.class)
-public class ProductServicesTests {
+class ProductServicesTests {
 
     @InjectMocks
     private ProductService service;
@@ -59,30 +59,30 @@ public class ProductServicesTests {
 
         Mockito.when(repository.find(any(), any(), any())).thenReturn(page);
 
-        //Teste com ID existente na base (Remover o mockito o sistema importa staticamente os metodos)
+        //Teste com ‘ID’ existente na base (Remover o mockito o sistema importa staticamente os metodos)
         Mockito.doNothing().when(repository).deleteById(existingId);
-        //Teste quando não existe o ID na base lança uma exception
+        //Teste quando não existe o ‘ID’ na base lança uma exception
         Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId);
-        //Verifica a integridade se tem uma categoria associado ao produto que esta tentando excluir(porem a categoria
+        //Verifica a integridade se tem uma categoria associada ao produto que esta tentando excluir(porem a categoria
         //Esta idependente uma classe distinta)
         Mockito.doThrow(DataIntegrityViolationException.class).when(repository).deleteById(dependentId);
     }
 
     @Test
-    public void findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
+    void findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExists(){
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             service.findById(nonExistingId);
         });
     }
 
     @Test
-    public void findByIdShouldReturnProductDTOWhenIdExists(){
+    void findByIdShouldReturnProductDTOWhenIdExists(){
         ProductDTO result = service.findById(existingId);
         Assertions.assertNotNull(result);
     }
 
     @Test
-    public void findAllPagedShouldReturnPage() {
+    void findAllPagedShouldReturnPage() {
 
         Pageable pageable = PageRequest.of(0, 12);
 
@@ -94,7 +94,7 @@ public class ProductServicesTests {
     }
 
     @Test
-    public void deleteShouldThrowDataBaseExceptionWhenIdDoesNotExist() {
+    void deleteShouldThrowDataBaseExceptionWhenIdDoesNotExist() {
         Assertions.assertThrows(DataBaseException.class, () -> {
             service.delete(dependentId);
         });
@@ -103,7 +103,7 @@ public class ProductServicesTests {
     }
 
     @Test
-    public void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
+    void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             service.delete(nonExistingId);
         });
@@ -112,7 +112,7 @@ public class ProductServicesTests {
     }
 
     @Test
-    public void deleteShouldDoNothingWhenIdExists() {
+    void deleteShouldDoNothingWhenIdExists() {
         Assertions.assertDoesNotThrow(() -> {
             service.delete(existingId);
         });

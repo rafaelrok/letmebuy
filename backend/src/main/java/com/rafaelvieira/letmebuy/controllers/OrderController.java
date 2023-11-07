@@ -3,10 +3,10 @@ package com.rafaelvieira.letmebuy.controllers;
 import com.rafaelvieira.letmebuy.dto.*;
 import com.rafaelvieira.letmebuy.entities.Order;
 import com.rafaelvieira.letmebuy.services.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,16 +22,20 @@ import java.util.List;
 @RequestMapping(value="/order")
 public class OrderController {
 
-    @Autowired
-    private OrderService service;
+    private final OrderService service;
 
-    @RequestMapping(value="/{id}", method= RequestMethod.GET)
+    public OrderController(OrderService service) {
+        this.service = service;
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Order> find(@PathVariable Integer id) {
         Order obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
-    @RequestMapping(method=RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody Order obj) {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -39,7 +43,7 @@ public class OrderController {
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(method=RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<Page<Order>> findPage(
             @RequestParam(value="page", defaultValue="0") Integer page,
             @RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
@@ -49,7 +53,7 @@ public class OrderController {
         return ResponseEntity.ok().body(list);
     }
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/by-orders")
     public ResponseEntity<Page<OrderDTO>> oders(
             @RequestParam(value = "minDate", defaultValue = "") String minDate,
@@ -60,6 +64,7 @@ public class OrderController {
         return ResponseEntity.ok(page);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/by-costumer")
     public ResponseEntity<List<OrderByCostumerDTO>> orderByCostumer(
             @RequestParam(value = "minDate", defaultValue = "") String minDate,
@@ -69,6 +74,7 @@ public class OrderController {
         return ResponseEntity.ok(list);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/by-payment-method")
     public ResponseEntity<List<OrderByPaymentMethodDTO>> orderByPaymentMethod(
             @RequestParam(value = "minDate", defaultValue = "") String minDate,
@@ -78,6 +84,7 @@ public class OrderController {
         return ResponseEntity.ok(list);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/by-date")
     public ResponseEntity<List<OrderByDateDTO>> orderByDate(
             @RequestParam(value = "minDate", defaultValue = "") String minDate,
@@ -87,6 +94,7 @@ public class OrderController {
         return ResponseEntity.ok(list);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/summary")
     public ResponseEntity<OrderSummaryDTO> orderSummary(
             @RequestParam(value = "minDate", defaultValue = "") String minDate,

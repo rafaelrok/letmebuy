@@ -2,9 +2,7 @@ package com.rafaelvieira.letmebuy.services;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import com.rafaelvieira.letmebuy.dto.*;
@@ -16,8 +14,6 @@ import com.rafaelvieira.letmebuy.repository.OrderRepository;
 import com.rafaelvieira.letmebuy.repository.PaymentRepository;
 import com.rafaelvieira.letmebuy.services.email.EmailService;
 import com.rafaelvieira.letmebuy.services.handlers.ObjectNotFoundException;
-import com.rafaelvieira.letmebuy.services.handlers.UnauthorizedException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,32 +28,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+    private final TicketService ticketService;
+    private final PaymentRepository paymentRepository;
+    private final OrderItemRepository orderItemRepository;
+    private final ProductService productService;
+    private final CostumerService costumerService;
+    private final UserService userService;
+//    @Autowired(required = false)
+    private final EmailService emailService;
+    private final AuthService authService;
 
-    @Autowired
-    private TicketService ticketService;
-
-    @Autowired
-    private PaymentRepository paymentRepository;
-
-    @Autowired
-    private OrderItemRepository orderItemRepository;
-
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private CostumerService costumerService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired(required = false)
-    private EmailService emailService;
-
-    @Autowired
-    private AuthService authService;
+    public OrderService(OrderRepository orderRepository, TicketService ticketService, PaymentRepository paymentRepository,
+                        OrderItemRepository orderItemRepository, ProductService productService, CostumerService costumerService,
+                        UserService userService, EmailService emailService, AuthService authService) {
+        this.orderRepository = orderRepository;
+        this.ticketService = ticketService;
+        this.paymentRepository = paymentRepository;
+        this.orderItemRepository = orderItemRepository;
+        this.productService = productService;
+        this.costumerService = costumerService;
+        this.userService = userService;
+        this.emailService = emailService;
+        this.authService = authService;
+    }
 
 
     public Order find(Integer id) {

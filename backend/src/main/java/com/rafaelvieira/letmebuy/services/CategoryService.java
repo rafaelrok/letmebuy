@@ -7,12 +7,11 @@ import java.util.Optional;
 import jakarta.persistence.EntityNotFoundException;
 
 import com.rafaelvieira.letmebuy.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.rafaelvieira.letmebuy.dto.CategoryDTO;
@@ -24,20 +23,23 @@ import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepo;
+    private final CategoryRepository categoryRepo;
+
+    public CategoryService(CategoryRepository categoryRepo) {
+        this.categoryRepo = categoryRepo;
+    }
 
     @Transactional(readOnly = true)
     public Page<CategoryDTO> findAllPaged(Pageable pageable) {
         Page<Category> list = categoryRepo.findAll(pageable);
-        return list.map(x -> new CategoryDTO(x));
+        return list.map(CategoryDTO::new);
 
     }
 
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
         Optional<Category> obj = categoryRepo.findById(id);
-        Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
+        Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Category not found"));
         return new CategoryDTO(entity);
     }
 
@@ -52,30 +54,26 @@ public class CategoryService {
     @Transactional
     public CategoryDTO update(Long id, CategoryDTO dto) {
         try {
-            // getOne salva em memoria o objeto para não acessr 2 vezes a base
-            Category entity = categoryRepo.getOne(id);
+            Category entity = categoryRepo.getReferenceById(id);
             entity.setName(dto.getName());
             entity = categoryRepo.save(entity);
             return new CategoryDTO(entity);
 
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Categoria não encontrada " + id);
+            throw new ResourceNotFoundException("Category not found " + id);
         }
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
+        if (!categoryRepo.existsById(id)) {
+            throw new ResourceNotFoundException("Category not found " + id);
+        }
         try {
             categoryRepo.deleteById(id);
         }
-        // Tratamento para verificar a existecia do id no banco
-        catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Categoria não encontrada " + id);
-        }
-        // Tratamento de integridade do banco verifica se exite produto vinculado a essa
-        // categoria
         catch (DataIntegrityViolationException ex) {
             throw new DataBaseException("Integrity Violation");
         }
-
     }
 }

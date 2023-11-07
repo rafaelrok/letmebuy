@@ -51,7 +51,7 @@ public class ProductControllerIT {
     }
 
     @Test
-    public void findAllShouldReturnSortedPageWhenSortByName() throws Exception {
+    void findAllShouldReturnSortedPageWhenSortByName() throws Exception {
 
         ResultActions result =
                 mockMvc.perform(get("/products?page=0&size=12&sort=name,asc")
@@ -66,7 +66,7 @@ public class ProductControllerIT {
     }
 
     @Test
-    public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
+    void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 
@@ -90,7 +90,7 @@ public class ProductControllerIT {
     }
 
     @Test
-    public void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
+    void updateShouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, username, password);
 

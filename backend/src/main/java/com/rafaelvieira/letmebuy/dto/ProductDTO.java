@@ -1,5 +1,6 @@
 package com.rafaelvieira.letmebuy.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -9,15 +10,19 @@ import java.util.Set;
 import com.rafaelvieira.letmebuy.entities.Category;
 import com.rafaelvieira.letmebuy.entities.Feedback;
 import com.rafaelvieira.letmebuy.entities.Product;
+import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+@Getter
 public class ProductDTO implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
+    //#region
     private Long id;
     @Size(min = 2, max = 60, message = "Deve ter entre 5 e 60 caracteres")
     @NotBlank(message = "Campo requirido")
@@ -29,9 +34,8 @@ public class ProductDTO implements Serializable {
     private String imgUrl;
     @PastOrPresent(message = "Data do produto futura")
     private Instant date;
-    private List<CategoryDTO> categories = new ArrayList<>();
-
-    private List<FeedbackDTO> feedbacks = new ArrayList<>();
+    private final List<CategoryDTO> categories = new ArrayList<>();
+    private final List<FeedbackDTO> feedbacks = new ArrayList<>();
 
     public ProductDTO() { }
 
@@ -61,67 +65,40 @@ public class ProductDTO implements Serializable {
         feedbacks.forEach(x -> this.feedbacks.add(new FeedbackDTO(x)));
     }
 
+    public ProductDTO(Product entity, Set<Category> categories) {
+        this(entity);
+        categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
+    }
+
 //    public ProductDTO(Product entity, List<Feedback> feedbacks) {
 //        this(entity);
 //        feedbacks.forEach(x -> this.feedbacks.add(new FeedbackDTO(x)));
 //    }
 
-    //#region
-    public Long getId() {
-        return id;
-    }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-    }
-
-    public Instant getDate() {
-        return date;
     }
 
     public void setDate(Instant date) {
         this.date = date;
     }
 
-    public List<CategoryDTO> getCategories() {
-        return categories;
-    }
-
-    public List<FeedbackDTO> getFeedbacks() {
-        return feedbacks;
-    }
     //#endregion
 
 
