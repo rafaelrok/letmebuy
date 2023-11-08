@@ -200,3 +200,7 @@ t
 Dbackend/src/main/java/com/rafaelvieira/letmebuy/dto/FeedbackDTO.java,4\1\41da0f40a3c8292ab572ea19d4b85c5e7c936654
 p
 @backend/src/main/java/com/rafaelvieira/letmebuy/dto/FileDTO.java,6\6\6648d1f64dbf8d9dbaf22780e6cfc790413cb1bf
+]
+-frontend-next/src/components/Navbar/index.tsx,6\c\6c5ec8de48618ab5ad64b1f754136ba083c06982
+P
+ frontend-next/src/pages/_app.tsx,a\2\a2bbd7a1ce70ef749d7b8ac6ba510f85a02c08b4
