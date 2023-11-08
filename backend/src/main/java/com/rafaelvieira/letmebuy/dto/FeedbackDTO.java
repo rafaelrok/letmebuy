@@ -3,8 +3,10 @@ package com.rafaelvieira.letmebuy.dto;
 import com.rafaelvieira.letmebuy.entities.Feedback;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serial;
 import java.io.Serializable;
 public class FeedbackDTO implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private Long id;
     @NotBlank(message ="Campo requerido")

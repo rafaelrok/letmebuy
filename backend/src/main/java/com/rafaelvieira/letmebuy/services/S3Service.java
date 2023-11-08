@@ -3,11 +3,9 @@ package com.rafaelvieira.letmebuy.services;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.rafaelvieira.letmebuy.services.handlers.FileException;
-import org.apache.commons.io.FilenameUtils;
-import org.joda.time.Instant;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 /**
  * @author rafae
@@ -24,15 +21,19 @@ import java.net.URL;
 @Service
 public class S3Service {
 
-    private static Logger LOG = LoggerFactory.getLogger(S3Service.class);
+    private static final Logger LOG = LoggerFactory.getLogger(S3Service.class);
 
-    @Autowired(required = false)
-    private AmazonS3 s3client;
+    private final AmazonS3 s3client;
 
     @Value("${s3.bucket}")
     private String bucketName;
 
+    public S3Service(AmazonS3 s3client) {
+        this.s3client = s3client;
+    }
 
+
+    @Transactional
     public URI uploadFile(MultipartFile multipartFile) {
         try {
             String fileName = multipartFile.getOriginalFilename();
@@ -44,6 +45,7 @@ public class S3Service {
         }
     }
 
+    @Transactional
     public URI uploadFile(InputStream is, String fileName, String contentType) {
         try {
             ObjectMetadata meta = new ObjectMetadata();

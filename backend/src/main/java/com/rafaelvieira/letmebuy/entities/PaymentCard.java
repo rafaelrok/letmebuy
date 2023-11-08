@@ -12,6 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.io.Serial;
+import java.time.Instant;
+
 /**
  * @author rafae
  */
@@ -24,6 +27,8 @@ import jakarta.persistence.Table;
 @JsonTypeName("paymentCard")
 @Table(name = "tb_payment_card")
 public class PaymentCard extends Payment {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Integer numberOfInstallments;
@@ -32,8 +37,8 @@ public class PaymentCard extends Payment {
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Order order;
 
-    public PaymentCard(TypePayment status, Order order, Integer numberOfInstallments) {
-        super(numberOfInstallments, status, order);
+    public PaymentCard(TypePayment status, Order order, Integer numberOfInstallments, Instant moment) {
+        super(numberOfInstallments, status, moment, order);
         this.numberOfInstallments = numberOfInstallments;
     }
 }

@@ -24,17 +24,24 @@ public class ProductDTO implements Serializable {
 
     //#region
     private Long id;
+
     @Size(min = 2, max = 60, message = "Deve ter entre 5 e 60 caracteres")
     @NotBlank(message = "Campo requirido")
     private String name;
+
     @NotBlank(message = "Campo requirido")
     private String description;
+
     @Positive(message = "Preço deve ser positivo")
     private Double price;
+
     private String imgUrl;
+
     @PastOrPresent(message = "Data do produto futura")
     private Instant date;
+
     private final List<CategoryDTO> categories = new ArrayList<>();
+
     private final List<FeedbackDTO> feedbacks = new ArrayList<>();
 
     public ProductDTO() { }

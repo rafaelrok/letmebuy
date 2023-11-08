@@ -1,4 +1,4 @@
-INSERT INTO tb_order (id, date, status, user_id, address_delivery_id, amount) VALUES
-        (0001, '2022-10-27', 0, 0001, 1, 2000.00),
-        (0002, '2022-10-27', 1, 0002, 2, 160.00),
-        (0003, '2022-10-27', 2, 0003, 3, 800.00);
+INSERT INTO tb_order (id, moment, status, user_id, address_delivery_id, amount) VALUES
+        (0001, TIMESTAMP WITH TIME ZONE '2022-07-25T13:00:00Z', 0, 0001, 1, 2000.00),
+        (0002, TIMESTAMP WITH TIME ZONE '2022-07-29T15:50:00Z', 1, 0002, 2, 160.00),
+        (0003, TIMESTAMP WITH TIME ZONE '2022-08-03T14:20:00Z', 2, 0003, 3, 800.00);

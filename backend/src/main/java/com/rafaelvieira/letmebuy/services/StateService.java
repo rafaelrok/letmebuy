@@ -2,7 +2,6 @@ package com.rafaelvieira.letmebuy.services;
 
 import com.rafaelvieira.letmebuy.entities.State;
 import com.rafaelvieira.letmebuy.repository.StateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +12,11 @@ import java.util.List;
 @Service
 public class StateService {
 
-    @Autowired
-    private StateRepository repo;
+    private final StateRepository repo;
+
+    public StateService(StateRepository repo) {
+        this.repo = repo;
+    }
 
     public List<State> findAll() {
         return repo.findAllByOrderByName();

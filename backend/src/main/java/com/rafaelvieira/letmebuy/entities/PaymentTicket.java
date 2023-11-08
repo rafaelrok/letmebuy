@@ -12,6 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import java.io.Serial;
+import java.time.Instant;
 import java.util.Date;
 
 /**
@@ -26,6 +29,8 @@ import java.util.Date;
 @Table(name = "tb_payment_ticket")
 @JsonTypeName("paymentTicket")
 public class PaymentTicket extends Payment {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -37,8 +42,8 @@ public class PaymentTicket extends Payment {
     @JoinColumn(name = "order_id", insertable = false, updatable = false)
     private Order order;
 
-    public PaymentTicket(Integer id, TypePayment status, Order order, Date dueDate, Date paymentDate) {
-        super(id, status, order);
+    public PaymentTicket(Integer id, TypePayment status, Order order, Date dueDate, Date paymentDate, Instant moment) {
+        super(id, status, moment, order);
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
     }

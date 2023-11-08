@@ -5,7 +5,6 @@ import com.rafaelvieira.letmebuy.entities.Address;
 import com.rafaelvieira.letmebuy.repository.AddressRepository;
 import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
 import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -22,8 +21,11 @@ import java.util.Optional;
 @Service
 public class AddressService {
 
-    @Autowired
-    private AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
+
+    public AddressService(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
+    }
 
     @Transactional(readOnly = true)
     public Page<AddressDTO> findAllPaged(Pageable pageable) {

@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS tb_order
 (
     id                  INTEGER NOT NULL,
-    date                DATE NOT NULL,
+    moment              TIMESTAMP WITHOUT TIME ZONE,
     status              INTEGER,
     user_id             BIGINT,
     address_delivery_id INTEGER,

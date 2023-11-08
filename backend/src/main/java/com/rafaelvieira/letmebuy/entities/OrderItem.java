@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -22,19 +24,21 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @JsonIgnore
     @EmbeddedId
-    private OrderItemPK orderItemPK = new OrderItemPK();
+    private OrderItemPK id = new OrderItemPK();
     private Double discount;
     private Integer quantity = 1;
     private Double price;
 
     public OrderItem(Order order, Product product, Double discount, Integer quantity, Double price) {
         super();
-        orderItemPK.setOrder(order);
-        orderItemPK.setProduct(product);
+        id.setOrder(order);
+        id.setProduct(product);
         this.discount = discount;
         this.quantity = quantity;
         this.price = price;
@@ -46,19 +50,19 @@ public class OrderItem implements Serializable {
 
     @JsonIgnore
     public Order getOrder() {
-        return orderItemPK.getOrder();
+        return id.getOrder();
     }
 
     public void setOrder(Order order) {
-        orderItemPK.setOrder(order);
+        id.setOrder(order);
     }
 
     public Product getProduct() {
-        return orderItemPK.getProduct();
+        return id.getProduct();
     }
 
     public void setProduct(Product product) {
-        orderItemPK.setProduct(product);
+        id.setProduct(product);
     }
 
     @Override
@@ -70,11 +74,11 @@ public class OrderItem implements Serializable {
             return false;
         }
         OrderItem orderItem = (OrderItem) o;
-        return orderItemPK != null && Objects.equals(orderItemPK, orderItem.orderItemPK);
+        return id != null && Objects.equals(id, orderItem.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderItemPK);
+        return Objects.hash(id);
     }
 }

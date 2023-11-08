@@ -53,7 +53,7 @@ public class ImageService {
     }
 
     public BufferedImage cropSquare(BufferedImage sourceImg) {
-        int min = (sourceImg.getHeight() <= sourceImg.getWidth()) ? sourceImg.getHeight() : sourceImg.getWidth();
+        int min = Math.min(sourceImg.getHeight(), sourceImg.getWidth());
         return Scalr.crop(
                 sourceImg,
                 (sourceImg.getWidth()/2) - (min/2),

@@ -8,7 +8,9 @@ import org.hibernate.Hibernate;
 
 import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serial;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -24,26 +26,33 @@ import java.util.Objects;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 @Table(name = "tb_payment")
 public class Payment implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     private Integer id;
+
     @NotBlank(message = "O campo 'Tipo de Pagamento' é obrigatório")
     private TypePayment typePayment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_method_id")
     private PaymentMethod paymentMethod;
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant moment;
+
     @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "order_id")
     @MapsId
     private Order order;
 
-    public Payment(Integer id, TypePayment typePayment, Order order) {
+    public Payment(Integer id, TypePayment typePayment, Instant moment, Order order) {
         super();
         this.id = id;
         this.typePayment = typePayment;
+        this.moment = moment;
         this.order = order;
     }
 

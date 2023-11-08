@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS tb_payment
     order_id          INTEGER NOT NULL,
     type_payment      INTEGER,
     payment_method_id BIGINT,
+    moment            TIMESTAMP WITHOUT TIME ZONE,
     CONSTRAINT pk_tb_payment PRIMARY KEY (order_id)
 );
 

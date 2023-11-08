@@ -4,6 +4,8 @@ import com.rafaelvieira.letmebuy.enums.TypeCostumer;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,17 +23,25 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_costumer")
 public class Costumer implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String cpfOuCnpj;
+
     private Integer type;
+
     @OneToMany(mappedBy = "costumer", cascade = CascadeType.ALL)
     private List<Address> address = new ArrayList<>();
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tb_phone")
     private Set<String> phones = new HashSet<>();

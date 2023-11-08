@@ -6,19 +6,22 @@ import com.rafaelvieira.letmebuy.entities.Product;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.repository.FeedbackRepository;
 import com.rafaelvieira.letmebuy.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
  * @author rafae
  */
 @Service
 public class FeedbackService {
-    @Autowired
-    private FeedbackRepository feedbackRepository;
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private AuthService authService;
+
+    private final FeedbackRepository feedbackRepository;
+    private final ProductRepository productRepository;
+    private final AuthService authService;
+
+    public FeedbackService(FeedbackRepository feedbackRepository, ProductRepository productRepository, AuthService authService) {
+        this.feedbackRepository = feedbackRepository;
+        this.productRepository = productRepository;
+        this.authService = authService;
+    }
 
     public FeedbackDTO save(FeedbackDTO feedbackDTO) {
         Feedback feedback = new Feedback();
@@ -27,7 +30,7 @@ public class FeedbackService {
         return new FeedbackDTO(feedback);
     }
     private void copyDtoToEntity(FeedbackDTO dto, Feedback entity) {
-        Product product = productRepository.getOne(dto.getProductId());
+        Product product = productRepository.getReferenceById(dto.getProductId());
         User user = authService.authenticated();
         authService.validateSelfOrAdmin(user.getId());
 

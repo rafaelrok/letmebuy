@@ -19,8 +19,6 @@ import com.rafaelvieira.letmebuy.services.handlers.DataBaseException;
 import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
 import com.rafaelvieira.letmebuy.services.handlers.UnauthorizedException;
 
-import com.rafaelvieira.letmebuy.utils.BR;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -36,32 +34,32 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class CostumerService {
-    @Autowired
-    private CostumerRepository costumerRepository;
 
-    @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired(required = false)
-    private BCryptPasswordEncoder pe;
-
-    @Autowired
-    private S3Service s3Service;
-
-    @Autowired
-    private ImageService imageService;
-
-    @Autowired
-    private AuthService authService;
+    private final CostumerRepository costumerRepository;
+    private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder pe;
+    private final S3Service s3Service;
+    private final ImageService imageService;
+    private final AuthService authService;
 
     @Value("${img.prefix.client.profile}")
     private String prefix;
 
     @Value("${img.profile.size}")
     private Integer size;
+
+    public CostumerService(CostumerRepository costumerRepository, AddressRepository addressRepository,
+                            UserRepository userRepository, BCryptPasswordEncoder pe, S3Service s3Service,
+                            ImageService imageService, AuthService authService) {
+        this.costumerRepository = costumerRepository;
+        this.addressRepository = addressRepository;
+        this.userRepository = userRepository;
+        this.pe = pe;
+        this.s3Service = s3Service;
+        this.imageService = imageService;
+        this.authService = authService;
+    }
 
     public Costumer find(Long id) {
         User user = authService.authenticated();
@@ -139,6 +137,8 @@ public class CostumerService {
                 TypeCostumer.toEnum(objDto.getType()));
         User user = new User(
                 null,
+                objDto.getFirstName(),
+                objDto.getLastName(),
                 objDto.getEmail(),
                 pe.encode(objDto.getPassword())
         );

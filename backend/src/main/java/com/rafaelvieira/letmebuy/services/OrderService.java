@@ -29,25 +29,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final TicketService ticketService;
     private final PaymentRepository paymentRepository;
     private final OrderItemRepository orderItemRepository;
     private final ProductService productService;
-    private final CostumerService costumerService;
     private final UserService userService;
 //    @Autowired(required = false)
     private final EmailService emailService;
     private final AuthService authService;
 
-    public OrderService(OrderRepository orderRepository, TicketService ticketService, PaymentRepository paymentRepository,
-                        OrderItemRepository orderItemRepository, ProductService productService, CostumerService costumerService,
+    public OrderService(OrderRepository orderRepository, PaymentRepository paymentRepository,
+                        OrderItemRepository orderItemRepository, ProductService productService,
                         UserService userService, EmailService emailService, AuthService authService) {
         this.orderRepository = orderRepository;
-        this.ticketService = ticketService;
         this.paymentRepository = paymentRepository;
         this.orderItemRepository = orderItemRepository;
         this.productService = productService;
-        this.costumerService = costumerService;
         this.userService = userService;
         this.emailService = emailService;
         this.authService = authService;
@@ -64,14 +60,14 @@ public class OrderService {
 
     public Order insert(Order obj) {
         obj.setId(null);
-        obj.setDate(obj.getDate());
+        obj.setMoment(Instant.now());
         obj.setUser(userService.find(obj.getUser().getId()));
         obj.getPayment().setTypePayment(TypePayment.PENDENTE);
-        obj.setStatus(OrderStatus.PENDENTE);
+        obj.setStatus(OrderStatus.PAID);
         obj.getPayment().setOrder(obj);
         if (obj.getPayment() instanceof PaymentTicket) {
             PaymentTicket ticket = (PaymentTicket) obj.getPayment();
-            TicketService.fillPaymentWithTicket(ticket, Instant.from(obj.getDate() == null ? LocalDate.now() : obj.getDate()));
+            TicketService.fillPaymentWithTicket(ticket, Instant.from(obj.getMoment() == null ? LocalDate.now() : obj.getMoment()));
         }
         obj = orderRepository.save(obj);
         paymentRepository.save(obj.getPayment());

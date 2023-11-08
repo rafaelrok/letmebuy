@@ -8,14 +8,14 @@ import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author rafae
@@ -28,12 +28,15 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Table(name = "tb_order")
 public class Order implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private LocalDate date;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant moment;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Payment payment;
     private OrderStatus status;
@@ -43,14 +46,14 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "address_delivery_id")
     private Address addressDelivery;
-    @OneToMany(mappedBy = "orderItemPK.order")
+    @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> itens = new HashSet<>();
     private Double amount;
 
-    public Order(Integer id, LocalDate date, User user, Address addressDelivery, Payment payment, OrderStatus status) {
+    public Order(Integer id, Instant moment, User user, Address addressDelivery, Payment payment, OrderStatus status) {
         super();
         this.id = id;
-        this.date = date;
+        this.moment = moment;
         this.user = user;
         this.addressDelivery = addressDelivery;
         this.payment = payment;
@@ -66,6 +69,10 @@ public class Order implements Serializable {
         return sum;
     }
 
+    public List<Product> getProducts() {
+        return itens.stream().map(OrderItem::getProduct).toList();
+    }
+
     @Override
     public String toString() {
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
@@ -74,7 +81,7 @@ public class Order implements Serializable {
         builder.append("Pedido número: ");
         builder.append(getId());
         builder.append(", Instante: ");
-        builder.append(getDate());
+        builder.append(getMoment());
         builder.append(", Cliente: ");
         builder.append(getUser().getCostumer().getFirstName());
         builder.append(", Situação do pagamento: ");

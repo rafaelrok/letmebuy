@@ -31,9 +31,6 @@ public class User implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
-
     @Column(unique = true)
     private String email;
 
@@ -44,21 +41,24 @@ public class User implements UserDetails, Serializable {
     private Costumer costumer;
 
     @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
     private List<Feedback> feedbacks = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "tb_user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() {
         getRoles().add(new Role(1L, "ROLE_OPERATOR"));
     }
 
-    public User(Long id, String firstName, String lastName, String email, String password) {
+    public User(Long id, String email, String password) {
         super();
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
