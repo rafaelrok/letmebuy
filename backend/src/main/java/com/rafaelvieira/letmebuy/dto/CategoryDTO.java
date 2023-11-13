@@ -1,16 +1,15 @@
 package com.rafaelvieira.letmebuy.dto;
 
-import java.io.Serializable;
 
 import com.rafaelvieira.letmebuy.entities.Category;
-
 import javax.validation.constraints.NotBlank;
+import lombok.Getter;
 
 /**
  * @author rafae
  */
-public class CategoryDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Getter
+public class CategoryDTO {
 
     private Long id;
 
@@ -29,16 +28,8 @@ public class CategoryDTO implements Serializable {
         this.name = entity.getName();
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {

@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 /**
  * @author rafae
  */
@@ -16,8 +14,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderByPaymentMethodDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class OrderByPaymentMethodDTO {
 
     private String description;
     private Double sum;

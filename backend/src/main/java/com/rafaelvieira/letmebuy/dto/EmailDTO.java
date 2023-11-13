@@ -1,15 +1,11 @@
 package com.rafaelvieira.letmebuy.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serial;
-import java.io.Serializable;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * @author rafae
@@ -19,10 +15,8 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailDTO implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class EmailDTO {
+    
 
     @NotEmpty(message="Preenchimento obrigatório")
     @Email(message="Email inválido")

@@ -1,9 +1,13 @@
 package com.rafaelvieira.letmebuy.dto;
 
+import lombok.Getter;
+
 import java.io.Serial;
 import java.io.Serializable;
 
+@Getter
 public class UriDTO implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -14,10 +18,6 @@ public class UriDTO implements Serializable {
 
     public UriDTO(String uri) {
         this.uri = uri;
-    }
-
-    public String getUri() {
-        return uri;
     }
 
     public void setUri(String uri) {

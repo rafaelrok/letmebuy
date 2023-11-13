@@ -1,13 +1,18 @@
 package com.rafaelvieira.letmebuy.dto;
 
 import com.rafaelvieira.letmebuy.entities.State;
+import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * @author rafae
  */
+@Getter
 public class StateDTO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Integer id;
@@ -21,16 +26,8 @@ public class StateDTO implements Serializable {
         name = entity.getName();
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {

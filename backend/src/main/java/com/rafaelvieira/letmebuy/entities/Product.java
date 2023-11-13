@@ -30,24 +30,33 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     @Column(columnDefinition = "TEXT")
     private String description;
+
     @Column(columnDefinition = "DECIMAL(10,2)")
     private Double price;
+
     private String imgUrl;
+
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant date;
+
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     Set<Category> categories = new HashSet<>();
+
     @OneToMany(mappedBy = "product")
     private List<Feedback> feedbacks = new ArrayList<>();
 
-    public Product(long l, String string, String string2, double d, String string3, Instant instant, boolean b) {
-    }
+  public Product(
+      long l, String string, String string2, double d, String string3, Instant instant, boolean b) {
+    // TODO document why this constructor is empty
+  }
 
     public void prePersist() {
         date = Instant.now();

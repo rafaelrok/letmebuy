@@ -3,8 +3,6 @@ package com.rafaelvieira.letmebuy.dto;
 import com.rafaelvieira.letmebuy.entities.Role;
 import lombok.*;
 
-import java.io.Serializable;
-
 /**
  * @author rafae
  */
@@ -13,9 +11,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class RoleDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class RoleDTO {
+    
     private Long id;
     private String authority;
 

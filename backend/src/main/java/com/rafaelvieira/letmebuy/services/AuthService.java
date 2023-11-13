@@ -9,7 +9,6 @@ import com.rafaelvieira.letmebuy.repository.UserRepository;
 import com.rafaelvieira.letmebuy.services.email.EmailService;
 import com.rafaelvieira.letmebuy.services.handlers.ForbiddenException;
 import com.rafaelvieira.letmebuy.services.handlers.ResourceNotFoundException;
-import com.rafaelvieira.letmebuy.services.handlers.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -81,6 +80,9 @@ public class AuthService {
 		}
 
 		User user = userRepository.findByEmail(list.get(0).getEmail());
+		if (user == null) {
+			throw new ResourceNotFoundException("User not found");
+		}
 		user.setPassword(passwordEncoder.encode(body.getPassword()));
 		userRepository.save(user);
 	}
@@ -98,7 +100,7 @@ public class AuthService {
 	
 	public void validateSelfOrAdmin(Long userId) {
 		User user = authenticated();
-		if (!user.getId().equals(userId) && !user.hasRole("ROLE_ADMIN")) {
+		if (!user.getId().equals(userId) && user.hasRole("ROLE_ADMIN")) {
 			throw new ForbiddenException("Access denied");
 		}
 	}

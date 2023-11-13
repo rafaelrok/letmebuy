@@ -53,6 +53,9 @@ public class CategoryService {
 
     @Transactional
     public CategoryDTO update(Long id, CategoryDTO dto) {
+        if(!categoryRepo.existsById(id)) {
+            throw new ResourceNotFoundException("Category not localized " + id);
+        }
         try {
             Category entity = categoryRepo.getReferenceById(id);
             entity.setName(dto.getName());

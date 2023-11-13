@@ -2,13 +2,16 @@ package com.rafaelvieira.letmebuy.dto;
 
 import com.rafaelvieira.letmebuy.entities.Address;
 import com.rafaelvieira.letmebuy.entities.City;
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author rafae
  */
-public class AddressDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+@Setter
+@Getter
+public class AddressDTO {
 
     private Integer id;
     private String street;
@@ -41,51 +44,4 @@ public class AddressDTO implements Serializable {
         this.city = entity.getCity();
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getComplement() {
-        return complement;
-    }
-
-    public void setComplement(String complement) {
-        this.complement = complement;
-    }
-
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
 }

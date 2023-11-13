@@ -3,6 +3,8 @@ package com.rafaelvieira.letmebuy.entities;
 import lombok.*;
 
 import jakarta.persistence.*;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,23 +17,21 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Table(name = "tb_feedback")
 public class Feedback implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
-    // @Id
-    // @GenericGenerator(name = "UUIDGenerator", strategy =
-    // "org.hibernate.id.UUIDGenerator")
-    // @GeneratedValue(strategy = GenerationType.AUTO, generator = "UUIDGenerator")
-    // @Column(name = "id", updatable = false, nullable = false)
-    // @ColumnDefault("random_uuid()")
-    // @Type(type = "uuid-char")
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(columnDefinition = "TEXT")
     private String text;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -57,9 +57,7 @@ public class Feedback implements Serializable {
         }
         Feedback other = (Feedback) obj;
         if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
+            return other.id == null;
         } else if (!id.equals(other.id)) {
             return false;
         }

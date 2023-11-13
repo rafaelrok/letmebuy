@@ -63,7 +63,7 @@ public class CostumerService {
 
     public Costumer find(Long id) {
         User user = authService.authenticated();
-        if (user==null || !user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
+        if (user==null || user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
             throw new UnauthorizedException("Acesso negado");
         }
 
@@ -74,6 +74,9 @@ public class CostumerService {
 
     @Transactional
     public Costumer insert(Costumer obj) {
+        if (obj.getId()!=null) {
+            throw new ResourceNotFoundException("Id not found");
+        }
         obj.setId(null);
         obj = costumerRepository.save(obj);
         addressRepository.saveAll(obj.getAddress());
@@ -81,6 +84,10 @@ public class CostumerService {
     }
 
     public Costumer update(Costumer obj) {
+        if (obj.getId()==null) {
+            throw new ResourceNotFoundException("Id not found");
+        }
+
         Costumer newObj = find(obj.getId());
         updateData(newObj, obj);
         return costumerRepository.save(newObj);
@@ -102,7 +109,7 @@ public class CostumerService {
 
     public User findByEmail(String email) {
         User user = authService.authenticated();
-        if (user == null || !user.hasRole("ROLE_ADMIN") && !email.equals(user.getUsername())) {
+        if (user == null || user.hasRole("ROLE_ADMIN") && !email.equals(user.getUsername())) {
             throw new UnauthorizedException("Acesso negado");
         }
 
@@ -120,6 +127,9 @@ public class CostumerService {
     }
 
     public Costumer fromDTO(CostumerDTO objDto) {
+        if(objDto.getId()==null) {
+            throw new ResourceNotFoundException("Id not found");
+        }
         return new Costumer(
                 objDto.getId(),
                 objDto.getFirstName(),
@@ -137,8 +147,6 @@ public class CostumerService {
                 TypeCostumer.toEnum(objDto.getType()));
         User user = new User(
                 null,
-                objDto.getFirstName(),
-                objDto.getLastName(),
                 objDto.getEmail(),
                 pe.encode(objDto.getPassword())
         );

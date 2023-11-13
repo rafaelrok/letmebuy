@@ -2,15 +2,8 @@ package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.rafaelvieira.letmebuy.enums.TypePayment;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serial;
 import java.time.Instant;
@@ -24,21 +17,20 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
+@EqualsAndHashCode
 @JsonTypeName("paymentCard")
 @Table(name = "tb_payment_card")
-public class PaymentCard extends Payment {
+public class PaymentCard extends PaymentMethod {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
-
+    @Column(name = "number_of_installments")
     private Integer numberOfInstallments;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", insertable = false, updatable = false)
-    private Order order;
+//    @ManyToOne
+//    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+//    private Order order;
 
-    public PaymentCard(TypePayment status, Order order, Integer numberOfInstallments, Instant moment) {
-        super(numberOfInstallments, status, moment, order);
+    public PaymentCard(Long id, String description, Integer numberOfInstallments) {
+        super(id, description);
         this.numberOfInstallments = numberOfInstallments;
     }
 }

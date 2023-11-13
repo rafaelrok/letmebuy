@@ -2,16 +2,14 @@ package com.rafaelvieira.letmebuy.dto;
 
 import com.rafaelvieira.letmebuy.entities.*;
 import com.rafaelvieira.letmebuy.enums.OrderStatus;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author rafae
@@ -21,11 +19,10 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class OrderDTO {
 
     private Integer id;
-    private LocalDate date;
+    private Instant moment;
     private Payment payment;
     private OrderStatus status;
     private String costumer;
@@ -36,7 +33,7 @@ public class OrderDTO implements Serializable {
 
     public OrderDTO(Order entity){
         id=entity.getId();
-        date=entity.getDate();
+        moment=entity.getMoment();
         payment = entity.getPayment().getOrder().getPayment();
         status = entity.getStatus();
         costumer = entity.getUser().getCostumer().getFirstName();

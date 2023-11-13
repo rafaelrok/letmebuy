@@ -3,10 +3,7 @@ package com.rafaelvieira.letmebuy.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.rafaelvieira.letmebuy.enums.TypePayment;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -23,28 +20,29 @@ import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Setter
 @Entity
 @Table(name = "tb_payment_ticket")
 @JsonTypeName("paymentTicket")
-public class PaymentTicket extends Payment {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class PaymentTicket extends PaymentMethod {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dueDate;
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date paymentDate;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", insertable = false, updatable = false)
-    private Order order;
+//    @ManyToOne
+//    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+//    private Order order;
 
-    public PaymentTicket(Integer id, TypePayment status, Order order, Date dueDate, Date paymentDate, Instant moment) {
-        super(id, status, moment, order);
+    public PaymentTicket(Long id, String description, Date dueDate, Date paymentDate) {
+        super(id, description);
         this.dueDate = dueDate;
         this.paymentDate = paymentDate;
     }
+
+
 }

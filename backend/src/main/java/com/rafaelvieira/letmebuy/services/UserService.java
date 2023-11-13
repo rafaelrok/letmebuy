@@ -53,7 +53,7 @@ public class UserService implements UserDetailsService {
 
     public User find(Long id) {
         User user = authService.authenticated();
-        if (user == null || !user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
+        if (user == null || user.hasRole("ROLE_ADMIN") && !id.equals(user.getId())) {
             throw new UnauthorizedException("Acesso negado");
         }
 

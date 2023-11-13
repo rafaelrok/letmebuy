@@ -31,8 +31,11 @@ public class OrderItem implements Serializable {
     @JsonIgnore
     @EmbeddedId
     private OrderItemPK id = new OrderItemPK();
+
     private Double discount;
+
     private Integer quantity = 1;
+
     private Double price;
 
     public OrderItem(Order order, Product product, Double discount, Integer quantity, Double price) {

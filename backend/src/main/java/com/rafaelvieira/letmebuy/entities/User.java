@@ -1,16 +1,12 @@
 package com.rafaelvieira.letmebuy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.*;
-
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,14 +14,12 @@ import java.util.stream.Collectors;
  * @author rafae
  */
 
+@SuppressWarnings("serial")
 @Getter
 @Setter
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_user")
-public class User implements UserDetails, Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +31,8 @@ public class User implements UserDetails, Serializable {
     @JsonIgnore
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "costumer_id")
     private Costumer costumer;
 
     @OneToMany(mappedBy = "user")
@@ -63,10 +58,15 @@ public class User implements UserDetails, Serializable {
         this.password = password;
     }
 
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+//                .collect(Collectors.toList());
+//    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority()))
-                .collect(Collectors.toList());
+        return roles;
     }
 
     @Override
@@ -117,10 +117,10 @@ public class User implements UserDetails, Serializable {
     public boolean hasRole(String roleName) {
         for (Role role : roles) {
             if (role.getAuthority().equals(roleName)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     @Override

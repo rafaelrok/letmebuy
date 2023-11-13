@@ -1,26 +1,20 @@
 package com.rafaelvieira.letmebuy.dto;
 
-import java.io.Serial;
-import java.io.Serializable;
+import com.rafaelvieira.letmebuy.entities.Category;
+import com.rafaelvieira.letmebuy.entities.Feedback;
+import com.rafaelvieira.letmebuy.entities.Product;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import com.rafaelvieira.letmebuy.entities.Category;
-import com.rafaelvieira.letmebuy.entities.Feedback;
-import com.rafaelvieira.letmebuy.entities.Product;
-import lombok.Getter;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import lombok.Getter;
 
 @Getter
-public class ProductDTO implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class ProductDTO {
 
     //#region
     private Long id;

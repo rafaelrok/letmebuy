@@ -11,5 +11,5 @@ import java.util.List;
 public interface StateRepository extends JpaRepository<State, Integer> {
 
     @Transactional(readOnly = true)
-    public List<State> findAllByOrderByName();
+    List<State> findAllByOrderByName();
 }

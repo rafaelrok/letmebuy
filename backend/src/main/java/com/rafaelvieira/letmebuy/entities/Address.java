@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -19,20 +20,28 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Table(name = "tb_address")
 public class Address implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String street;
+
     private String number;
+
     private String complement;
+
     private String neighborhood;
+
     private String zipcode;
+
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "costumer_id")
     private Costumer costumer;
+
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;

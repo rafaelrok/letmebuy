@@ -55,18 +55,18 @@ public class OrderService {
         authService.validateSelfOrAdmin(user.getId());
         Optional<Order> obj = orderRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
-                "Pedido não encontrado! Id: " + id + ", Tipo: " + Order.class.getName()));
+                "Order not found! Id: " + id + ", Tipo: " + Order.class.getName()));
     }
 
     public Order insert(Order obj) {
         obj.setId(null);
         obj.setMoment(Instant.now());
         obj.setUser(userService.find(obj.getUser().getId()));
-        obj.getPayment().setTypePayment(TypePayment.PENDENTE);
+        obj.getPayment().setTypePayment(TypePayment.PENDING_PAYMENT);
         obj.setStatus(OrderStatus.PAID);
         obj.getPayment().setOrder(obj);
-        if (obj.getPayment() instanceof PaymentTicket) {
-            PaymentTicket ticket = (PaymentTicket) obj.getPayment();
+        if (obj.getPayment().getPaymentMethod() instanceof PaymentTicket) {
+            PaymentTicket ticket = (PaymentTicket) obj.getPayment().getPaymentMethod();
             TicketService.fillPaymentWithTicket(ticket, Instant.from(obj.getMoment() == null ? LocalDate.now() : obj.getMoment()));
         }
         obj = orderRepository.save(obj);

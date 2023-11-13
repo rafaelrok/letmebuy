@@ -20,10 +20,9 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @RequiredArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+//@Inheritance(strategy = InheritanceType.JOINED)
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 @Table(name = "tb_payment")
 public class Payment implements Serializable {
 
@@ -36,7 +35,7 @@ public class Payment implements Serializable {
     @NotBlank(message = "O campo 'Tipo de Pagamento' é obrigatório")
     private TypePayment typePayment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "payment_method_id")
     private PaymentMethod paymentMethod;
 
@@ -46,6 +45,7 @@ public class Payment implements Serializable {
     @JsonIgnore
     @OneToOne
     @MapsId
+    @JoinColumn(name = "order_id")
     private Order order;
 
     public Payment(Integer id, TypePayment typePayment, Instant moment, Order order) {

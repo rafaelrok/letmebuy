@@ -3,18 +3,25 @@ package com.rafaelvieira.letmebuy.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Entity
 @Table(name = "tb_state")
 public class State implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
 
     @JsonIgnore
@@ -30,24 +37,12 @@ public class State implements Serializable {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<City> getCities() {
-        return cities;
     }
 
     public void setCities(List<City> cities) {

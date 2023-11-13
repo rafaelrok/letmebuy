@@ -4,9 +4,7 @@ import com.rafaelvieira.letmebuy.dto.OrderByCostumerDTO;
 import com.rafaelvieira.letmebuy.dto.OrderByDateDTO;
 import com.rafaelvieira.letmebuy.dto.OrderByPaymentMethodDTO;
 import com.rafaelvieira.letmebuy.dto.OrderSummaryDTO;
-import com.rafaelvieira.letmebuy.entities.Costumer;
 import com.rafaelvieira.letmebuy.entities.Order;
-import com.rafaelvieira.letmebuy.entities.PaymentMethod;
 import com.rafaelvieira.letmebuy.entities.User;
 import com.rafaelvieira.letmebuy.enums.TypePayment;
 import org.springframework.data.domain.Page;
@@ -31,45 +29,45 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Query("SELECT new com.rafaelvieira.letmebuy.dto.OrderByCostumerDTO(obj.user, SUM(obj.amount)) "
             + "FROM Order AS obj "
-            + "WHERE (CAST(:min AS date) IS NULL OR obj.date >= :min) "
-            + "AND (CAST(:max AS date) IS NULL OR obj.date <= :max) "
+            + "WHERE (CAST(:min AS date) IS NULL OR obj.moment >= :min) "
+            + "AND (CAST(:max AS date) IS NULL OR obj.moment <= :max) "
             + "AND (:typePayment IS NULL OR obj.payment.typePayment = :typePayment) "
             + "GROUP BY obj.user")
     List<OrderByCostumerDTO> orderByCostumer(LocalDate min, LocalDate max, TypePayment typePayment);
 
     @Query("SELECT new com.rafaelvieira.letmebuy.dto.OrderByPaymentMethodDTO(obj.payment.paymentMethod, SUM(obj.amount)) "
             + "FROM Order AS obj "
-            + "WHERE (CAST(:min AS date) IS NULL OR obj.date >= :min) "
-            + "AND (CAST(:max AS date) IS NULL OR obj.date <= :max) "
+            + "WHERE (CAST(:min AS date) IS NULL OR obj.moment >= :min) "
+            + "AND (CAST(:max AS date) IS NULL OR obj.moment <= :max) "
             + "AND (:typePayment IS NULL OR obj.payment.typePayment = :typePayment) "
             + "GROUP BY obj.payment.paymentMethod")
     List<OrderByPaymentMethodDTO> orderByPaymentMethod(LocalDate min, LocalDate max, TypePayment typePayment);
 
-    @Query("SELECT new com.rafaelvieira.letmebuy.dto.OrderByDateDTO(obj.date, SUM(obj.amount)) "
+    @Query("SELECT new com.rafaelvieira.letmebuy.dto.OrderByDateDTO(obj.moment, SUM(obj.amount)) "
             + "FROM Order AS obj "
-            + "WHERE (CAST(:min AS date) IS NULL OR obj.date >= :min) "
-            + "AND (CAST(:max AS date) IS NULL OR obj.date <= :max) "
+            + "WHERE (CAST(:min AS date) IS NULL OR obj.moment >= :min) "
+            + "AND (CAST(:max AS date) IS NULL OR obj.moment <= :max) "
             + "AND (:typePayment IS NULL OR obj.payment.typePayment = :typePayment) "
-            + "GROUP BY obj.date")
+            + "GROUP BY obj.moment")
     List<OrderByDateDTO> orderByDate(LocalDate min, LocalDate max, TypePayment typePayment);
 
     @Query("SELECT obj FROM Order obj "
             + "JOIN FETCH obj.user "
             + "JOIN FETCH obj.payment "
             + "WHERE obj in :orders")
-    List<Order> orderWithOtherEntities(List<Order> orders);
+    void orderWithOtherEntities(List<Order> orders);
 
     @Query("SELECT new com.rafaelvieira.letmebuy.dto.OrderSummaryDTO(SUM(obj.amount), MAX(obj.amount), MIN(obj.amount), AVG(obj.amount), COUNT(obj.id)) "
             + "FROM Order AS obj "
-            + "WHERE (CAST(:min AS date) IS NULL OR obj.date >= :min) "
-            + "AND (CAST(:max AS date) IS NULL OR obj.date <= :max) "
+            + "WHERE (CAST(:min AS date) IS NULL OR obj.moment >= :min) "
+            + "AND (CAST(:max AS date) IS NULL OR obj.moment <= :max) "
             + "AND (:typePayment IS NULL OR obj.payment.typePayment = :typePayment) ")
     OrderSummaryDTO orderSummary(LocalDate min, LocalDate max, TypePayment typePayment);
 
     @Query("SELECT obj "
             + "FROM Order AS obj "
-            + "WHERE (CAST(:min AS date) IS NULL OR obj.date >= :min) "
-            + "AND (CAST(:max AS date) IS NULL OR obj.date <= :max) "
+            + "WHERE (CAST(:min AS date) IS NULL OR obj.moment >= :min) "
+            + "AND (CAST(:max AS date) IS NULL OR obj.moment <= :max) "
             + "AND (:typePayment IS NULL OR obj.payment.typePayment = :typePayment) ")
     Page<Order> searchPage(LocalDate min, LocalDate max, TypePayment typePayment, Pageable pageable);
 

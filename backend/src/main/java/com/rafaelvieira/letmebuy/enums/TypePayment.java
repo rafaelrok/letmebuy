@@ -6,7 +6,10 @@ package com.rafaelvieira.letmebuy.enums;
 
 public enum TypePayment {
 
-    PENDENTE, QUITADO, CANCELADO
+    PENDING_PAYMENT,
+    PAID,
+    CANCELED,
+    PAYMENT_FINISHED
 //
 //    private final int code;
 //    private final String description;

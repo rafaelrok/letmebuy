@@ -30,6 +30,7 @@ public class CostumerUpdateValidator implements ConstraintValidator<CostumerUpda
     public void initialize(CostumerUpdate ann) {
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("EC_UNRELATED_TYPES")
     @Override
     public boolean isValid(UserDTO objDto, ConstraintValidatorContext context) {
 

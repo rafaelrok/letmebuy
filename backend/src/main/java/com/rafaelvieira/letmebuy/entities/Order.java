@@ -35,19 +35,26 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
     private Payment payment;
+
     private OrderStatus status;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "address_delivery_id")
     private Address addressDelivery;
+
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> itens = new HashSet<>();
+
     private Double amount;
 
     public Order(Integer id, Instant moment, User user, Address addressDelivery, Payment payment, OrderStatus status) {
@@ -81,7 +88,7 @@ public class Order implements Serializable {
         builder.append("Pedido número: ");
         builder.append(getId());
         builder.append(", Instante: ");
-        builder.append(getMoment());
+        builder.append(sdf.format(getMoment()));
         builder.append(", Cliente: ");
         builder.append(getUser().getCostumer().getFirstName());
         builder.append(", Situação do pagamento: ");

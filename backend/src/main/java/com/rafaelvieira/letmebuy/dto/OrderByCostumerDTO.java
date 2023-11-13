@@ -1,12 +1,9 @@
 package com.rafaelvieira.letmebuy.dto;
 
-import com.rafaelvieira.letmebuy.entities.Costumer;
 import com.rafaelvieira.letmebuy.entities.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 /**
  * @author rafae
@@ -15,8 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderByCostumerDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class OrderByCostumerDTO {
 
     private String costumerName;
     private Double sum;

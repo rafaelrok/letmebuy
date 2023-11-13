@@ -5,37 +5,32 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.io.Serializable;
+import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
 
 @SuppressWarnings("serial")
+@Getter
 @Entity
 @Table(name = "tb_role")
-public class Role implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Role implements GrantedAuthority {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String authority;
 
 	public Role() {
 	}
 
 	public Role(Long id, String authority) {
+		super();
 		this.id = id;
 		this.authority = authority;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getAuthority() {
-		return authority;
 	}
 
 	public void setAuthority(String authority) {
@@ -60,11 +55,8 @@ public class Role implements Serializable {
 			return false;
 		Role other = (Role) obj;
 		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+            return other.id == null;
+		} else return id.equals(other.id);
+    }
 
 }

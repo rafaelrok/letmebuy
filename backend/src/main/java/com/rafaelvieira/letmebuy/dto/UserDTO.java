@@ -1,17 +1,11 @@
 package com.rafaelvieira.letmebuy.dto;
 
-import java.io.Serial;
-import java.io.Serializable;
+import com.rafaelvieira.letmebuy.entities.User;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.validation.constraints.Email;
-
-import com.rafaelvieira.letmebuy.entities.User;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -21,9 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class UserDTO implements Serializable {
-	@Serial
-	private static final long serialVersionUID = 1L;
+public class UserDTO {
 
 	private Long id;
 

@@ -13,8 +13,6 @@ import java.io.Serial;
 @Getter
 @UserInsertValid
 public class UserInsertDTO extends UserDTO {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     @NotBlank(message = "Campo requerido")
     @Size(min = 8, message = "Deve ter no mínimo 8 caracteres")

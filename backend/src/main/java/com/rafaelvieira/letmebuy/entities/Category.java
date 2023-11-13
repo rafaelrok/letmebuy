@@ -33,13 +33,17 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "Campo obrigatório")
     private String name;
+
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createdAt;
+
     @JsonIgnore
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
+
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
 

@@ -5,14 +5,99 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80ec125e-fd48-40cf-8aab-a118af747ecd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V36__Create_Table_PasswordRecover.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/letmebuy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/letmebuy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/4/04f904d578b4b7417e6986ef75f9356923641aaf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/4/04f904d578b4b7417e6986ef75f9356923641aaf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/e/0e5d19e245564a3551306edbf07f602d815e87c7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/e/0e5d19e245564a3551306edbf07f602d815e87c7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/e/1e28414ec4e2bd023ee3250ef4c1aae210a1979f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/e/1e28414ec4e2bd023ee3250ef4c1aae210a1979f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/f/2f4cdd9e05c4f356ced76b09d470946fa2a47426" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/f/2f4cdd9e05c4f356ced76b09d470946fa2a47426" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/1/51099239c4377727a461ba7848e5e490ace08b81" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/1/51099239c4377727a461ba7848e5e490ace08b81" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5b09c1e75f5e3095bba40ca8f558efc5dc8af234" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/b/5b09c1e75f5e3095bba40ca8f558efc5dc8af234" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/c/5c60239afd4210f84b1d4875cc1889efcc217ba7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/c/5c60239afd4210f84b1d4875cc1889efcc217ba7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/6648d1f64dbf8d9dbaf22780e6cfc790413cb1bf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/6648d1f64dbf8d9dbaf22780e6cfc790413cb1bf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/66f3a64dc91ab880e412ea0dd1d5208ace64d648" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/6/66f3a64dc91ab880e412ea0dd1d5208ace64d648" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/2/724a67cd7866edb344e3e1dd848bf44ca8b0b7c0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/2/724a67cd7866edb344e3e1dd848bf44ca8b0b7c0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7b88b24bdd5e0950238a28dd002a19507ad43b5f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/b/7b88b24bdd5e0950238a28dd002a19507ad43b5f" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/4/84afb91c8c9bffad3fe00cf4c8041666e75879f0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/4/84afb91c8c9bffad3fe00cf4c8041666e75879f0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/2/92fb1f5fb4a0c97f236ad3a70442d04eabd7d203" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/2/92fb1f5fb4a0c97f236ad3a70442d04eabd7d203" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/6/96157683bb40fc27e92afca0436cb169bfe1de35" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/6/96157683bb40fc27e92afca0436cb169bfe1de35" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf6087fbddf2512c46a441e843479f3a2c72007c" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf6087fbddf2512c46a441e843479f3a2c72007c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/7/c7ec260c24aecb471b2f5d8643beb9f7d6b8ac80" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/7/c7ec260c24aecb471b2f5d8643beb9f7d6b8ac80" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/f/cf9240569be47809b1b703eded2f88b6686d11e0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/f/cf9240569be47809b1b703eded2f88b6686d11e0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/c/dcf3e5facadff943b48ec01c0102ccc8e7982a7d" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/c/dcf3e5facadff943b48ec01c0102ccc8e7982a7d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/7/f77531995b1b56a772162c2cf04f71b519f80e6b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/7/f77531995b1b56a772162c2cf04f71b519f80e6b" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/LetmebuyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/LetmebuyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/config/ResourceServerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/AddressDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/AddressDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CityDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CostumerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CostumerDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CostumerNewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/CostumerNewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/EmailDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/EmailDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/FeedbackDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/FeedbackDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/FileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/FileDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderByCostumerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderByCostumerDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderByDateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderByDateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderByPaymentMethodDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderByPaymentMethodDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderItemPKDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderItemPKDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderSummaryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/OrderSummaryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/ProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/RoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/RoleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/StateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/StateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UriDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UriDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserInsertDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserInsertDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserUpdateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/dto/UserUpdateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/City.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Feedback.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Feedback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PasswordRecover.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PasswordRecover.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PaymentCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PaymentCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PaymentMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PaymentMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PaymentTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/PaymentTicket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/enums/TypePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/enums/TypePayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/CostumerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/CostumerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/PasswordRecoverRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/PasswordRecoverRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/StateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/repository/StateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/CostumerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/CostumerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/CostumerUpdateValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/rafaelvieira/letmebuy/services/validation/CostumerUpdateValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V32__Create_table_PaymentCard.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V32__Create_table_PaymentCard.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V33__Insert_Table_PaymentCard.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V33__Insert_Table_PaymentCard.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V34__Create_Table_PaymentTicket.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V34__Create_Table_PaymentTicket.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V35__Insert_Table_PaymentTicket.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/db/migration/V35__Insert_Table_PaymentTicket.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="d31abcae-94b5-4587-846f-719c46513495" value="Blue" />
+    </colors>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -27,6 +112,17 @@
   </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="KubernetesApiProvider">{
+  &quot;contexts&quot;: [
+    {
+      &quot;name&quot;: &quot;docker-desktop&quot;
+    }
+  ],
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="KubernetesSettings">
+    <option name="contextName" value="docker-desktop" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -48,6 +144,10 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -60,14 +160,35 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.30229884&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.221519&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\DESENVOLVIMENTO\\devsuperior\\letmebuy\\frontend-next\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="LetmebuyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" value="dev" />
+      <module name="letmebuy" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.rafaelvieira.letmebuy.LetmebuyApplication" />
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -87,7 +208,21 @@
       <workItem from="1699353089248" duration="1347000" />
       <workItem from="1699354454359" duration="16035000" />
       <workItem from="1699439361255" duration="1177000" />
-      <workItem from="1699440578273" duration="1140000" />
+      <workItem from="1699440578273" duration="8779000" />
+      <workItem from="1699492745180" duration="51000" />
+      <workItem from="1699492814127" duration="1455000" />
+      <workItem from="1699526645932" duration="3306000" />
+      <workItem from="1699529971516" duration="163000" />
+      <workItem from="1699530150018" duration="599000" />
+      <workItem from="1699531163924" duration="10289000" />
+      <workItem from="1699613255522" duration="78000" />
+      <workItem from="1699613450970" duration="4518000" />
+      <workItem from="1699618570992" duration="9737000" />
+      <workItem from="1699646944332" duration="462000" />
+      <workItem from="1699647943545" duration="2383000" />
+      <workItem from="1699833695469" duration="54000" />
+      <workItem from="1699833772045" duration="316000" />
+      <workItem from="1699870727609" duration="8849000" />
     </task>
     <servers />
   </component>
