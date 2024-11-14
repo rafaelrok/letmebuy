@@ -12,22 +12,23 @@ public enum TypeCostumer {
     private int code;
     private String description;
 
-    //tipo enum o construtor é privado
+    // tipo enum o construtor é privado
     private TypeCostumer(int code, String description) {
         this.code = code;
         this.description = description;
     }
-    //Somente getters
+
+    // Somente getters
     public int getCode() {
         return code;
     }
 
-    public String getDescription () {
+    public String getDescription() {
         return description;
     }
 
-    //Statico para se iniciada mesmo que não tenha instanciado
-    public static Integer toEnum(Integer code) {
+    // Statico para se iniciada mesmo que não tenha instanciado
+    public static TypeCostumer toEnum(Integer code) {
 
         if (code == null) {
             return null;

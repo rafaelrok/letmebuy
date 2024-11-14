@@ -16,7 +16,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @RequiredArgsConstructor
@@ -31,7 +30,7 @@ public class Costumer implements Serializable {
     private String firstName;
     private String lastName;
     private String cpfOuCnpj;
-    private Integer type;
+    private TypeCostumer type;
     @ManyToMany
     @ToString.Exclude
     private List<Address> address = new ArrayList<>();
@@ -44,7 +43,7 @@ public class Costumer implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.type = (type == null) ? null : type.getCode();
+        this.type = type;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class Costumer implements Serializable {
                 .firstName(costumer.getFirstName())
                 .lastName(costumer.getLastName())
                 .cpfOuCnpj(costumer.getCpfOuCnpj())
-                .type(TypeCostumer.toEnum(costumer.getType()))
+                .type(TypeCostumer.values()[0])
                 .address(costumer.getAddress())
                 .build();
     }
